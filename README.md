@@ -9,7 +9,7 @@ This is the 3rd year embedded system project
 
 ## OVERVIEW
   As we all know gaming industry is growing day by day. As a result of this growth the concept of gaming centers has been popular lately. In a gaming center they normally use coins to play the games. The procedure is when a customer comes to the gaming center they have to buy coins from the cashier in order to use those as a paying method to the gaming machine. Once they put enough number of coins into the machine they are allowed to play the game.
-![problem picture](https://raw.githubusercontent.com/cepdnaclk/e16-3yp-chessMATE/main/Images/problem.png)
+![introduction](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/images/smart_payment_system_intro.png?raw=true)
 
   
 ## Problem
