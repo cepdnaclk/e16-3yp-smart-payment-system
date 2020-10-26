@@ -9,8 +9,8 @@ This is the 3rd year embedded system project
 
 ## OVERVIEW
   As we all know gaming industry is growing day by day. As a result of this growth the concept of gaming centers has been popular lately. In a gaming center they normally use coins to play the games. The procedure is when a customer comes to the gaming center they have to buy coins from the cashier in order to use those as a paying method to the gaming machine. Once they put enough number of coins into the machine they are allowed to play the game.
-  ![Coin](https://feels.pdn.ac.lk/pluginfile.php/32250/mod_forum/post/5519/Screenshot%20%2810%29.png)
- 
+![problem picture](https://raw.githubusercontent.com/cepdnaclk/e16-3yp-chessMATE/main/Images/problem.png)
+
   
 ## Problem
   The problems of this approach are the coins are simply hard to carry around the gaming center when the customer has large number of coins and also they have good chance to loose a coin or two. When we consider the gaming center's point of view they have to collect coins every day at each machines and count it and keep the record.
