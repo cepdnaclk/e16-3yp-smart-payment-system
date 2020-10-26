@@ -26,3 +26,6 @@ This is the 3rd year embedded system project
 - [Department of Computer Engineering](http://www.ce.pdn.ac.lk/)
 - [Faculty of Engineering](http://eng.pdn.ac.lk/)
 - [University of Peradeniya](https://www.pdn.ac.lk/)
+- [Project website](https://cepdnaclk.github.io/e16-3yp-smart-payment-system/)
+
+
