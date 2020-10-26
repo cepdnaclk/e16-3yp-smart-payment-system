@@ -5,7 +5,6 @@ This is the 3rd year embedded system project
                 E/16/054 e16054@eng.pdn.ac.lk
                 E/16/351 e16351@eng.pdn.ac.lk
                 E/16/389 e16389@eng.pdn.ac.lk
----
 
 ## OVERVIEW
   As we all know gaming industry is growing day by day. As a result of this growth the concept of gaming centers has been popular lately. In a gaming center they normally use coins to play the games. The procedure is when a customer comes to the gaming center they have to buy coins from the cashier in order to use those as a paying method to the gaming machine. Once they put enough number of coins into the machine they are allowed to play the game.
