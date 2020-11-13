@@ -8,7 +8,7 @@ module.exports = {
   hostname: process.env.HOSTNAME,
   mongo: {
     uri: process.env.MONGOURI,
-    // testURI: process.env.MONGOTESTURI
+    testURI: process.env.MONGOTESTURI
   },
 //   transporter: {
 //     host: process.env.TRANSPORTER_HOST,
