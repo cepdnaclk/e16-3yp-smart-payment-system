@@ -4,7 +4,7 @@ const Currency = mongoose.Types.Currency;
 const Schema = mongoose.Schema;
 
 const roles = [
-  'user', 'admin'
+  'superAdmin', 'admin','users'
 ]
 
 const userSchema = new Schema({
@@ -32,9 +32,13 @@ const userSchema = new Schema({
       type: String,
       unique: true
     },
-    active: {
+    active: { 
       type: Boolean,
       default: false
+    },
+    contactNumber: {
+      type: Number,
+      maxlength: 10
     },
     role: {
       type: String,
@@ -46,5 +50,5 @@ const userSchema = new Schema({
   })
   
 
-var User = mongoose.model('User',userSchema);
+const User = mongoose.model('User',userSchema);
 module.exports = User;
