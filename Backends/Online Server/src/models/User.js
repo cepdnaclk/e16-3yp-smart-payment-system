@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 require('mongoose-currency').loadType(mongoose);
 const Currency = mongoose.Types.Currency;
 const Schema = mongoose.Schema;
+const Center = require("../models/Center")
+
 
 const roles = [
   'superAdmin', 'admin','users'
@@ -44,7 +46,11 @@ const userSchema = new Schema({
       type: String,
       default: 'user',
       enum: roles
-    }
+    },
+    center:[{
+      type: mongoose.Schema.Types.ObjectId,
+      ref : Center
+    }]
   }, {
     timestamps: true
   })
