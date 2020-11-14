@@ -44,7 +44,7 @@ const userSchema = new Schema({
     },
     role: {
       type: String,
-      default: 'user',
+      default: 'users',
       enum: roles
     },
     center:[{

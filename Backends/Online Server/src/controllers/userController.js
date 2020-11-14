@@ -1,11 +1,12 @@
+//importing files
 const config = require('../config')
 const User = require('../models/User')
+//importing moduels
 const {v4 : uuidv4} = require('uuid')
 const bcrypt = require('bcryptjs')
+const {ValidationError} = require('express-validation');
 //const httpStatus = require('http-status')
 //const jwt = require('jsonwebtoken')
-const user = require('../models/User')
-const {ValidationError} = require('express-validation');
 
 
 exports.userRegister = async (req,res,next)=>{

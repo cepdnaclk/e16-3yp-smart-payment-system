@@ -4,6 +4,7 @@ require('mongoose-currency').loadType(mongoose);
 const Currency = mongoose.Types.Currency;
 const Schema = mongoose.Schema;
 const Node = require('../models/Node');
+const Center = require('../models/Center');
 
 const status = [
     'using', 'damaged','removed'
@@ -11,17 +12,19 @@ const status = [
 const nodeUsageScema = new Schema({
      
      center_id:{
-         type: Number,
+         type: mongoose.Schema.Types.ObjectId,
+         ref: Center,
          required : true
      },
-     Node:{
+     node_id:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: Node
+        ref: Node,
+        required : true
      }
-     ,
-     timestamps: true,
-    
-})
+     
+  },{
+    timestamps: true,
+  })
 
 var NodeUsage = mongoose.model('NodeUsage',nodeUsageScema);
 module.exports = NodeUsage;

@@ -1,39 +1,40 @@
 const { required } = require('joi');
 const mongoose = require('mongoose');
-const Employee = require('./Employees');
+
 require('mongoose-currency').loadType(mongoose);
 const Currency = mongoose.Types.Currency;
 const Schema = mongoose.Schema;
-const Card = require('../models/Card');
+
 const Employee = require('../models/Employees');
 
 const Card = require('../models/Card');
-const Employee = require('../models/Employees');
+const Center = require('../models/Center');
 
 const status = [
     'using', 'damaged','removed'
   ]
-const nodeScema = new Schema({
+const cardIssueScema = new Schema({
      
      center_id:{
-         type: Number,
+         type: mongoose.Schema.Types.ObjectId,
+         ref: Center,
          required : true
      },
-     card:{
+     card_id:{
         type: mongoose.Schema.Types.ObjectId,
         ref: Card,
         required : true
      },
 
-     employee:{
+     employee_id:{
         type: mongoose.Schema.Types.ObjectId,
         ref: Employee,
         required : true
-     },
+     }
+     
+   },{
+      timestamps: true,
+ })
 
-     timestamps: true,
-    
-})
-
-var Node = mongoose.model('Node',nodeScema);
-module.exports = Node;
+var CardIssue = mongoose.model('CardIssue',cardIssueScema);
+module.exports = CardIssue;
