@@ -51,10 +51,10 @@ const employeeScema = new Schema({
         type: Number,
         maxlength: 10
       },
-
-     timestamps: true,
     
-})
+}, {
+  timestamps: true,
+  })
 
 const  Employee = mongoose.model('Employee',employeeScema);
 module.exports = Employee;

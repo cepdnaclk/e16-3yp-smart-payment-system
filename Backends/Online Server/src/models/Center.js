@@ -10,33 +10,29 @@ const status = [
   ]
 const centerScema = new Schema({
      
-     center_id:{
-         type: Number,
-         required : true
-     },
      name:{
         type:  String,
         required :true
         
      },
-     Address:
+     address:
         {
         type:  String,
         required :true
         
      },
-     User_id:[
-        {
+     user_id:
+        [{
             type: mongoose.Schema.Types.ObjectId,
-            ref:User,
+            //ref:User,
             required:true
         }
-    ]
+      ]
    },{   
 
      timestamps: true,
     
 })
 
-var Center = mongoose.model('Center',centerScema);
+const Center = mongoose.model('Center',centerScema);
 module.exports = Center;

@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 require('mongoose-currency').loadType(mongoose);
 const Currency = mongoose.Types.Currency;
 const Schema = mongoose.Schema;
+const Center = require('../models/Center')
 
 const status = [
     'using', 'damaged','removed'
@@ -10,18 +11,19 @@ const status = [
 const cardScema = new Schema({
      
      center_id:{
-         type: Number,
+         type: mongoose.Schema.Types.ObjectId,
+         ref : Center,
          required : true
      },
      status:{
         type:  String,
-        default : 'using',
-        enum: status
+        enum: status,
+        required: true
         
-     },
-
-     timestamps: true,
+     }
     
+},{
+  timestamps: true
 })
 
 var Card = mongoose.model('Card',cardScema);
