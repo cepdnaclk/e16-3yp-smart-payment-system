@@ -18,7 +18,8 @@ exports.register = {
 	    lname: Joi.string()
 	    	.max(30)
 	    	.regex(/[a-zA-Z]/)
-	    	.required()
+			.required(),
+		role: Joi.string()
 	}),
 }
 

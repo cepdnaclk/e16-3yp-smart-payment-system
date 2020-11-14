@@ -2,9 +2,11 @@ const mongoose = require('mongoose');
 require('mongoose-currency').loadType(mongoose);
 const Currency = mongoose.Types.Currency;
 const Schema = mongoose.Schema;
+const Center = require("../models/Center")
+
 
 const roles = [
-  'user', 'admin'
+  'superAdmin', 'admin','users'
 ]
 
 const userSchema = new Schema({
@@ -32,19 +34,27 @@ const userSchema = new Schema({
       type: String,
       unique: true
     },
-    active: {
+    active: { 
       type: Boolean,
       default: false
     },
+    contactNumber: {
+      type: Number,
+      maxlength: 10
+    },
     role: {
       type: String,
-      default: 'user',
+      default: 'users',
       enum: roles
-    }
+    },
+    center:[{
+      type: mongoose.Schema.Types.ObjectId,
+      ref : Center
+    }]
   }, {
     timestamps: true
   })
   
 
-var User = mongoose.model('User',userSchema);
+const User = mongoose.model('User',userSchema);
 module.exports = User;
