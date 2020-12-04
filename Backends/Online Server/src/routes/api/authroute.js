@@ -13,10 +13,11 @@ const cardIssueLogController = require('../../controllers/cardIssueLogController
 
 //Importing validators
 const userValidation = require('../../validations/userValidation')
+const { validateBody, schemas } = require('../../validations/userValidation')
 
 //route to reister and login users
-router.post('/register',validate(userValidation.register,{}),userController.userRegister);
-router.post('/login',validate(userValidation.login,{}),userController.userLogin);
+router.post('/register',validateBody(schemas.registerSchema),userController.userRegister);
+router.post('/login',validateBody(schemas.loginSchema),userController.userLogin);
 
 //routes about cards
 router.post('/addCards',cardController.addCards);
