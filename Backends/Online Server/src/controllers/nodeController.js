@@ -30,9 +30,9 @@ exports.addNodes = async (req,res,next)=>{
             success :true
         });
     }catch(err){
-        console.log(err)
+        //console.log(err)
         return res.status(400).json({   
-            "message" : "Unable to Add Nodes",
+            "message" : err.message,
             success : false
         })
     }

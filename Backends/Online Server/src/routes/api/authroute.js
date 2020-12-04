@@ -13,23 +13,27 @@ const cardIssueLogController = require('../../controllers/cardIssueLogController
 
 //Importing validators
 const userValidation = require('../../validations/userValidation')
-const { validateBody, schemas } = require('../../validations/userValidation')
+//const { validateBody, schemas } = require('../../validations/userValidation')
+const nodeValidation = require('../../validations/NodeValidation')
+const centerValidation = require('../../validations/CenterValidations')
+const cardValidation = require('../../validations/CardValidation')
+const logValidation = require('../../validations/logValidation')
 
 //route to reister and login users
-router.post('/register',validateBody(schemas.registerSchema),userController.userRegister);
-router.post('/login',validateBody(schemas.loginSchema),userController.userLogin);
+router.post('/register',userValidation.validateBody(userValidation.schemas.registerSchema),userController.userRegister);
+router.post('/login',userValidation.validateBody(userValidation.schemas.loginSchema),userController.userLogin);
 
 //routes about cards
-router.post('/addCards',cardController.addCards);
+router.post('/addCards',cardValidation.validateBody(cardValidation.schemas.cardAddSchema),cardController.addCards);
 
 //routes about Center
-router.post('/addCenter',centerController.addCenter);
+router.post('/addCenter',centerValidation.validateBody(centerValidation.schemas.centerAddSchema),centerController.addCenter);
 
 //routes about Node
-router.post('/addNodes',nodeController.addNodes);
+router.post('/addNodes',nodeValidation.validateBody(nodeValidation.schemas.NodeAddSchema),nodeController.addNodes);
 
 //routes to update the log
-router.post('/addNodeUsage',nodeUsageController.addNodeUsage);
-router.post('/addCardIssueLog',cardIssueLogController.addCardIssueLog)
+router.post('/addNodeUsage',logValidation.validateBody(logValidation.schemas.nodeUsageSchema),nodeUsageController.addNodeUsage);
+router.post('/addCardIssueLog',logValidation.validateBody(logValidation.schemas.cardIssueSchema),cardIssueLogController.addCardIssueLog)
 
 module.exports = router
