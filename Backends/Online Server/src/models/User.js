@@ -56,5 +56,44 @@ const userSchema = new Schema({
   })
   
 
-const User = mongoose.model('User',userSchema);
+  userSchema.statics = {
+    roles,
+  
+    checkDuplicateEmailError (err) {
+      if (err.code === 11000) {
+        let error = new Error('Email already taken')
+        error.errors = [{
+          field: 'email',
+          location: 'body',
+          messages: ['Email already taken']
+        }]
+        error.status = 400
+        return error.json({   
+          "message" : error.message,
+          success : false
+      })
+      }
+  
+      return err
+    },
+  
+    // async findAndGenerateToken (payload) {
+    //   const { email, password } = payload
+    //   if (!email) throw new APIError('Email must be provided for login')
+  
+    //   const user = await this.findOne({ email }).exec()
+    //   if (!user) throw new APIError(`No user associated with ${email}`, httpStatus.NOT_FOUND)
+  
+    //   const passwordOK = await user.passwordMatches(password)
+  
+    //   if (!passwordOK) throw new APIError(`Password mismatch`, httpStatus.UNAUTHORIZED)
+  
+    //   if (!user.active) throw new APIError(`User not activated`, httpStatus.UNAUTHORIZED)
+  
+    //   return user
+    // }
+  }
+
+
+  const User = mongoose.model('User',userSchema);
 module.exports = User;
