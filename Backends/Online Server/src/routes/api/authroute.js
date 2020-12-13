@@ -18,6 +18,8 @@ const nodeValidation = require('../../validations/NodeValidation')
 const centerValidation = require('../../validations/CenterValidations')
 const cardValidation = require('../../validations/CardValidation')
 const logValidation = require('../../validations/logValidation')
+const isAuth = require("../../middlewares/authorization")
+
 
 //route to reister and login users
 router.post('/register',userValidation.validateBody(userValidation.schemas.registerSchema),userController.userRegister);
@@ -27,7 +29,7 @@ router.post('/login',userValidation.validateBody(userValidation.schemas.loginSch
 router.post('/addCards',cardValidation.validateBody(cardValidation.schemas.cardAddSchema),cardController.addCards);
 
 //routes about Center
-router.post('/addCenter',centerValidation.validateBody(centerValidation.schemas.centerAddSchema),centerController.addCenter);
+router.post('/addCenter',centerValidation.validateBody(centerValidation.schemas.centerAddSchema),isAuth(["user","superAdmin"]),centerController.addCenter);
 
 //routes about Node
 router.post('/addNodes',nodeValidation.validateBody(nodeValidation.schemas.NodeAddSchema),nodeController.addNodes);

@@ -3,6 +3,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const apistatus = require('../routes/api/status')
 const apiIndex = require('../routes/api/index')
+const errorHandler = require('../middlewares/error-handler')
 
 
 const app = express()
@@ -21,6 +22,8 @@ app.use((req,res,next)=>{
 
 app.use(apistatus)
 app.use(apiIndex)
+app.use(errorHandler.handleNotFound)
+app.use(errorHandler.handleError)
 
 
 exports.start = () => {
