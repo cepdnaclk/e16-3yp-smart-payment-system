@@ -1,12 +1,15 @@
+//const { function } = require('joi');
 const mongoose = require('mongoose');
+const config = require('../config')
 require('mongoose-currency').loadType(mongoose);
 const Currency = mongoose.Types.Currency;
 const Schema = mongoose.Schema;
 const Center = require("../models/Center")
+const jwt = require('jsonwebtoken')
 
 
 const roles = [
-  'superAdmin', 'admin','users'
+  'superAdmin', 'admin','user'
 ]
 
 const userSchema = new Schema({
@@ -44,7 +47,7 @@ const userSchema = new Schema({
     },
     role: {
       type: String,
-      default: 'users',
+      default: 'user',
       enum: roles
     },
     center:[{
@@ -55,6 +58,15 @@ const userSchema = new Schema({
     timestamps: true
   })
   
+  userSchema.methods.generateToken = function () {
+    const user_details = {
+      id : this._id,
+      role : this.role,
+      name: `${this.fName} ${this.lName}` 
+    }
+    const token = jwt.sign(user_details, config.secret)
+    return token;
+  }
 
   userSchema.statics = {
     roles,
@@ -95,5 +107,5 @@ const userSchema = new Schema({
   }
 
 
-  const User = mongoose.model('User',userSchema);
+const User = mongoose.model('User',userSchema);
 module.exports = User;

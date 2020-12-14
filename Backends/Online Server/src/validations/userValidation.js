@@ -30,7 +30,7 @@ module.exports = {
 		contactNumber: Joi.number()
 			.required(),
 		role: Joi.string()
-			
+			.required()
 	  })
   },
  
