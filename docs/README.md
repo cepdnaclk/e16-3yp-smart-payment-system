@@ -2,9 +2,26 @@
 ---
 This is the 3rd year embedded system project
 ## Group Members : 
-                E/16/054 e16054@eng.pdn.ac.lk
-                E/16/351 e16351@eng.pdn.ac.lk
-                E/16/389 e16389@eng.pdn.ac.lk
+>[Basnayake S.S.](https://github.com/sathirauop) **E/16/054**
+
+>[Madusha shanaka](https://github.com/MadushaShanaka) **E/16/351**
+
+>[Nadun welikanda](https://github.com/Nadun360) **E/16/389**
+
+---
+## Product design     
+
+![Our Design](https://github.com/sathirauop/e16-3yp-smart-payment-system/blob/main/images/Capture.PNG?raw=true)  
+
+## Table of contents
+
+1. >[Problem](https://github.com/cepdnaclk/e16-3yp-smart-payment-system#problem)
+2. >[Our solution](https://github.com/cepdnaclk/e16-3yp-smart-payment-system#our-solution)
+3. >[Solution Architecture](https://github.com/cepdnaclk/e16-3yp-smart-payment-system#solution-architecture)
+4. >[Hardware & Software Designs](https://github.com/cepdnaclk/e16-3yp-smart-payment-systemr#hardware--software-designs)
+5. >[Testing](https://github.com/cepdnaclk/e16-3yp-smart-payment-system#testing)
+6. >[Detailed budget](https://github.com/cepdnaclk/e16-3yp-smart-payment-system#detailed-budget)
+7. >[Links](https://github.com/cepdnaclk/e16-3yp-smart-payment-system#Links)
 
 ## OVERVIEW
   As we all know gaming industry is growing day by day. As a result of this growth the concept of gaming centers has been popular lately. In a gaming center they normally use coins to play the games. The procedure is when a customer comes to the gaming center they have to buy coins from the cashier in order to use those as a paying method to the gaming machine. Once they put enough number of coins into the machine they are allowed to play the game.
@@ -17,6 +34,15 @@ This is the 3rd year embedded system project
 ## Our Solution
   As a solution for above problems we came up with a solution which completely replace coins system with a RFID and NFC technology. In our solution, when the customer arrives at the cashier and pay money they will be issued a RFID card or if they have NFC supported mobile device they can use our mobile app instead of coins. To play the game what they have to do is simply tap the RFID card or the mobile device into the reading area which is in the gaming machine. After the customer done playing he can go to the cashier and return the card. If there is any balance the cashier will return the balance.
 ![overview](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/images/smart_payment_system_overview.png?raw=true)
+
+## Solution Architecture
+
+## Detailed Budget
+![Our Budjet](https://github.com/sathirauop/e16-3yp-smart-payment-system/blob/main/images/Budget.jpeg?raw=true)  
+
+
+## Hardware  Software design
+![Our Design](https://github.com/sathirauop/e16-3yp-smart-payment-system/blob/main/Diagrams/EasyEDA_diagram.png?raw=true)  
 
 ## Target Audience
   The target audience of this project is Gaming centers which is our primary target. As our next milestone, we are planning to update this system in a way that it can be used in any commercial market place such as casino, leisure world, etc.
