@@ -10,7 +10,7 @@ const {ValidationError} = require('express-validation');
 //const jwt = require('jsonwebtoken')
 
 
-//In this method even when the json key is mispelled the center_id a card will be added with wrong informaion
+//In this method even when the json key is mispelled the center_id a card will be added with wrong informaion.Need to fix the issue
 exports.addNodes = async (req,res,next)=>{
     
     try{
@@ -30,9 +30,9 @@ exports.addNodes = async (req,res,next)=>{
             success :true
         });
     }catch(err){
-        console.log(err)
+        //console.log(err)
         return res.status(400).json({   
-            "message" : "Unable to Add Nodes",
+            "message" : err.message,
             success : false
         })
     }

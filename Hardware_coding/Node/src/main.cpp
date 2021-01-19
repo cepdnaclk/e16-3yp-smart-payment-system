@@ -10,10 +10,21 @@
 #define RST_PIN D3
 #include <SPI.h>
 #include <MFRC522.h>
+#include <ArduinoJson.h>
 
 //LCD monitor
 #include <LiquidCrystal_I2C.h>
 #include <Wire.h>
+
+//Wifi
+#include <ESP8266WiFi.h>
+#include <ESP8266HTTPClient.h>
+#define SERVER_IP "192.168.43.27:3000"
+#ifndef STASSID
+#define STASSID "sathira"
+#define STAPSK  "12345678"
+#endif
+
 //LCD monitor
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
@@ -26,11 +37,12 @@ MFRC522::MIFARE_Key key;          //create a MIFARE_Key struct named 'key', whic
 int readBlock(int , byte []);
 int writeBlock(int , byte []);
 void lcd_init();
+void wifi_init();
 
 //this is the block number we will write into and then read.
 int block=2;  
 
-byte blockcontent[16] = {"sathiraJu@5wq"};  //an array with 16 bytes to be written into one of the 64 card blocks is defined
+byte blockcontent[16] = {"sathiraBasnayak"};  //an array with 16 bytes to be written into one of the 64 card blocks is defined
 //byte blockcontent[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};  //all zeros. This can be used to delete a block.
 
 //This array is used for reading out a block.
@@ -43,11 +55,14 @@ void setup()
   Serial.begin(9600);   // Initiate a serial communication
   SPI.begin();      // Initiate  SPI bus
   mfrc522.PCD_Init();   // Initiate MFRC522
-  Serial.println("Show your card:");
+  Serial.println  ();
+  Serial.println("Welcome:");
 
   //lcd monitor
   lcd_init();
-
+  
+  //wifi 
+  wifi_init();
   // Prepare the security key for the read and write functions.
   for (byte i = 0; i < 6; i++) {
     key.keyByte[i] = 0xFF;  //keyByte is defined in the "MIFARE_Key" 'struct' definition in the .h file of the library
@@ -56,7 +71,9 @@ void setup()
 
 void loop() 
 
+
 {
+  //Serial.print("begin test");
   String tag ="";
   String id= "";
 
@@ -98,11 +115,60 @@ void loop()
    for (int j=0 ; j<16 ; j++)
    {
      tag.concat(String(readbackblock[j] < 0x10 ? " 0" : " "));
-     tag.concat(String(readbackblock[j],DEC));
-     Serial.write(readbackblock[j]);
+     tag.concat(String(readbackblock[j],HEX));
+     //Serial.write(readbackblock[j]);
    }
    Serial.println("");
    Serial.println(tag);
+   //tag = "73 61 74 68 69 72 61 12 a3 12 ds 12 34 12 as sd 12";
+   if ((WiFi.status() == WL_CONNECTED)) {
+
+    WiFiClient client;
+    HTTPClient http;
+
+    Serial.print("[HTTP] begin...\n");
+    // configure traged server and url
+    http.begin(client, "http://" SERVER_IP "/Id/"); //HTTP
+    http.addHeader("Content-Type", "application/json");
+    
+
+    //creating the body of post request
+    char JSON[150];
+    sprintf(JSON, "{\"Card_id\": \"%s\",\"security\":\"%s\"}",id.c_str(),tag.c_str());
+   
+
+    Serial.print("[HTTP] POST...\n");
+    // start connection and send HTTP header and body
+   
+   
+    //sending the post request
+    int httpCode = http.POST(JSON);
+   
+    // httpCode will be negative on error
+    if (httpCode > 0) {
+      // HTTP header has been send and Server response header has been handled
+      Serial.printf("[HTTP] POST... code: %d\n", httpCode);
+
+      // file found at server
+      if (httpCode == HTTP_CODE_OK) {
+        const String& payload = http.getString();
+        Serial.println("received payload:\n<<");
+        Serial.println(payload);
+        StaticJsonDocument<50> doc; // <- a little more than 200 bytes in the stack
+        deserializeJson(doc, payload);
+        const char* reply = doc["msg"];
+        lcd.clear();
+        lcd.print(reply);
+        Serial.println(">>");
+      }
+    } else {
+      Serial.printf("[HTTP] POST... failed, error: %s\n", http.errorToString(httpCode).c_str());
+    }
+
+    http.end();
+     Serial.println("end");
+  }
+
    
   
 } 
@@ -175,4 +241,16 @@ void lcd_init(){
   lcd.init();
   lcd.backlight();
   lcd.print("Show your card");
+}
+
+void wifi_init(){
+   WiFi.begin(STASSID, STAPSK);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("");
+  Serial.print("Connected! IP address: ");
+  Serial.println(WiFi.localIP());
 }
