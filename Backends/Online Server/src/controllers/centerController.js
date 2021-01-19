@@ -30,13 +30,18 @@ exports.addCenter = async (req,res,next)=>{
             success :true
         });
     }catch(err){
-       console.log(err)
        
         return res.status(400).json({   
-            "message" : "Unable to Add the center",
+            "message" : "Unable to Add the center. "+err.message,
             success : false
         })
     }
    
 
 }
+
+/*
+    Issue
+    If I add the same center over and over again it will be added to the data base with different ObjectIds.
+
+*/
