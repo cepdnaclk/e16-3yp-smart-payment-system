@@ -2,12 +2,14 @@
 
 const config = require('../config')
 const mysql = require('mysql')
+//const mysql2 = require('mysql')
 
 const client = mysql.createConnection({
 	host : config.db.host,
 	user : config.db.user,
 	password : config.db.password,
-	multipleStatements : true
+	multipleStatements : true,
+	insecureAuth : true
 })
 
 const sql = {
@@ -16,12 +18,11 @@ const sql = {
 		use: 'USE Smart_Payment_System;'
 	},
 	tables: {
-		employee:'CREATE TABLE IF NOT EXISTS EMPLOYEE(NIC VARCHAR(12) PRIMARY KEY, FName VARCHAR(30) NOT NULL, LName VARCHAR(30) NOT NULL, Email VARCHAR(60) UNIQUE NOT NULL, Password VARCHAR(128) NOT NULL, Activation_Key CHAR(36) NOT NULL, Status BOOLEAN DEFAULT false)',
-		rfidTag:'CREATE TABLE IF NOT EXISTS RFID_TAG(Tag_ID VARCHAR(10) PRIMARY KEY, Employee_ID VARCHAR(12) NOT NULL, Date DATE NOT NULL, Time TIME NOT NULL, In_Store BOOLEAN DEFAULT true, FOREIGN KEY (Employee_ID) REFERENCES EMPLOYEE (NIC) ON UPDATE CASCADE)',
-		customer:'CREATE TABLE IF NOT EXISTS CUSTOMER(Customer_ID INT AUTO_INCREMENT PRIMARY KEY, FName VARCHAR(30) NOT NULL, LName VARCHAR(30) NOT NULL, Employee_ID VARCHAR(12) NOT NULL, RFID_Tag VARCHAR(10) NOT NULL, Date DATE NOT NULL, Time TIME NOT NULL, Balance DOUBLE NOT NULL, Status BOOLEAN DEFAULT false, FOREIGN KEY (Employee_ID) REFERENCES EMPLOYEE (NIC) ON UPDATE CASCADE, FOREIGN KEY (RFID_Tag) REFERENCES RFID_TAG (Tag_ID) ON UPDATE CASCADE)',
+		employee:'CREATE TABLE IF NOT EXISTS EMPLOYEE(NIC VARCHAR(12) PRIMARY KEY, FName VARCHAR(30) NOT NULL, LName VARCHAR(30) NOT NULL, Email VARCHAR(60) UNIQUE NOT NULL, Password VARCHAR(128) NOT NULL, Activation_Key CHAR(36) NOT NULL, Status BOOLEAN DEFAULT false,Designation VARCHAR(36) NOT NULL)',
+		rfidCard:'CREATE TABLE IF NOT EXISTS RFID_Card(CardId VARCHAR(10) PRIMARY KEY, EmployeeId VARCHAR(12) , CustomerName VARCHAR(25), Date DATE , Time TIME , IsIssued BOOLEAN DEFAULT false, Amount DOUBLE, FOREIGN KEY (EmployeeId) REFERENCES EMPLOYEE (NIC) ON UPDATE CASCADE)',
 		// The format of Gaming Node Id: S_xx_N_xx (here xx is a hexadecimal value)
-		gamingNode:'CREATE TABLE IF NOT EXISTS GAMING_NODE(Node_ID CHAR(9) PRIMARY KEY, Value DOUBLE NOT NULL, Status BOOLEAN DEFAULT true, Employee_ID VARCHAR(12) NOT NULL, Date DATE NOT NULL, Time TIME NOT NULL, FOREIGN KEY (Employee_ID) REFERENCES EMPLOYEE (NIC) ON UPDATE CASCADE)',
-		gamingLog:'CREATE TABLE IF NOT EXISTS GAMING_LOG(Node_ID CHAR(9), Customer_ID INT, Date DATE, Time TIME, PRIMARY KEY(Node_ID, Customer_ID, Date, Time), FOREIGN KEY (Node_ID) REFERENCES GAMING_NODE (Node_ID) ON UPDATE CASCADE, FOREIGN KEY (Customer_ID) REFERENCES CUSTOMER (Customer_ID) ON UPDATE CASCADE)'
+		gamingNode:'CREATE TABLE IF NOT EXISTS GAMING_NODE(NodeId CHAR(9) PRIMARY KEY, Price DOUBLE NOT NULL, Status BOOLEAN DEFAULT true)',
+		gamingLog:'CREATE TABLE IF NOT EXISTS GAMING_LOG(NodeId CHAR(9),NIC VARCHAR(12), Date DATE, Time TIME, PRIMARY KEY(NodeId, NIC), FOREIGN KEY (NodeId) REFERENCES GAMING_NODE (NodeId) ON UPDATE CASCADE, FOREIGN KEY (NIC) REFERENCES EMPLOYEE (NIC) ON UPDATE CASCADE)'
 	}
 }
 
@@ -69,25 +70,16 @@ exports.connect = async () => {
 	  	// 	console.log('EMPLOYEE created')
 	})
 
-// creat table RFID_TAG
-	client.query(sql.tables.rfidTag, (err, results) => {
+// creat table RFID_Card
+	client.query(sql.tables.rfidCard, (err, results) => {
 	  	if (err) {
-	  		console.log(`Could not create table "RFID_TAG" because of ${err.code}`)
+	  		console.log(`Could not create table "RFID_Card" because of ${err.code}`)
 			process.exit(1)
 	  	}
 	  	// else
 	  	// 	console.log('RFID_TAG created')
 	})
 
-// creat table CUSTOMER
-	client.query(sql.tables.customer, (err, results) => {
-	  	if (err) {
-	  		console.log(`Could not create table "CUSTOMER" because of ${err.code}`)
-			process.exit(1)
-	  	}
-	  	// else
-	  	// 	console.log('CUSTOMER created')
-	})
 
 // creat table GAMING_NODE
 	client.query(sql.tables.gamingNode, (err, results) => {
@@ -122,4 +114,28 @@ exports.sendQuery = async (sql, callback) => {
 	  		callback(null, results)
 	  	}
 	})
+}
+
+// We will use this to execute the sql queries 
+exports.sendQuery = async (sql, callback) => {
+	client.query(sql, (err, results) => {
+	  	if (err) {
+	  		callback(err, null);
+	  	} else {
+	  		callback(null, results)
+	  	}
+	})
+}
+
+exports.sendQuery2 =  (sql) => {
+	try{
+		console.log(sql);
+		const result = client.query(sql);
+		console.log("test3");
+		//console.log(result);
+	}catch(err){
+		console.log(err.message);
+	}
+	
+	
 }
