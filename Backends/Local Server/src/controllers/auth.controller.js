@@ -15,6 +15,7 @@ exports.register = async (req, res, next) => {
 
     // Proceesing and making data object 
     const details = {
+      NIC: req.body.NIC,
       email : req.body.email,
       password : pwd,
       fname : req.body.fname,
