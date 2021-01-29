@@ -1,28 +1,10 @@
+'use strict'
 
-
-const mongoose = require('./services/mongoose')
 const app = require('./services/express')
+const mysql = require('./services/mysql')
 
-
-// start app and connect to database
+// Start app and connect it to the database
 app.start()
-mongoose.connect()
-
-
-
+mysql.connect()
 
 module.exports = app
-
-
-
-
-
-
-
-
-
-
-
-
-
-
