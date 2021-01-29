@@ -1,1 +1,0 @@
-mongodb+srv://sathira97:sathira97@sample-project.xzlyi.mongodb.net/sample-project?retryWrites=true&w=majority

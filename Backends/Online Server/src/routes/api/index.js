@@ -1,10 +1,16 @@
+'use strict'
+
 const express = require('express')
 const router = express.Router()
-const authRouter = require('./authroute')
+const authRouter = require('./authRoute')
+const Embedded_Project = require('../../public/introduction')
 
-router.get('/', (req, res) => { res.send({homepage: 'OK'}) }) // api status
+// will send little introduction about the API
+router.get('/', (req, res) => {
+	res.status(200).send(Embedded_Project)
+})
 
-router.use('/auth', authRouter) // mount auth paths
-//router.use('/api', authRouter) // mount auth paths
+// adding authentication routes for the application
+router.use('/api', authRouter)
 
 module.exports = router

@@ -1,37 +1,73 @@
-//TODO : when a invalid token is invalid it gives the wrong status code. Have to correct it
-
-const jwt = require('jsonwebtoken');
-const APIError = require('../utils/APIErrors')
 const httpStatus = require('http-status')
-const config = require("../config")
-const User = require('../models/User')
+const config = require('../config')
+const jwt = require('jsonwebtoken')
 
-const auth =(roles =[User.role]) => async (req,res,next)=>{
-    
-        
-  try{  
-    console.log("in middleware "+roles[0])
-    const authHeader = req.get('Authorization');
-     if(!authHeader){
-            throw new APIError(`this have not authenticated`, httpStatus.UNAUTHORIZED)
-     }
-    
-    const token =authHeader.split(' ')[1] ;
-     let decodedToken;
-        
-     
-    decodedToken = jwt.verify(token,config.secret);
-    current_role = decodedToken.role;
-    console.log(current_role) 
-    if((roles.indexOf(current_role))<0) throw new APIError(`Access FORBIDDEN`, httpStatus.FORBIDDEN)
-  
-    next();
-  }catch(err){
-    
-   next(err)
-  }
-   
-};
+exports.sendUser = async (req, res, next) => {
+	try {
+		// get auth header
+		const brearerHeader = req.headers.authorization
 
+		// if the token is there
+		if (typeof brearerHeader !== 'undefined') {
+			// separate the token and brearer
+			const brearer = brearerHeader.split(' ')
+			// taking token
+			const brearerToken = brearer[1]
+			
+			// verify the token
+			jwt.verify(brearerToken, config.secret, (err, decoded) => {
+				if (err)
+					return res.status(httpStatus.UNAUTHORIZED).json({Error : 'Unauthorized for the request!'})
+				else {
+					req.authuser = {
+						name: decoded.name,
+						role: decoded.role,
+						designation: decoded.designation
+					}
+					return next()
+				}
+			})
 
-module.exports = auth
+		} else {
+			return res.status(httpStatus.FORBIDDEN).json({Error : 'Authentication Failed!'})
+		}
+	}
+	catch(err) {
+		return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: "could not create the user!"})
+	}
+	
+}
+
+exports.check = async (req, res, next, roles) => {
+	try {
+		// get auth header
+		const brearerHeader = req.headers.authorization
+
+		// if the token is there
+		if (typeof brearerHeader !== 'undefined') {
+			// separate the token and brearer
+			const brearer = brearerHeader.split(' ')
+			// taking token
+			const brearerToken = brearer[1]
+			
+			// verify the token
+			jwt.verify(brearerToken, config.secret, (err, decoded) => {
+				if (err)
+					return res.status(httpStatus.UNAUTHORIZED).json({Error : 'Unauthorized for the request!'})
+				else {
+					if (!roles.includes(decoded.role))
+						return res.status(httpStatus.FORBIDDEN).json({Error : 'Forbidden for your user type!'})
+					else 
+						return next()
+				}
+			})
+
+		} else {
+			return res.status(httpStatus.FORBIDDEN).json({Error : 'Authentication Failed!'})
+		}
+	}
+	catch(err) {
+		return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: "could not create the user!"})
+	}
+	
+}
