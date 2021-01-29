@@ -32,13 +32,17 @@ export default {
     '@nuxtjs/eslint-module'
   ],
 
-  // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://go.nuxtjs.dev/bootstrap
-    'bootstrap-vue/nuxt'
+    'bootstrap-vue/nuxt',
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
+  // When this enable user will redirect to /login
+  router: {
+    middleware: ['auth']
+  },
+
   build: {
   }
 }

@@ -1,10 +1,11 @@
 {
-  "name": "smart-payment-system-local-server",
+  "name": "smart-payment-system-cloud-server",
   "version": "1.0.0",
-  "description": "This is the backend of the local server which is implemented using Node js",
+  "description": "This is the backend of the cloud server which is implemented using Node js",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "nodemon src/index.js",
+    "dev": "./node_modules/.bin/nodemon src/index.js"
   },
   "author": "E/16/054, E/16/351, E/16/389",
   "license": "ISC",
@@ -18,7 +19,6 @@
     "http-status": "^1.5.0",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
-    "mysql2": "2.2.5",
     "uuidv1": "^1.6.14"
   },
   "devDependencies": {
