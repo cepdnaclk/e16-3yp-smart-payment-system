@@ -20,7 +20,7 @@ exports.register = async (req, res, next) => {
       password : pwd,
       fname : req.body.fname,
       lname : req.body.lname,
-      designation : req.body.designation,
+      role : req.body.role,
       activation_key : activationKey
     }
 
