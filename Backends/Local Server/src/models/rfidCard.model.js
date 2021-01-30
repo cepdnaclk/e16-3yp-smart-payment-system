@@ -46,25 +46,157 @@ exports.cardIssueing = async (card, callback) => {
   }
 }
 
-exports.cardScanning = async (details)=>{
-  try{
-    if(details){
-      const sql_findBalance = `SELECT CustomerName,Amount from RFID_Card WHERE CardId =  '${details.card_id}';`
-      const sql_findPrice = `SELECT Price from GAMING_NODE WHERE NodeId =  '${details.node_id}';`
-      console.log("test");
-      await client.sendQuery2(sql_findBalance);
-      //const price = await client.sendQuery2(sql_findPrice);
-      console.log(balanceDetails)
-      console.log("test2");
-
-   }
-
-  }catch(err){
-    console.log(err.message)
+exports.cardState = async (card,callback)=>{
+  if(card){
+    //const sql_issue_card = `UPDATE RFID_Card SET IsIssued = ${card.is_issued}, Amount = ${card.amount}, CustomerName = '${card.customer_name}', EmployeeId  = '${card.employee_id}' WHERE CardId =  '${card.card_id}';`
+    const sql_isissued = `SELECT IsIssued from RFID_Card WHERE CardId =  '${card.card_id}'`
+    await client.sendQuery(sql_isissued, (err, result) => {
+      if(err) {
+        console.error(`SQLQueryError: ${err.sqlMessage}`)
+				callback(err.code)
+      } else {
+        if(result[0]['IsIssued'] === 1){
+          callback(new Error('Card is already issued'));
+        }else{
+          callback(null);
+        }
+      }
+    })
   }
+}
+
+'${client.sendQuery(sql)}'
+
+exports.cardRefundng = async (card,callback)=>{
+  if(card){
+    const sql_currentAmount = `SELECT Amount from RFID_Card WHERE CardId =  '${card.card_id}'`
  
    
+    await client.sendQuery(sql_currentAmount, async (err, result) => {
+      if(err) {
+        console.error(`SQLQueryError: ${err.sqlMessage}`)
+				callback(err.code)
+      } else {
+        const current_amount = result[0]['Amount'];
+        await client.sendQuery(`UPDATE RFID_Card SET  Amount = '${card.refund_amount}'+'${current_amount}' WHERE CardId =  '${card.card_id}';`, (err, result) => {
+          if(err) {
+            console.error(`SQLQueryError: ${err.sqlMessage}`)
+            callback(err.code)
+          } else {
+            if (result.affectedRows > 0) {
+              console.log(`Key_ID '${card.card_id}' successfully refunded!`)
+              callback(null)
+            }
+            else {
+              callback("ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG CARD_ID")
+            }
+          }
+        })
+      }
+    })
+    
+  }
+}
+
+exports.cardReturning = async (details,callback)=>{
+  if(details){
+    const sql_cardReturn =  `UPDATE RFID_Card SET IsIssued = false, Amount = null, CustomerName = null, EmployeeId  = null WHERE CardId =  '${details.card_id}';`
+    await client.sendQuery(sql_cardReturn,(err,result)=>{
+      if(err) {
+        console.error(`SQLQueryError: ${err.sqlMessage}`)
+        callback(err.code)
+      } else {
+        if (result.affectedRows > 0) {
+					console.log(`Key_ID '${details.card_id}' successfully returned!`)
+					callback(null)
+				}
+				else {
+					callback("ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG CARD_ID")
+				}
+      }
+    })
+  }
+}
+
+exports.cardScanning = async (details,callback)=>{
+    if(details){
+      const sql_findBalance = `SELECT CustomerName,Amount from RFID_Card WHERE CardId =  '${details.card_id}';`
+      console.log("test");
+      await client.sendQuery(sql_findBalance, (err, result) => {
+        if(err) {
+          console.error(`SQLQueryError: ${err.sqlMessage}`)
+          callback(err.code)
+        } else {
+          if (result) {
+               
+           // console.log(result[0])
+            callback(null,result)
+
+          }
+          else {
+           
+            callback(null)
+          }
+        }
+      })
+      
+   }
    
+}
+
+exports.cardScanning2 = async (details,callback)=>{
+  if(details){
+    const sql_findPrice = `SELECT Price from GAMING_NODE WHERE NodeId =  '${details.node_id}';`
+    console.log("test");
+    await client.sendQuery(sql_findPrice, (err, result) => {
+      if(err) {
+        console.error(`SQLQueryError: ${err.sqlMessage}`)
+        callback(err.code)
+      } else {
+        if (result) {
+             
+          //console.log(result[0])
+          callback(null,result)
+
+        }
+        else {
+         
+          callback(null)
+        }
+      }
+    })
+    
+ }
+
+ 
+ 
+}
+
+exports.creatingCurrentBalanace = async (details,callback)=>{
+  if(details){
+    const sql_currentprice = `UPDATE RFID_Card SET  Amount = ${details.newAmount} WHERE CardId =  '${details.card_id}';`
+    console.log("test");
+    await client.sendQuery(sql_currentprice, (err, result) => {
+      if(err) {
+        console.error(`SQLQueryError: ${err.sqlMessage}`)
+        callback(err.code)
+      } else {
+        if (result) {
+
+          callback(null,result)
+
+        }
+        else {
+         
+          callback(null)
+        }
+      }
+    })
+    
+ }
+
+ 
+ 
 }
 
 exports.findUser = async (email, callback) => {

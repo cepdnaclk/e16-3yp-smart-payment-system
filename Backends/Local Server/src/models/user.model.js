@@ -5,7 +5,7 @@ const client = require('../services/mysql')
 exports.registering = async (user, callback) => {
   if (user) {
     // sql query to register a user
-    const sql_regi = `INSERT INTO EMPLOYEE(NIC,Email, Password, FName, LName, Designation, Activation_Key) VALUES ('${user.NIC}', '${user.email}', '${user.password}', '${user.fname}', '${user.lname}', '${user.designation}', '${user.activation_key}');`
+    const sql_regi = `INSERT INTO EMPLOYEE(NIC,Email, Password, FName, LName, Role, Activation_Key) VALUES ('${user.NIC}', '${user.email}', '${user.password}', '${user.fname}', '${user.lname}', '${user.role}', '${user.activation_key}');`
     
     // executing the query
     await client.sendQuery(sql_regi, (err, result) => {
