@@ -90,10 +90,15 @@ exports.issueCard = async(req,res,next)=>{
     await card.cardState(details, async (err)=>{
       if(!err){
        
-        await card.cardIssueing(details, (err)=>{
+        await card.cardIssueing(details, async (err)=>{
           if (!err) {
-          
-            return res.status(httpStatus.CREATED).json({msg : `card ${details.card_id} is ready to issued to the customer`})
+            await card.addtoIssuelog(details, async(err)=>{
+              if(!err){
+                return res.status(httpStatus.CREATED).json({msg : `card ${details.card_id} is ready to issued to the customer`})
+              }else{
+               return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({msg :" Something went wrong didn't add to the log"})
+              }
+           })
           } else {
          
               return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err})
@@ -138,7 +143,18 @@ exports.scanCard = async(req,res,next) =>{
               } 
               await card.creatingCurrentBalanace(newDetails, async (err)=>{
                  if(!err){
-                  return res.status(httpStatus.OK).json({msg :"Hi " +balance[0]['CustomerName'] + " You can play the game"})
+                  //return res.status(httpStatus.OK).json({msg :"Hi " +balance[0]['CustomerName'] + " You can play the game"})
+                  const log = {
+                    card_id: details.card_id,
+                    node_id: details.node_id
+                  }
+                  await card.addtolog(log, async(err)=>{
+                     if(!err){
+                       return res.status(httpStatus.OK).json({msg :"Hi " +balance[0]['CustomerName'] + " You can play the game"})
+                     }else{
+                      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({msg :"Hi " +balance[0]['CustomerName'] + " Something went wrong please try again"})
+                     }
+                  })
                  }else{
                   console.log(err.message)
                   return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({msg :"Hi " +balance[0]['CustomerName'] + " Something went wrong please try again"})
