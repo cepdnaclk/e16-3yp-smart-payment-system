@@ -1,21 +1,31 @@
+'use strict'
+
 const httpStatus = require('http-status')
 
-// hanlde not found error
+// when the path is not valid
 exports.handleNotFound = (req, res, next) => {
   res.status(httpStatus.NOT_FOUND)
   res.json({
-    'message': 'Requested resource not found'
+    message: 'Requested resource not found'
   })
   res.end()
 }
 
-// handle errors
+// If the error has occured
 exports.handleError = (err, req, res, next) => {
-  res.status(err.status || httpStatus.INTERNAL_SERVER_ERROR)
-  res.json({
-    message: err.message,
-    extra: err.extra,
-    errors: err
-  })
-  res.end()
+	res.status(err.statusCode || httpStatus.INTERNAL_SERVER_ERROR)
+	res.json({
+    	errors: {
+    		name: err.name,
+    		message: err.message,
+    		statusCode: err.statusCode,
+    		error: err.error,
+    		details: {
+    			message: err.details.body[0].message,
+    			path: err.details.body[0].path,
+    			type: err.details.body[0].type
+    		}
+    	}
+	})
+	res.end()
 }

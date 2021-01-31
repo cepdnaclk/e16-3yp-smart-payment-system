@@ -15,11 +15,12 @@ exports.register = async (req, res, next) => {
 
     // Proceesing and making data object 
     const details = {
+      NIC: req.body.NIC,
       email : req.body.email,
       password : pwd,
       fname : req.body.fname,
       lname : req.body.lname,
-      designation : req.body.designation,
+      role : req.body.role,
       activation_key : activationKey
     }
 
@@ -69,7 +70,6 @@ exports.login = async (req, res, next) => {
                 id : result[0].Security_ID,
                 role : result[0].Role,
                 name: `${result[0].FName} ${result[0].LName}`,
-                designation : result[0].Designation
               }
               const token = jwt.sign(user, config.secret)
               return res.status(httpStatus.OK).json({ token: token})

@@ -1,4 +1,3 @@
-const APIError = require('../utils/APIError')
 const httpStatus = require('http-status')
 const config = require('../config')
 const jwt = require('jsonwebtoken')
