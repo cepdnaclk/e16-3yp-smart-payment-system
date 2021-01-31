@@ -70,7 +70,6 @@ exports.login = async (req, res, next) => {
                 id : result[0].Security_ID,
                 role : result[0].Role,
                 name: `${result[0].FName} ${result[0].LName}`,
-                designation : result[0].Designation
               }
               const token = jwt.sign(user, config.secret)
               return res.status(httpStatus.OK).json({ token: token})
