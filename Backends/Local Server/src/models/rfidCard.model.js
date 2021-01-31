@@ -101,27 +101,34 @@ exports.cardRefundng = async (card,callback)=>{
   if(card){
     const sql_currentAmount = `SELECT Amount from RFID_Card WHERE CardId =  '${card.card_id}'`
  
-   
     await client.sendQuery(sql_currentAmount, async (err, result) => {
       if(err) {
         console.error(`SQLQueryError: ${err.sqlMessage}`)
 				callback(err.code)
       } else {
-        const current_amount = result[0]['Amount'];
-        await client.sendQuery(`UPDATE RFID_Card SET  Amount = '${card.refund_amount}'+'${current_amount}' WHERE CardId =  '${card.card_id}';`, (err, result) => {
-          if(err) {
-            console.error(`SQLQueryError: ${err.sqlMessage}`)
-            callback(err.code)
-          } else {
-            if (result.affectedRows > 0) {
-              console.log(`Key_ID '${card.card_id}' successfully refunded!`)
-              callback(null)
+        console.log(result.length)
+        if(result.length<=0){
+      
+          callback("ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG CARD_ID")
+        }else{
+         
+          const current_amount = result[0]['Amount'];
+          await client.sendQuery(`UPDATE RFID_Card SET  Amount = '${card.refund_amount}'+'${current_amount}' WHERE CardId =  '${card.card_id}';`, (err, result) => {
+            if(err) {
+              console.error(`SQLQueryError: ${err.sqlMessage}`)
+              callback(err.code)
+            } else {
+              if (result.affectedRows > 0) {
+                console.log(`Key_ID '${card.card_id}' successfully refunded!`)
+                callback(null)
+              }
+              else {
+                callback("ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG CARD_ID")
+              }
             }
-            else {
-              callback("ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG CARD_ID")
-            }
-          }
-        })
+          })
+        }
+      
       }
     })
     
