@@ -18,11 +18,12 @@ const sql = {
 		use: 'USE Smart_Payment_System;'
 	},
 	tables: {
-		employee:'CREATE TABLE IF NOT EXISTS EMPLOYEE(NIC VARCHAR(12) PRIMARY KEY, FName VARCHAR(30) NOT NULL, LName VARCHAR(30) NOT NULL, Email VARCHAR(60) UNIQUE NOT NULL, Password VARCHAR(128) NOT NULL, Activation_Key CHAR(36) NOT NULL, Status BOOLEAN DEFAULT false,Designation VARCHAR(36) NOT NULL)',
+		employee:'CREATE TABLE IF NOT EXISTS EMPLOYEE(NIC VARCHAR(12) PRIMARY KEY, FName VARCHAR(30) NOT NULL, LName VARCHAR(30) NOT NULL, Email VARCHAR(60) UNIQUE NOT NULL, Password VARCHAR(128) NOT NULL, Activation_Key CHAR(36) NOT NULL, Status BOOLEAN DEFAULT false,Role VARCHAR(36) NOT NULL)',
 		rfidCard:'CREATE TABLE IF NOT EXISTS RFID_Card(CardId VARCHAR(10) PRIMARY KEY, EmployeeId VARCHAR(12) , CustomerName VARCHAR(25), Date DATE , Time TIME , IsIssued BOOLEAN DEFAULT false, Amount DOUBLE, FOREIGN KEY (EmployeeId) REFERENCES EMPLOYEE (NIC) ON UPDATE CASCADE)',
 		// The format of Gaming Node Id: S_xx_N_xx (here xx is a hexadecimal value)
 		gamingNode:'CREATE TABLE IF NOT EXISTS GAMING_NODE(NodeId CHAR(9) PRIMARY KEY, Price DOUBLE NOT NULL, Status BOOLEAN DEFAULT true)',
-		gamingLog:'CREATE TABLE IF NOT EXISTS GAMING_LOG(NodeId CHAR(9),NIC VARCHAR(12), Date DATE, Time TIME, PRIMARY KEY(NodeId, NIC), FOREIGN KEY (NodeId) REFERENCES GAMING_NODE (NodeId) ON UPDATE CASCADE, FOREIGN KEY (NIC) REFERENCES EMPLOYEE (NIC) ON UPDATE CASCADE)'
+		gamingLog:'CREATE TABLE IF NOT EXISTS GAMING_LOG(LogId INT PRIMARY KEY AUTO_INCREMENT, NodeId CHAR(9),CardId VARCHAR(12), Date DATE, Time TIME, FOREIGN KEY (NodeId) REFERENCES GAMING_NODE (NodeId) ON UPDATE CASCADE, FOREIGN KEY (CardId) REFERENCES RFID_Card (CardId) ON UPDATE CASCADE)',
+		issueLog:'CREATE TABLE IF NOT EXISTS ISSUE_LOG(LogId INT PRIMARY KEY AUTO_INCREMENT,NIC VARCHAR(12),CardId VARCHAR(10),CustomerName VARCHAR(30),DepositAmount DOUBLE,Date DATE , Time TIME , FOREIGN KEY (CardId) REFERENCES RFID_Card(CardId) ON UPDATE CASCADE, FOREIGN KEY (NIC) REFERENCES EMPLOYEE (NIC) ON UPDATE CASCADE)'
 	}
 }
 
@@ -90,6 +91,17 @@ exports.connect = async () => {
 	  	// else
 	  	// 	console.log('GAMING_NODE created')
 	})
+
+	// creat table GAMING_NODE
+	client.query(sql.tables.issueLog, (err, results) => {
+		if (err) {
+			console.log(`Could not create table "ISSUE_NODE" because of ${err.code}`)
+		  process.exit(1)
+		}
+		// else
+		// 	console.log('GAMING_NODE created')
+  })
+  
 
 // creat table GAMING_LOG
 	client.query(sql.tables.gamingLog, (err, results) => {
