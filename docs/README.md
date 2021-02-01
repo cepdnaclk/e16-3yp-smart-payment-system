@@ -42,7 +42,20 @@ This is the 3rd year embedded system project
 
 
 ## Hardware  Software design
+  Hardware design
 ![Our Design](https://github.com/sathirauop/e16-3yp-smart-payment-system/blob/main/Diagrams/EasyEDA_diagram.png?raw=true)  
+
+  Software design
+  
+    1. Database
+    
+![EER Diagram](https://github.com/cepdnaclk/e16-3yp-smart-payment-system/blob/main/Diagrams/EER_diagram/EER_diagram.png?raw=true)  
+
+    2. Cashier Application
+    
+ ![login](https://github.com/cepdnaclk/e16-3yp-smart-payment-system/blob/main/images/Desktop%20Application/login.PNG?raw=true)  
+ ![issue card](https://github.com/cepdnaclk/e16-3yp-smart-payment-system/blob/main/images/Desktop%20Application/issue_card.PNG?raw=true)  
+ ![add employer](https://github.com/cepdnaclk/e16-3yp-smart-payment-system/blob/main/images/Desktop%20Application/add_employer.PNG?raw=true)  
 
 ## Target Audience
   The target audience of this project is Gaming centers which is our primary target. As our next milestone, we are planning to update this system in a way that it can be used in any commercial market place such as casino, leisure world, etc.
@@ -51,6 +64,6 @@ This is the 3rd year embedded system project
 - [Department of Computer Engineering](http://www.ce.pdn.ac.lk/)
 - [Faculty of Engineering](http://eng.pdn.ac.lk/)
 - [University of Peradeniya](https://www.pdn.ac.lk/)
-- [Github Repository](https://github.com/cepdnaclk/e16-3yp-smart-payment-system/)
+- [Project website](https://cepdnaclk.github.io/e16-3yp-smart-payment-system/)
 
 
