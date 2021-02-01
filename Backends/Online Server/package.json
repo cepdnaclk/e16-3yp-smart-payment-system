@@ -4,7 +4,7 @@
   "description": "This is the backend of the cloud server which is implemented using Node js",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.js",
+    "start": "node src/index.js",
     "dev": "./node_modules/.bin/nodemon src/index.js"
   },
   "author": "E/16/054, E/16/351, E/16/389",

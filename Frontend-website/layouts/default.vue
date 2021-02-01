@@ -1,8 +1,19 @@
 <template>
-  <div>
-    <Nuxt />
-  </div>
+  <v-app>
+    <Snackbar></Snackbar>
+    <div>
+      <Nuxt />
+    </div>
+  </v-app>
 </template>
+
+<script>
+  import Snackbar from '~/components/Snackbar.vue'
+
+  export default {
+    components: { Snackbar }
+  }
+</script>
 
 <style>
 html {
@@ -29,6 +40,25 @@ html {
 *::after {
   box-sizing: border-box;
   margin: 0;
+}
+
+.back-ground {
+  color: #000;
+  background: #fff;
+  /*background: linear-gradient(30deg,#00bcd4,#060c21,#00bcd4);*/
+
+}
+
+.outer-boarder {
+  box-shadow: 0px 0px 3px 2px #060c21;
+  background: linear-gradient(560deg,#00bcd4,#060c21,#00bcd4);
+  /* 89ff00 */
+}
+
+.inner-boarder {
+	box-shadow: 0px 0px 12px 1px #27ae60;
+	border-radius: 15px;
+  /*background: linear-gradient(600deg,#00bcd4,#060c21,#00bcd4);*/
 }
 
 .button--green {
