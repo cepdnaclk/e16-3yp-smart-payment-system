@@ -21,6 +21,9 @@ router.post('/addCard',cardController.addCard);
 router.post('/issueCard',cardController.issueCard);
 
 router.post('/scanCard',cardController.scanCard);
+router.post('/returnCard',cardController.returnCard);
+router.post('/refundCard',cardController.refundCard);
+
 // router.post('/rfidcard/register', validate(keyValidation.register, {}, {}), keyController.register)
 // router.post('/rfidcard/update', validate(keyValidation.register, {}, {}), keyController.update)
 // router.post('/rfidcard/getkey', validate(keyValidation.getkey, {}, {}), keyController.getkey)
