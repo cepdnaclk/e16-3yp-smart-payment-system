@@ -5,9 +5,7 @@ const httpStatus = require('http-status')
 // when the path is not valid
 exports.handleNotFound = (req, res, next) => {
   res.status(httpStatus.NOT_FOUND)
-  res.json({
-    message: 'Requested resource not found'
-  })
+  res.json({message: 'Requested resource not found'})
   res.end()
 }
 
