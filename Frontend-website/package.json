@@ -1,6 +1,8 @@
 {
   "name": "Frontend-website",
   "version": "1.0.0",
+  "description": "This is the front end web application for Smart Payment System Project",
+  "author": "E/16/389, E/16/351, E/16/054",
   "private": true,
   "scripts": {
     "dev": "nuxt",
@@ -22,13 +24,10 @@
   "devDependencies": {
     "@nuxtjs/eslint-config": "^5.0.0",
     "@nuxtjs/eslint-module": "^3.0.2",
+    "@nuxtjs/vuetify": "^1.11.3",
     "@vue/test-utils": "^1.1.2",
     "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.3",
-    "eslint": "^7.18.0",
-    "eslint-plugin-nuxt": "^2.0.0",
-    "eslint-plugin-vue": "^7.4.1",
     "jest": "^26.6.3",
     "vue-jest": "^3.0.4"
   }
