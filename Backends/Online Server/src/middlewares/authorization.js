@@ -20,9 +20,7 @@ exports.sendUser = async (req, res, next) => {
 					return res.status(httpStatus.UNAUTHORIZED).json({Error : 'Unauthorized for the request!'})
 				else {
 					req.authuser = {
-						name: decoded.name,
-						role: decoded.role,
-						designation: decoded.designation
+						email: decoded.email
 					}
 					return next()
 				}

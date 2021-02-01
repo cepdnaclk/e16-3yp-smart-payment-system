@@ -158,7 +158,7 @@
 
 <script>
   export default {
-    auth: false,
+    auth: 'guest',
     data() {
       return {
         form: {
@@ -217,7 +217,7 @@
         if (this.form.nic == '')
           return true
         else {
-          letters = /^[0-9]+$/
+          var letters = /^[0-9]+$/
           return (!this.form.nic.match(letters) || this.form.nic.length > 11 || this.form.nic.length < 9) ? false : true
         }        
       },

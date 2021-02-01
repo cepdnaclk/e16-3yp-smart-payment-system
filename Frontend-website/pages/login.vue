@@ -148,7 +148,7 @@
             data: this.form
           })
           // console.log(this.$auth.user)
-          this.$notifier.showMessage({ content: `Welcome ${this.$auth.user.name} `, color: 'success' })
+          this.$notifier.showMessage({ content: `Welcome ${this.form.email} `, color: 'success' })
            
           return this.$router.push('/user')
         } catch (err) {
