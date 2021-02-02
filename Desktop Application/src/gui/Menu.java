@@ -5,9 +5,11 @@
  */
 package gui;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author Madusha Shanaka
@@ -15,13 +17,30 @@ import javax.swing.JOptionPane;
 public class Menu extends javax.swing.JFrame {
     
     public static String id = "";
+    public static String token = "admin2021";
     /**
      * Creates new form Menu
      */
     public Menu() {
         initComponents();
+        Edit.setVisible(false);
+        Option.setVisible(false);
+        btn_delete.setVisible(false);
     }
-
+    
+    private boolean isadmin(String token){
+        return(token.contains("admin"));
+    }
+    
+    private boolean login_success(String token){
+        try {
+            login_check lgin = new login_check();
+            lgin.call_me(email.getText(),pward.getText());
+        }catch (Exception e) {
+            e.printStackTrace();
+       }
+        return(!("".equals(token)));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,14 +56,14 @@ public class Menu extends javax.swing.JFrame {
         btn_login = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txt_uname = new javax.swing.JTextField();
-        txt_passw = new javax.swing.JPasswordField();
+        email = new javax.swing.JTextField();
+        pward = new javax.swing.JTextField();
         panel_issue_card = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txt_amount = new javax.swing.JTextField();
-        txt_user = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
         txt_card_id = new javax.swing.JTextField();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
@@ -57,25 +76,28 @@ public class Menu extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txt_nic = new javax.swing.JTextField();
         btn_save = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
         panel_edit = new javax.swing.JPanel();
         btn_back_edit = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        txt_name1 = new javax.swing.JTextField();
+        txt_ol_passward = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txt_tp1 = new javax.swing.JTextField();
+        txt_new_username = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        txt_nic1 = new javax.swing.JTextField();
+        txt_new_passward = new javax.swing.JTextField();
         btn_edit = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
-        txt_id = new javax.swing.JTextField();
+        txt_old_username = new javax.swing.JTextField();
         panel_search = new javax.swing.JPanel();
         btn_back_search = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         txt_id1 = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         txt_nic2 = new javax.swing.JTextField();
-        btn_search1 = new javax.swing.JButton();
+        btn_sear = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
+        btn_delete = new javax.swing.JButton();
         panel_menu = new javax.swing.JPanel();
         btn_addcustomer = new javax.swing.JButton();
         btn_issue = new javax.swing.JButton();
@@ -85,6 +107,12 @@ public class Menu extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         javax.swing.JMenuItem logout = new javax.swing.JMenuItem();
         exit = new javax.swing.JMenuItem();
+        Edit = new javax.swing.JMenu();
+        edit_passward = new javax.swing.JMenuItem();
+        Option = new javax.swing.JMenu();
+        javax.swing.JMenuItem add_emp = new javax.swing.JMenuItem();
+        remove_emp = new javax.swing.JMenuItem();
+        search_emp = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
 
@@ -102,20 +130,20 @@ public class Menu extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Username");
+        jLabel2.setText("Email");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Passward");
 
-        txt_uname.addActionListener(new java.awt.event.ActionListener() {
+        email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_unameActionPerformed(evt);
+                emailActionPerformed(evt);
             }
         });
 
-        txt_passw.addActionListener(new java.awt.event.ActionListener() {
+        pward.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_passwActionPerformed(evt);
+                pwardActionPerformed(evt);
             }
         });
 
@@ -132,12 +160,12 @@ public class Menu extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(45, 45, 45)
                         .addGroup(panel_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_uname, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_passw, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pward, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panel_loginLayout.createSequentialGroup()
                         .addGap(298, 298, 298)
                         .addComponent(btn_login)))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         panel_loginLayout.setVerticalGroup(
             panel_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,20 +173,20 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(88, 88, 88)
                 .addGroup(panel_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_uname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addGroup(panel_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txt_passw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(77, 77, 77)
+                    .addComponent(pward, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(79, 79, 79)
                 .addComponent(btn_login)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
 
         jLayeredPane1.add(panel_login, "card2");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("User Name");
+        jLabel1.setText("User ID");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Amount (LKR)");
@@ -166,9 +194,9 @@ public class Menu extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Card ID");
 
-        txt_amount.setToolTipText("");
+        jTextField3.setToolTipText("");
 
-        txt_user.setToolTipText("");
+        jTextField4.setToolTipText("");
 
         txt_card_id.setToolTipText("");
 
@@ -201,20 +229,20 @@ public class Menu extends javax.swing.JFrame {
                             .addGroup(panel_issue_cardLayout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_amount, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panel_issue_cardLayout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txt_card_id, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panel_issue_cardLayout.createSequentialGroup()
                                 .addGap(180, 180, 180)
-                                .addComponent(txt_user, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panel_issue_cardLayout.createSequentialGroup()
                         .addGap(297, 297, 297)
                         .addComponent(jButton7)))
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addContainerGap(238, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_issue_cardLayout.createSequentialGroup()
-                .addGap(55, 546, Short.MAX_VALUE)
+                .addGap(55, 556, Short.MAX_VALUE)
                 .addComponent(jButton8)
                 .addGap(64, 64, 64))
         );
@@ -225,13 +253,13 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(panel_issue_cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panel_issue_cardLayout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addComponent(txt_user, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                        .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                         .addGap(40, 40, 40))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel_issue_cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_amount, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
                 .addGap(39, 39, 39)
                 .addGroup(panel_issue_cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txt_card_id, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -276,6 +304,11 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel16.setText("Status");
+
+        jCheckBox1.setText("Is an administrator");
+
         javax.swing.GroupLayout panel_addLayout = new javax.swing.GroupLayout(panel_add);
         panel_add.setLayout(panel_addLayout);
         panel_addLayout.setHorizontalGroup(
@@ -285,7 +318,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(panel_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_addLayout.createSequentialGroup()
                         .addGroup(panel_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel_addLayout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_addLayout.createSequentialGroup()
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txt_nic, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -297,11 +330,18 @@ public class Menu extends javax.swing.JFrame {
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txt_tp, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(206, Short.MAX_VALUE))
-                    .addGroup(panel_addLayout.createSequentialGroup()
-                        .addComponent(btn_back_add)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_save)
+                        .addContainerGap(216, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_addLayout.createSequentialGroup()
+                        .addGroup(panel_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(panel_addLayout.createSequentialGroup()
+                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBox1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(panel_addLayout.createSequentialGroup()
+                                .addComponent(btn_back_add)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_save)))
                         .addGap(82, 82, 82))))
         );
         panel_addLayout.setVerticalGroup(
@@ -311,21 +351,24 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(panel_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_name, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
-                .addGap(39, 39, 39)
+                .addGap(18, 18, 18)
                 .addGroup(panel_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txt_tp, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(panel_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txt_nic, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(panel_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_addLayout.createSequentialGroup()
-                        .addGap(62, 62, 62)
+                        .addGroup(panel_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt_nic, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(panel_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox1))
+                        .addGap(50, 50, 50)
                         .addComponent(btn_back_add)
                         .addGap(45, 45, 45))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_addLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_save)
                         .addGap(58, 58, 58))))
         );
@@ -341,19 +384,19 @@ public class Menu extends javax.swing.JFrame {
         });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel9.setText("Name");
+        jLabel9.setText("Old Passward");
 
-        txt_name1.setToolTipText("");
+        txt_ol_passward.setToolTipText("");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel10.setText("TP");
+        jLabel10.setText("New username");
 
-        txt_tp1.setToolTipText("");
+        txt_new_username.setToolTipText("");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel11.setText("National ID");
+        jLabel11.setText("New passward");
 
-        txt_nic1.setToolTipText("");
+        txt_new_passward.setToolTipText("");
 
         btn_edit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btn_edit.setText("Edit");
@@ -364,9 +407,9 @@ public class Menu extends javax.swing.JFrame {
         });
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel12.setText("Customer ID");
+        jLabel12.setText("Old username");
 
-        txt_id.setToolTipText("");
+        txt_old_username.setToolTipText("");
 
         javax.swing.GroupLayout panel_editLayout = new javax.swing.GroupLayout(panel_edit);
         panel_edit.setLayout(panel_editLayout);
@@ -384,21 +427,21 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(panel_editLayout.createSequentialGroup()
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_old_username, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panel_editLayout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_name1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_ol_passward, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panel_editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(panel_editLayout.createSequentialGroup()
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txt_tp1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_new_username, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(panel_editLayout.createSequentialGroup()
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txt_nic1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(187, Short.MAX_VALUE))
+                            .addComponent(txt_new_passward, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(197, Short.MAX_VALUE))
         );
         panel_editLayout.setVerticalGroup(
             panel_editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,18 +449,18 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(panel_editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_id, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+                    .addComponent(txt_old_username, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(panel_editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_name1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+                    .addComponent(txt_ol_passward, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
                 .addGap(28, 28, 28)
                 .addGroup(panel_editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txt_tp1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_new_username, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(panel_editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txt_nic1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_new_passward, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addGroup(panel_editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -437,7 +480,7 @@ public class Menu extends javax.swing.JFrame {
         });
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel13.setText("Customer ID");
+        jLabel13.setText("Employer ID");
 
         txt_id1.setToolTipText("");
 
@@ -446,16 +489,24 @@ public class Menu extends javax.swing.JFrame {
 
         txt_nic2.setToolTipText("");
 
-        btn_search1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btn_search1.setText("Search");
-        btn_search1.addActionListener(new java.awt.event.ActionListener() {
+        btn_sear.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btn_sear.setText("Search");
+        btn_sear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_search1ActionPerformed(evt);
+                btn_searActionPerformed(evt);
             }
         });
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel15.setText("Enter customer ID or Naional Card ID to Search:");
+        jLabel15.setText("Enter employer ID or Naional Card ID to Search:");
+
+        btn_delete.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btn_delete.setText("Delete");
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel_searchLayout = new javax.swing.GroupLayout(panel_search);
         panel_search.setLayout(panel_searchLayout);
@@ -463,9 +514,6 @@ public class Menu extends javax.swing.JFrame {
             panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_searchLayout.createSequentialGroup()
                 .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_searchLayout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(btn_back_search))
                     .addGroup(panel_searchLayout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(jLabel15))
@@ -480,12 +528,15 @@ public class Menu extends javax.swing.JFrame {
                                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txt_id1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(166, Short.MAX_VALUE))
-            .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panel_searchLayout.createSequentialGroup()
-                    .addGap(542, 542, 542)
-                    .addComponent(btn_search1)
-                    .addContainerGap(68, Short.MAX_VALUE)))
+                .addContainerGap(176, Short.MAX_VALUE))
+            .addGroup(panel_searchLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(btn_back_search)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_delete)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_sear)
+                .addGap(74, 74, 74))
         );
         panel_searchLayout.setVerticalGroup(
             panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -501,13 +552,11 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(txt_nic2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(67, 67, 67)
-                .addComponent(btn_back_search)
+                .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_back_search)
+                    .addComponent(btn_sear)
+                    .addComponent(btn_delete))
                 .addGap(45, 45, 45))
-            .addGroup(panel_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panel_searchLayout.createSequentialGroup()
-                    .addContainerGap(294, Short.MAX_VALUE)
-                    .addComponent(btn_search1)
-                    .addGap(38, 38, 38)))
         );
 
         jLayeredPane1.add(panel_search, "card5");
@@ -596,6 +645,46 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        Edit.setText("Edit");
+
+        edit_passward.setText("Username/ Passward");
+        edit_passward.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edit_passwardActionPerformed(evt);
+            }
+        });
+        Edit.add(edit_passward);
+
+        jMenuBar1.add(Edit);
+
+        Option.setText("Option");
+
+        add_emp.setText("Add employer");
+        add_emp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_empActionPerformed(evt);
+            }
+        });
+        Option.add(add_emp);
+
+        remove_emp.setText("Remove Emplyer");
+        remove_emp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                remove_empActionPerformed(evt);
+            }
+        });
+        Option.add(remove_emp);
+
+        search_emp.setText("Search Employer");
+        search_emp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_empActionPerformed(evt);
+            }
+        });
+        Option.add(search_emp);
+
+        jMenuBar1.add(Option);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -619,20 +708,18 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
-        String username = txt_uname.getText();
-        String passward = txt_passw.getText();
-        if(username.equals("mds") & passward.equals("mds")){
+        if(login_success(token)){
+            if(isadmin(token)){
+                Option.setVisible(true);
+            }
+            Edit.setVisible(true);
             panel_login.setVisible(false);
             panel_menu.setVisible(false);
             panel_add.setVisible(false);
             panel_edit.setVisible(false);
             panel_search.setVisible(false);
             panel_issue_card.setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(null, "Incorrect username or passward", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
-        txt_uname.setText("");
-        txt_passw.setText("");
     }//GEN-LAST:event_btn_loginActionPerformed
 
     private void btn_addcustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addcustomerActionPerformed
@@ -644,9 +731,13 @@ public class Menu extends javax.swing.JFrame {
         panel_issue_card.setVisible(false);
     }//GEN-LAST:event_btn_addcustomerActionPerformed
 
-    private void txt_unameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_unameActionPerformed
+    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_unameActionPerformed
+    }//GEN-LAST:event_emailActionPerformed
+
+    private void pwardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwardActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pwardActionPerformed
 
     private void btn_issueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_issueActionPerformed
         panel_login.setVisible(false);
@@ -672,36 +763,24 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         JOptionPane.showMessageDialog(null, "Card Updated Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-        txt_user.setText("");
-        txt_amount.setText("");
-        txt_card_id.setText("");
     }//GEN-LAST:event_jButton8ActionPerformed
-
-    private void btn_back_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_back_addActionPerformed
-        panel_login.setVisible(false);
-        panel_menu.setVisible(true);
-        panel_add.setVisible(false);
-        panel_edit.setVisible(false);
-        panel_search.setVisible(false);
-        panel_issue_card.setVisible(false);
-    }//GEN-LAST:event_btn_back_addActionPerformed
 
     private void btn_back_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_back_editActionPerformed
         panel_login.setVisible(false);
-        panel_menu.setVisible(true);
+        panel_menu.setVisible(false);
         panel_add.setVisible(false);
         panel_edit.setVisible(false);
         panel_search.setVisible(false);
-        panel_issue_card.setVisible(false);
+        panel_issue_card.setVisible(true);
     }//GEN-LAST:event_btn_back_editActionPerformed
 
     private void btn_back_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_back_searchActionPerformed
         panel_login.setVisible(false);
-        panel_menu.setVisible(true);
+        panel_menu.setVisible(false);
         panel_add.setVisible(false);
         panel_edit.setVisible(false);
         panel_search.setVisible(false);
-        panel_issue_card.setVisible(false);
+        panel_issue_card.setVisible(true);
     }//GEN-LAST:event_btn_back_searchActionPerformed
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
@@ -711,34 +790,85 @@ public class Menu extends javax.swing.JFrame {
         panel_edit.setVisible(false);
         panel_search.setVisible(false);
         panel_issue_card.setVisible(false);
+        token = "";
     }//GEN-LAST:event_logoutActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitActionPerformed
 
-    private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
-        JOptionPane.showMessageDialog(null, "Customer added Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_btn_saveActionPerformed
+    private void edit_passwardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_passwardActionPerformed
+        panel_login.setVisible(false);
+        panel_menu.setVisible(false);
+        panel_add.setVisible(false);
+        panel_edit.setVisible(true);
+        panel_search.setVisible(false);
+        panel_issue_card.setVisible(false);
+    }//GEN-LAST:event_edit_passwardActionPerformed
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Username and Passward Updated Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btn_editActionPerformed
 
-    private void btn_search1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_search1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_search1ActionPerformed
+    private void btn_searActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searActionPerformed
+        btn_delete.setVisible(true);
+    }//GEN-LAST:event_btn_searActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        txt_card_id.setText("");
-        JSerialComm01 card = new JSerialComm01();
-        id = card.scan();
-        txt_card_id.setText(id);
+        try {
+            txt_card_id.setText("");
+            Reader rdr = new Reader();
+            //JSerialComm01 card = new JSerialComm01();
+            //id = card.scan();
+            txt_card_id.setText(rdr.test());
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void txt_passwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_passwActionPerformed
+    private void add_empActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_empActionPerformed
+        panel_login.setVisible(false);
+        panel_menu.setVisible(false);
+        panel_add.setVisible(true);
+        panel_edit.setVisible(false);
+        panel_search.setVisible(false);
+        panel_issue_card.setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_add_empActionPerformed
+
+    private void remove_empActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remove_empActionPerformed
+        panel_login.setVisible(false);
+        panel_menu.setVisible(false);
+        panel_add.setVisible(false);
+        panel_edit.setVisible(false);
+        panel_search.setVisible(true);
+        panel_issue_card.setVisible(false);
+    }//GEN-LAST:event_remove_empActionPerformed
+
+    private void search_empActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_empActionPerformed
+        panel_login.setVisible(false);
+        panel_menu.setVisible(false);
+        panel_add.setVisible(false);
+        panel_edit.setVisible(false);
+        panel_search.setVisible(true);
+        panel_issue_card.setVisible(false);
+    }//GEN-LAST:event_search_empActionPerformed
+
+    private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
+        JOptionPane.showMessageDialog(null, "Employer added Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btn_saveActionPerformed
+
+    private void btn_back_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_back_addActionPerformed
+        panel_login.setVisible(false);
+        panel_menu.setVisible(false);
+        panel_add.setVisible(false);
+        panel_edit.setVisible(false);
+        panel_search.setVisible(false);
+        panel_issue_card.setVisible(true);
+    }//GEN-LAST:event_btn_back_addActionPerformed
+
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_passwActionPerformed
+    }//GEN-LAST:event_btn_deleteActionPerformed
 
     public void setCardId(String str)
     {
@@ -782,20 +912,26 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu Edit;
+    private javax.swing.JMenu Option;
     private javax.swing.JButton btn_addcustomer;
     private javax.swing.JButton btn_back_add;
     private javax.swing.JButton btn_back_edit;
     private javax.swing.JButton btn_back_search;
+    private javax.swing.JButton btn_delete;
     private javax.swing.JButton btn_edit;
     private javax.swing.JButton btn_issue;
     private javax.swing.JButton btn_login;
     private javax.swing.JButton btn_save;
+    private javax.swing.JButton btn_sear;
     private javax.swing.JButton btn_search;
-    private javax.swing.JButton btn_search1;
+    private javax.swing.JMenuItem edit_passward;
+    private javax.swing.JTextField email;
     private javax.swing.JMenuItem exit;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -803,6 +939,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -815,25 +952,26 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     private javax.swing.JPanel panel_add;
     private javax.swing.JPanel panel_edit;
     private javax.swing.JPanel panel_issue_card;
     private javax.swing.JPanel panel_login;
     private javax.swing.JPanel panel_menu;
     private javax.swing.JPanel panel_search;
-    private javax.swing.JTextField txt_amount;
+    private javax.swing.JTextField pward;
+    private javax.swing.JMenuItem remove_emp;
+    private javax.swing.JMenuItem search_emp;
     private javax.swing.JTextField txt_card_id;
-    private javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_id1;
     private javax.swing.JTextField txt_name;
-    private javax.swing.JTextField txt_name1;
+    private javax.swing.JTextField txt_new_passward;
+    private javax.swing.JTextField txt_new_username;
     private javax.swing.JTextField txt_nic;
-    private javax.swing.JTextField txt_nic1;
     private javax.swing.JTextField txt_nic2;
-    private javax.swing.JPasswordField txt_passw;
+    private javax.swing.JTextField txt_ol_passward;
+    private javax.swing.JTextField txt_old_username;
     private javax.swing.JTextField txt_tp;
-    private javax.swing.JTextField txt_tp1;
-    private javax.swing.JTextField txt_uname;
-    private javax.swing.JTextField txt_user;
     // End of variables declaration//GEN-END:variables
 }
