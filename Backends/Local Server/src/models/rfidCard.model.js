@@ -16,6 +16,7 @@ exports.cardAdding = async (card, callback) => {
         callback(err.code)
       } else {
         // console.log(`User ${user.email} was successfully registered!`)
+        console.log(result)
         callback(null)
       }
     })

@@ -2,9 +2,7 @@
 
 const config = require('../config')
 const uuidv1 = require('uuidv1')
-//const bcrypt = require('bcrypt-nodejs')
 const httpStatus = require('http-status')
-//const jwt = require('jsonwebtoken')
 const card = require('../models/rfidCard.model')
 
 
@@ -33,6 +31,7 @@ exports.addCard = async (req, res, next) => {
   }
 }
 
+//use to refund a a card
 exports.refundCard = async (req, res, next) => {
   try {
     const details = {
@@ -40,13 +39,13 @@ exports.refundCard = async (req, res, next) => {
       refund_amount: req.body.refund_amount
     }
 
-  	// card should be added to the database
+  
     await card.cardRefundng(details, (err) => {
-      // user successfully registered
+      // sucesfully refunded the card
       if (!err) {
         return res.status(httpStatus.CREATED).json({msg : `card ${details.card_id} is succesfully refunded`})
       } else {
-        // Email already in the database
+        // refunding was unsuccesfull
         return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err})
       }
     })    

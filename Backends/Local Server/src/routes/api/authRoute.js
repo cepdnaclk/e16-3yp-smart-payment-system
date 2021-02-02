@@ -16,7 +16,7 @@ const isAuth = require("../../middlewares/authorization")
 router.post('/register',authController.register)
 router.post('/login', authController.login)
 
-router.post('/addCard',cardValidation.validateBody(cardValidation.schemas.cardAddSchema),cardController.addCard);
+router.post('/addCard',cardValidation.validateBody(cardValidation.schemas.cardAddorReturnSchema),cardController.addCard);
 router.post('/issueCard',cardValidation.validateBody(cardValidation.schemas.cardIssueSchema),cardController.issueCard);
 
 router.post('/scanCard',cardValidation.validateBody(cardValidation.schemas.cardScanSchema),cardController.scanCard);

@@ -7,7 +7,7 @@ const Embedded_Project = require('../../public/introduction')
 
 // will send little introduction about the API
 router.get('/', (req, res) => {
-	res.status(200).send(Embedded_Project)
+	res.status(200).json({message: 'C0227'})
 })
 
 // adding authentication routes for the application
