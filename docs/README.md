@@ -18,7 +18,7 @@ This is the 3rd year embedded system project
 1. >[Problem](https://github.com/cepdnaclk/e16-3yp-smart-payment-system#problem)
 2. >[Our solution](https://github.com/cepdnaclk/e16-3yp-smart-payment-system#our-solution)
 3. >[Solution Architecture](https://github.com/cepdnaclk/e16-3yp-smart-payment-system#solution-architecture)
-4. >[Hardware & Software Designs](https://github.com/cepdnaclk/e16-3yp-smart-payment-systemr#hardware--software-designs)
+4. >[Hardware & Software Designs](https://github.com/cepdnaclk/e16-3yp-smart-payment-systemr#hardware-and-software-designs)
 5. >[Testing](https://github.com/cepdnaclk/e16-3yp-smart-payment-system#testing)
 6. >[Detailed budget](https://github.com/cepdnaclk/e16-3yp-smart-payment-system#detailed-budget)
 7. >[Links](https://github.com/cepdnaclk/e16-3yp-smart-payment-system#Links)
@@ -43,7 +43,7 @@ This is the 3rd year embedded system project
 ![Our Budjet](https://github.com/sathirauop/e16-3yp-smart-payment-system/blob/main/images/Budget.jpeg?raw=true)  
 
 
-## Hardware  Software design
+## Hardware and Software design
   Hardware design
 ![Our Design](https://github.com/sathirauop/e16-3yp-smart-payment-system/blob/main/Diagrams/EasyEDA_diagram.png?raw=true)  
 
@@ -65,8 +65,10 @@ This is the 3rd year embedded system project
 ## Testing
       Under testing we checked for unit testing and intergration testing. In unit testing we checked all functions related to 
       adding a card, refunding, return, scanning a card, issue a card, register and login.
- ![Testing](https://github.com/cepdnaclk/e16-3yp-smart-payment-system/blob/main/images/Testing/1612244321006.jpg?raw=true)  
-
+ ![Testing](https://github.com/cepdnaclk/e16-3yp-smart-payment-system/blob/main/images/Testing/unit%20testing.jpeg?raw=true)  
+ 
+    Under intergration testing we tested Basic route to see the server up and ruining and Route which send the 404 message
+ ![Testing1](https://github.com/cepdnaclk/e16-3yp-smart-payment-system/blob/main/images/Testing/integrtion%20testing.jpeg?raw=true)  
 ## Target Audience
   The target audience of this project is Gaming centers which is our primary target. As our next milestone, we are planning to update this system in a way that it can be used in any commercial market place such as casino, leisure world, etc.
   
