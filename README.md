@@ -65,8 +65,10 @@ This is the 3rd year embedded system project
 ## Testing
       Under testing we checked for unit testing and intergration testing. In unit testing we checked all functions related to 
       adding a card, refunding, return, scanning a card, issue a card, register and login.
- ![Testing](https://github.com/cepdnaclk/e16-3yp-smart-payment-system/blob/main/images/Testing/1612244321006.jpg?raw=true)  
-
+ ![Testing](https://github.com/cepdnaclk/e16-3yp-smart-payment-system/blob/main/images/Testing/unit%20testing.jpeg?raw=true)  
+ 
+    Under intergration testing we tested Basic route to see the server up and ruining and Route which send the 404 message
+ ![Testing1](https://github.com/cepdnaclk/e16-3yp-smart-payment-system/blob/main/images/Testing/integrtion%20testing.jpeg?raw=true)  
 ## Target Audience
   The target audience of this project is Gaming centers which is our primary target. As our next milestone, we are planning to update this system in a way that it can be used in any commercial market place such as casino, leisure world, etc.
   
