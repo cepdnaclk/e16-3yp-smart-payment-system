@@ -1,59 +1,108 @@
 export default {
-  // Global page headers: https://go.nuxtjs.dev/config-head
+  // mode: 'universal',
+  /*
+  ** Headers of the page
+  */
   head: {
     title: 'World Play - KCC',
-    htmlAttrs: {
-      lang: 'en'
-    },
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800'},
+      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css'}
+    ],
+    bodyAttrs: {
+      class: '' // Add `white-content` class here to enable "white" mode.
+    }
   },
-
-  // Global CSS: https://go.nuxtjs.dev/config-css
+  router: {
+    linkExactActiveClass: 'active',
+    middleware: ['auth'],
+  },
+  /*
+  ** Customize the progress-bar color
+  */
+  loading: { color: '#fff' },
+  /*
+   ** Global CSS
+   */
   css: [
+    'assets/css/demo.css',
+    'assets/css/nucleo-icons.css',
+    'assets/sass/black-dashboard.scss'
   ],
-
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
+  /*
+  ** Plugins to load before mounting the App
+  */
   plugins: [
-    '~/plugins/notifier.js'
+    `~/plugins/dashboard-plugin.js`
   ],
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
-
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
+  /*
+  ** Nuxt.js dev-modules
+  */
   buildModules: [
-    // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module',
-    '@nuxtjs/vuetify'
   ],
-
+  /*
+  ** Nuxt.js modules
+  */
   modules: [
-    'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
+    '@nuxtjs/pwa',
+    'nuxt-i18n',
   ],
-
-  // When this enable user will redirect to /login
-  router: {
-    middleware: ['auth']
+  i18n: {
+    locales: [
+      {
+        code: 'en',
+        file: 'en.js'
+      },
+      {
+        code: 'ar',
+        file: 'ar.js'
+      }
+    ],
+    lazy: true,
+    langDir: 'lang/',
+    defaultLocale: 'en',
   },
-
+  /*
+  ** Build configuration
+  */
+  build: {
+    transpile: [/^element-ui/],
+    /*
+    ** You can extend webpack config here
+    */
+    extend (config, ctx) {
+    },
+    babel: {
+      plugins: [
+        [
+          'component',
+          {
+            'libraryName': 'element-ui',
+            'styleLibraryName': 'theme-chalk'
+          }
+        ]
+      ]
+    }
+  },
+  
   axios: {
-    baseURL: 'http://35.174.17.102/api'
+    baseURL: 'http://localhost:3000/api'
   },
 
   // Running port and host
   server: {
-    port: 8023, // default: 3000
+    port: 8000, // default: 3000
     host: '0.0.0.0' // default: localhost
   },
+
 
   // Nuxt authentication configuration to ensure user 
   auth: {
@@ -68,54 +117,5 @@ export default {
         tokenType: 'Bearer'
       }
     }
-  },
-
-  build: {
-  },
-
-  bootstrapVue: {
-    // If you want all bundle of bootstrap components and directives
-    componentPlugins: [
-
-      'CardPlugin',
-
-      'LayoutPlugin',
-      'NavPlugin',
-      'NavbarPlugin',
-
-      'IconsPlugin',
-
-      'FormGroupPlugin',
-      'FormPlugin',
-      'FormCheckboxPlugin',
-      'FormInputPlugin',
-      'FormRadioPlugin',
-
-      'ToastPlugin',
-      'TabsPlugin',
-      'ModalPlugin',
-
-      'MediaPlugin',
-
-      'ButtonGroupPlugin',
-      'ButtonPlugin',
-      'ButtonToolbarPlugin',
-
-      'AlertPlugin',
-      'BadgePlugin',
-      'CarouselPlugin',
-      'CollapsePlugin',
-      'DropdownPlugin',
-      'ListGroupPlugin',
-      'PopoverPlugin',
-      'BVToastPlugin'
-
-    ],
-    directivePlugins: ['VBPopoverPlugin', 'VBTooltipPlugin', 'VBScrollspyPlugin'],
-    /*,
-    // Or if you want specific set of components and directives ::For optimizing purpouse
-    directives: ['VBModal', 'VBPopover', 'VBTooltip', 'VBScrollspy']
-    */
-
   },
 }
