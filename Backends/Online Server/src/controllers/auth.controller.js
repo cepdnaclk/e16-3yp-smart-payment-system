@@ -1,7 +1,7 @@
 'use strict'
 
 const config = require('../config')
-const uuidv1 = require('uuidv1')
+// const uuidv1 = require('uuidv1')
 const bcrypt = require('bcrypt-nodejs')
 const httpStatus = require('http-status')
 const jwt = require('jsonwebtoken')
@@ -10,24 +10,23 @@ const user = require('../models/user.model')
 
 exports.register = async (req, res, next) => {
   try {
-    const activationKey = uuidv1()
+    // const activationKey = uuidv1()
     const pwd = bcrypt.hashSync(req.body.password)
 
     // Proceesing and making data object 
     const details = {
-      email : req.body.email,
-      password : pwd,
+      nic: req.body.nic,
       fname : req.body.fname,
       lname : req.body.lname,
-      designation : req.body.designation,
-      activation_key : activationKey
+      email : req.body.email,
+      password : pwd,
     }
 
   	// user should be added to the database
-    await user.registering(details, (err) => {
+    await user.registerOwner(details, (err) => {
       // user successfully registered
       if (!err) {
-        return res.status(httpStatus.CREATED).json({msg : `Please check ${details.email} to verify the account.`})
+        return res.status(httpStatus.CREATED).json({msg : `User ${details.fname} ${details.lname} successfully registered!`})
       } else {
         // Email already in the database
         if(err == "ER_DUP_ENTRY")
@@ -46,7 +45,7 @@ exports.register = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   try {
     // Find the user if exist
-    await user.findUser(req.body.email, (err, result) => {
+    await user.findOwner(req.body.email, (err, result) => {
       // There could be an internal server error
       if(err){
         return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err})
@@ -60,20 +59,11 @@ exports.login = async (req, res, next) => {
             return res.status(httpStatus.UNAUTHORIZED).json({Error : `email/password missmatch`})
             // user/password are correct
           } else {
-            // user account is not activated
-            if (!result[0].Active)
-              return res.status(httpStatus.UNAUTHORIZED).json({Error : `User account ${req.body.email} is not activated!`})
-            // permission given to log in
-            else {
-              const user = {
-                id : result[0].Security_ID,
-                role : result[0].Role,
-                name: `${result[0].FName} ${result[0].LName}`,
-                designation : result[0].Designation
-              }
-              const token = jwt.sign(user, config.secret)
-              return res.status(httpStatus.OK).json({ token: token})
+            const user = {
+              email : result[0].Email
             }
+            const token = jwt.sign(user, config.secret)
+            return res.status(httpStatus.OK).json({ token: token})
           }
         }
       }
@@ -86,10 +76,30 @@ exports.login = async (req, res, next) => {
 
 exports.getuser = async (req, res, next) => {
   try {
-    if (req.authuser)
-      return res.status(httpStatus.CREATED).json({user : req.authuser})
-    else
+    if (req.authuser) {
+      // Find the user if exist
+      await user.findOwner(req.authuser.email, (err, result) => {
+        // There could be an internal server error
+        if(err){
+          return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err})
+        } else {
+          // Requested user is not in the database
+          if(result.length == 0) {
+            return res.status(httpStatus.UNAUTHORIZED).json({Error : `${req.authuser.email} is not a user`})
+          } else {
+            const usertmp = {
+              nic : result[0].NIC,
+              fname: result[0].FName,
+              lname: result[0].LName,
+              role: result[0].Role
+            }
+            return res.status(httpStatus.CREATED).json({user : usertmp})
+          }
+        }
+      })
+    } else {
       return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: "user was not taken"})
+    }
   } catch (err) {
     return next(err)
   }

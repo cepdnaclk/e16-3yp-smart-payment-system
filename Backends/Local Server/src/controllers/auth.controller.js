@@ -24,20 +24,29 @@ exports.register = async (req, res, next) => {
       activation_key : activationKey
     }
 
-  	// user should be added to the database
-    await user.registering(details, (err) => {
-      // user successfully registered
-      if (!err) {
-        return res.status(httpStatus.CREATED).json({msg : `Please check ${details.email} to verify the account.`})
-      } else {
-        // Email already in the database
-        if(err == "ER_DUP_ENTRY")
-          return res.status(httpStatus.CONFLICT).json({Error: `Email ${details.email} is already registered`})
-        // Internal server error
-        else
+    // user should be added to the database
+    await user.findUser(details.email,async (err,result)=>{
+        if(err){
           return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err})
-      }
-    })    
+        }else if(result.length===0){
+          await user.registering(details, (err) => {
+            // user successfully registered
+            if (!err) {
+              return res.status(httpStatus.CREATED).json({msg : `Please check ${details.email} to verify the account.`})
+            } else {
+              // Email already in the database
+              if(err == "ER_DUP_ENTRY")
+                return res.status(httpStatus.CONFLICT).json({Error: `Email or NIC is already registered`})
+              // Internal server error
+              else
+                return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err})
+            }
+          })    
+        }else{
+          return res.status(httpStatus.CONFLICT).json({Error: `Email or NIC is already registered`})
+        }
+    })
+    
   } catch (err) {
   	return next(err)
   }

@@ -3,6 +3,7 @@
 const config = require('../config')
 const express = require('express')
 const bodyParser = require('body-parser')
+const errorHandler = require('../middlewares/error-handler')
 const cors = require('cors')
 const api = require('../routes/api')
 const port = (config.port) ? config.port : 4000
@@ -17,6 +18,8 @@ app.use(cors())
 
 // Route of the app will be done in here
 app.use('/', api)
+app.use(errorHandler.handleNotFound)
+app.use(errorHandler.handleError)
 
 // module export to use
 exports.start = () => {
