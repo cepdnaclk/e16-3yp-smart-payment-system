@@ -18,7 +18,7 @@ This is the 3rd year embedded system project
 1. >[Problem](https://github.com/cepdnaclk/e16-3yp-smart-payment-system#problem)
 2. >[Our solution](https://github.com/cepdnaclk/e16-3yp-smart-payment-system#our-solution)
 3. >[Solution Architecture](https://github.com/cepdnaclk/e16-3yp-smart-payment-system#solution-architecture)
-4. >[Hardware & Software Designs](https://github.com/cepdnaclk/e16-3yp-smart-payment-systemr#hardware-and-software-designs)
+4. >[Hardware & Software Design](https://github.com/cepdnaclk/e16-3yp-smart-payment-systemr#hardware-and-software-design)
 5. >[Testing](https://github.com/cepdnaclk/e16-3yp-smart-payment-system#testing)
 6. >[Detailed budget](https://github.com/cepdnaclk/e16-3yp-smart-payment-system#detailed-budget)
 7. >[Links](https://github.com/cepdnaclk/e16-3yp-smart-payment-system#Links)
