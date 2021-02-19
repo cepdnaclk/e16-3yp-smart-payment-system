@@ -45,9 +45,17 @@
             <Property name="text" type="java.lang.String" value="Edit"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="edit_email">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Change email"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="edit_emailActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="edit_passward">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Username/ Passward"/>
+                <Property name="text" type="java.lang.String" value="Change passward"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="edit_passwardActionPerformed"/>
@@ -156,12 +164,16 @@
                               <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel2" min="-2" pref="114" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="email" min="-2" pref="364" max="-2" attributes="0"/>
-                                  <Component id="pward" min="-2" pref="362" max="-2" attributes="0"/>
+                                  <Component id="txt_error_login" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="email" min="-2" pref="364" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="pward" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -169,7 +181,7 @@
                               <Component id="btn_login" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="78" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -186,9 +198,11 @@
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="pward" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="txt_error_login" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="btn_login" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="144" max="32767" attributes="0"/>
+                      <EmptySpace pref="158" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -223,10 +237,9 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="emailActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="pward">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pwardActionPerformed"/>
-              </Events>
+            <Component class="javax.swing.JLabel" name="txt_error_login">
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="pward">
             </Component>
           </SubComponents>
         </Container>
@@ -240,39 +253,41 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jButton8" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel1" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel4" min="-2" pref="176" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txt_amount" min="-2" pref="275" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="180" pref="180" max="-2" attributes="0"/>
+                              <Component id="txt_customer_name" min="-2" pref="275" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="275" max="-2" attributes="0"/>
+                              <Component id="jButton7" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel5" min="-2" pref="176" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txt_card_id" min="-2" pref="275" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
-                                      <Component id="jLabel4" min="-2" pref="176" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jTextField3" min="-2" pref="275" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="jLabel5" min="-2" pref="176" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txt_card_id" min="-2" pref="275" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="180" pref="180" max="-2" attributes="0"/>
-                                      <Component id="jTextField4" min="-2" pref="275" max="-2" attributes="0"/>
+                                      <Component id="txt_onlyno" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="297" max="-2" attributes="0"/>
-                              <Component id="jButton7" min="-2" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
-                      <EmptySpace pref="238" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="55" pref="556" max="32767" attributes="0"/>
-                      <Component id="jButton8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                      <EmptySpace pref="138" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -281,19 +296,20 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                              <Component id="jTextField4" pref="35" max="32767" attributes="0"/>
+                              <Component id="txt_customer_name" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jLabel1" max="32767" attributes="0"/>
+                          <Component id="jLabel1" min="-2" pref="116" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="jTextField3" alignment="3" pref="35" max="32767" attributes="0"/>
+                          <Component id="txt_amount" alignment="3" pref="35" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                      <Component id="txt_onlyno" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="txt_card_id" min="-2" pref="35" max="-2" attributes="0"/>
                           <Component id="jLabel5" min="-2" pref="35" max="-2" attributes="0"/>
@@ -313,7 +329,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="User ID"/>
+                <Property name="text" type="java.lang.String" value="Customer Name"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
@@ -332,12 +348,16 @@
                 <Property name="text" type="java.lang.String" value="Card ID"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField3">
+            <Component class="javax.swing.JTextField" name="txt_amount">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
+              <Events>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_amountKeyPressed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_amountKeyTyped"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField4">
+            <Component class="javax.swing.JTextField" name="txt_customer_name">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
@@ -369,6 +389,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JLabel" name="txt_onlyno">
+              <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="You can enter numbers only!"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="panel_add">
@@ -384,41 +412,44 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel16" min="-2" pref="176" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="is_admin" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="btn_back_add" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="431" max="32767" attributes="0"/>
+                              <Component id="btn_save" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                          </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel8" min="-2" pref="176" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txt_nic" min="-2" pref="275" max="-2" attributes="0"/>
+                                      <Component id="txt_nic" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel17" min="-2" pref="176" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txt_pward" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel6" min="-2" pref="176" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txt_name" min="-2" pref="275" max="-2" attributes="0"/>
+                                      <Component id="txt_fname" min="-2" pref="201" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txt_lname" min="-2" pref="213" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel7" min="-2" pref="176" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txt_tp" min="-2" pref="275" max="-2" attributes="0"/>
+                                      <Component id="txt_email" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="216" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jLabel16" min="-2" pref="176" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="btn_back_add" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="btn_save" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -426,38 +457,46 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel6" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="txt_name" alignment="3" pref="35" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="txt_tp" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="jLabel7" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="txt_nic" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
-                                  <Component id="jLabel8" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel16" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                                  <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel6" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                  <Component id="txt_fname" alignment="3" pref="35" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="btn_back_add" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="btn_save" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="txt_lname" min="-2" pref="38" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="txt_email" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="jLabel7" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel17" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="txt_pward" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel8" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="txt_nic" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel16" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="is_admin" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btn_back_add" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_save" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -482,7 +521,7 @@
                 <Property name="text" type="java.lang.String" value="Name"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txt_name">
+            <Component class="javax.swing.JTextField" name="txt_fname">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
@@ -492,10 +531,10 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="TP"/>
+                <Property name="text" type="java.lang.String" value="Email"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txt_tp">
+            <Component class="javax.swing.JTextField" name="txt_email">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
@@ -532,14 +571,26 @@
                 <Property name="text" type="java.lang.String" value="Status"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+            <Component class="javax.swing.JCheckBox" name="is_admin">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Is an administrator"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JLabel" name="jLabel17">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Passward"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="txt_pward">
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_lname">
+            </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="panel_edit">
+        <Container class="javax.swing.JPanel" name="panel_edit_email">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="card7"/>
@@ -550,66 +601,56 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                       <Component id="btn_back_edit" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btn_edit" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel12" min="-2" pref="176" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txt_old_username" min="-2" pref="275" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel9" min="-2" pref="176" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txt_ol_passward" min="-2" pref="275" max="-2" attributes="0"/>
+                              <Component id="txt_oldemail" min="-2" pref="275" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
+                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel10" min="-2" pref="176" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txt_new_username" min="-2" pref="275" max="-2" attributes="0"/>
+                                  <Component id="txt_newemail" min="-2" pref="275" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel11" min="-2" pref="176" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txt_new_passward" min="-2" pref="275" max="-2" attributes="0"/>
+                                  <Component id="txt_newemail1" min="-2" pref="275" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="197" max="32767" attributes="0"/>
+                      <EmptySpace pref="142" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel12" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="txt_old_username" alignment="3" pref="35" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel9" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="txt_ol_passward" alignment="3" pref="35" max="32767" attributes="0"/>
+                          <Component id="txt_oldemail" alignment="3" pref="35" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="txt_new_username" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="txt_newemail" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
                           <Component id="jLabel10" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="txt_new_passward" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="txt_newemail1" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
                           <Component id="jLabel11" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btn_back_edit" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_edit" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -636,10 +677,10 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Old Passward"/>
+                <Property name="text" type="java.lang.String" value="Old Email"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txt_ol_passward">
+            <Component class="javax.swing.JTextField" name="txt_oldemail">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
@@ -649,10 +690,10 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="New username"/>
+                <Property name="text" type="java.lang.String" value="New Email"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txt_new_username">
+            <Component class="javax.swing.JTextField" name="txt_newemail">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
@@ -662,10 +703,10 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="New passward"/>
+                <Property name="text" type="java.lang.String" value="Confirm Email"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txt_new_passward">
+            <Component class="javax.swing.JTextField" name="txt_newemail1">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
@@ -675,24 +716,11 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="18" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Edit"/>
+                <Property name="text" type="java.lang.String" value="Save"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_editActionPerformed"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel12">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="14" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Old username"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txt_old_username">
-              <Properties>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -706,38 +734,38 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel14" min="-2" pref="176" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txt_nic2" min="-2" pref="275" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel13" min="-2" pref="176" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txt_id1" min="-2" pref="275" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace pref="176" max="32767" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       <Component id="btn_back_search" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="328" max="32767" attributes="0"/>
                       <Component id="btn_delete" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btn_sear" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txt_search_result" alignment="0" min="-2" pref="455" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel13" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
+                                          <Component id="jLabel14" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="txt_mails" max="32767" attributes="0"/>
+                                          <Component id="txt_nicno" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -747,16 +775,18 @@
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel13" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="txt_id1" alignment="3" pref="35" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txt_mails" max="32767" attributes="0"/>
+                          <Component id="jLabel13" pref="35" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="txt_nic2" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="jLabel14" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txt_nicno" max="32767" attributes="0"/>
+                          <Component id="jLabel14" pref="35" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="txt_search_result" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btn_back_search" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_sear" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -784,12 +814,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Employer ID"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txt_id1">
-              <Properties>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
+                <Property name="text" type="java.lang.String" value="Email"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel14">
@@ -798,11 +823,6 @@
                   <Font name="Tahoma" size="14" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="National ID"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txt_nic2">
-              <Properties>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btn_sear">
@@ -821,7 +841,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="12" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Enter employer ID or Naional Card ID to Search:"/>
+                <Property name="text" type="java.lang.String" value="Enter Email or Naional Card ID to Search:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btn_delete">
@@ -834,6 +854,17 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_deleteActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="txt_search_result">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="12" style="1"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_mails">
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_nicno">
             </Component>
           </SubComponents>
         </Container>
@@ -924,6 +955,129 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
               </Events>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="panel_edit_passward">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="card7"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                      <Component id="btn_back_edit1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="380" max="32767" attributes="0"/>
+                      <Component id="btn_edit1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabel18" min="-2" pref="176" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txt_oldpassward" pref="275" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel19" min="-2" pref="176" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txt_newpassward" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel20" min="-2" pref="176" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txt_newpassward1" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel18" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="txt_oldpassward" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel19" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="txt_newpassward" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel20" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="txt_newpassward1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btn_back_edit1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_edit1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JButton" name="btn_back_edit1">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="18" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Back"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_back_edit1ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel18">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Old Passward"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel19">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="New passward"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel20">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="New passward"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_edit1">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="18" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Save"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_edit1ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="txt_oldpassward">
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="txt_newpassward">
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="txt_newpassward1">
             </Component>
           </SubComponents>
         </Container>

@@ -9,5 +9,10 @@ module.exports = {
 		host : process.env.DBHOST,
 		user : process.env.DBUSR,
 		password : process.env.DBPWD,
+	},
+	testdb : {
+		host : process.env.TESTDBHOST,
+		user : process.env.TESTDBUSR,
+		password : process.env.TESTDBPWD,
 	}
 }
