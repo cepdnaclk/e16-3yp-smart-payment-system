@@ -44,6 +44,12 @@ This is the 3rd year embedded system project
 
 
 ## Hardware and Software designs
+  
+  3D model Design
+  ![Our Design](https://github.com/sathirauop/e16-3yp-smart-payment-system/blob/main/images/frontVies?raw=true)  
+  ![Our Design](https://github.com/sathirauop/e16-3yp-smart-payment-system/blob/main/images/topView?raw=true)  
+  ![Our Design](https://github.com/sathirauop/e16-3yp-smart-payment-system/blob/main/images/without_cover?raw=true)  
+  
   Hardware design
 ![Our Design](https://github.com/sathirauop/e16-3yp-smart-payment-system/blob/main/Diagrams/EasyEDA_diagram.png?raw=true)  
 
