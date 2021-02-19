@@ -8,24 +8,20 @@ const authController = require('../../controllers/auth.controller')
 const cardController = require('../../controllers/card.controller')
 const auth = require('../../middlewares/authorization')
 
+const cardValidation = require('../../validations/CardValidation')
+const nodeValidation = require('../../validations/NodeValidation')                                                                                                                                                                                                                                  
+const isAuth = require("../../middlewares/authorization")
 
-// const keyValidation = require('../../validations/key.validation')
-// const keyController = require('../../controllers/key.controller')
 
 router.post('/register',authController.register)
 router.post('/login', authController.login)
-//router.get('/user', auth.sendUser, authController.getuser)
-//router.delete('/logout', authController.logout)
 
-router.post('/addCard',cardController.addCard);
-router.post('/issueCard',cardController.issueCard);
+router.post('/addCard',cardValidation.validateBody(cardValidation.schemas.cardAddorReturnSchema),cardController.addCard);
+router.post('/issueCard',cardValidation.validateBody(cardValidation.schemas.cardIssueSchema),cardController.issueCard);
 
-router.post('/scanCard',cardController.scanCard);
-router.post('/returnCard',cardController.returnCard);
-router.post('/refundCard',cardController.refundCard);
+router.post('/scanCard',cardValidation.validateBody(cardValidation.schemas.cardScanSchema),cardController.scanCard);
+router.post('/returnCard',cardValidation.validateBody(cardValidation.schemas.cardAddorReturnSchema),cardController.returnCard);
+router.post('/refundCard',cardValidation.validateBody(cardValidation.schemas.cardRefundSchema),cardController.refundCard);
 
-// router.post('/rfidcard/register', validate(keyValidation.register, {}, {}), keyController.register)
-// router.post('/rfidcard/update', validate(keyValidation.register, {}, {}), keyController.update)
-// router.post('/rfidcard/getkey', validate(keyValidation.getkey, {}, {}), keyController.getkey)
 
 module.exports = router
