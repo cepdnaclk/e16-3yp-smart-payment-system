@@ -17,6 +17,10 @@ const sql = {
 		create: 'CREATE DATABASE IF NOT EXISTS Smart_Payment_System;',
 		use: 'USE Smart_Payment_System;'
 	},
+	test_database: {
+		create: 'CREATE DATABASE IF NOT EXISTS Test_Smart_Payment_System;',
+		use: 'USE Test_Smart_Payment_System;'
+	},
 	tables: {
 		employee:'CREATE TABLE IF NOT EXISTS EMPLOYEE(NIC VARCHAR(12) PRIMARY KEY, FName VARCHAR(30) NOT NULL, LName VARCHAR(30) NOT NULL, Email VARCHAR(60) UNIQUE NOT NULL, Password VARCHAR(128) NOT NULL, Activation_Key CHAR(36) NOT NULL, Status BOOLEAN DEFAULT false,Role VARCHAR(36) NOT NULL)',
 		rfidCard:'CREATE TABLE IF NOT EXISTS RFID_Card(CardId VARCHAR(10) PRIMARY KEY, EmployeeId VARCHAR(12) , CustomerName VARCHAR(25), Date DATE , Time TIME , IsIssued BOOLEAN DEFAULT false, Amount DOUBLE, FOREIGN KEY (EmployeeId) REFERENCES EMPLOYEE (NIC) ON UPDATE CASCADE)',
@@ -25,6 +29,12 @@ const sql = {
 		gamingLog:'CREATE TABLE IF NOT EXISTS GAMING_LOG(LogId INT PRIMARY KEY AUTO_INCREMENT, NodeId CHAR(9),CardId VARCHAR(12), Date DATE, Time TIME, FOREIGN KEY (NodeId) REFERENCES GAMING_NODE (NodeId) ON UPDATE CASCADE, FOREIGN KEY (CardId) REFERENCES RFID_Card (CardId) ON UPDATE CASCADE)',
 		issueLog:'CREATE TABLE IF NOT EXISTS ISSUE_LOG(LogId INT PRIMARY KEY AUTO_INCREMENT,NIC VARCHAR(12),CardId VARCHAR(10),CustomerName VARCHAR(30),DepositAmount DOUBLE,Date DATE , Time TIME , FOREIGN KEY (CardId) REFERENCES RFID_Card(CardId) ON UPDATE CASCADE, FOREIGN KEY (NIC) REFERENCES EMPLOYEE (NIC) ON UPDATE CASCADE)'
 	}
+}
+
+exports.disconnect = async ()=>{
+	client.end((err)=>{
+		console.log(err)
+	})
 }
 
 // This will execute this with a promise to await until the queries return.
@@ -42,7 +52,9 @@ exports.connect = async () => {
 	})
 
 // Check whether the database is already exists. If not create it
-	client.query(sql.database.create, (err, results) => {
+    //(config.env === 'test' ? sql.database.create : sql.test_database.create)
+	client.query((config.env === 'dev' ? sql.database.create : sql.test_database.create), (err, results) => {
+		
 	  	if (err) {
 	  		console.log(`Could not connect Database "Key_Management_System" because of ${err.code}`)
 			process.exit(1)
@@ -52,7 +64,7 @@ exports.connect = async () => {
 	})
 
 // Use created database
-	client.query(sql.database.use, (err, results) => {
+	client.query((config.env === 'dev' ? sql.database.use : sql.test_database.use), (err, results) => {
 	  	if (err) {
 	  		console.log(`Could not use Database "Key_Management_System" because of ${err.code}`)
 			process.exit(1)
@@ -151,3 +163,4 @@ exports.sendQuery2 =  (sql) => {
 	
 	
 }
+
