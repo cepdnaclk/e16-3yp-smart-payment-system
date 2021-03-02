@@ -913,6 +913,7 @@ public class Menu extends javax.swing.JFrame {
                 txt_amount.setText("");
                 txt_customer_name.setText("");
                 txt_card_id.setText("");
+                txt_onlyno.setVisible(false);
             }
         }catch(Exception e){
             
@@ -952,6 +953,8 @@ public class Menu extends javax.swing.JFrame {
         pward.setText("");
         txt_error_login.setText("");
         token = "";
+        Edit.setVisible(false);
+        Option.setVisible(false);
     }//GEN-LAST:event_logoutActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
@@ -1063,6 +1066,7 @@ public class Menu extends javax.swing.JFrame {
         txt_nicno.setText("");
         txt_mails.setText("");
         txt_search_result.setText("");
+        btn_delete.setVisible(false);
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void txt_amountKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_amountKeyPressed
@@ -1079,7 +1083,13 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_amountKeyTyped
 
     private void btn_back_edit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_back_edit1ActionPerformed
-        // TODO add your handling code here:
+        panel_login.setVisible(false);
+        panel_menu.setVisible(false);
+        panel_add.setVisible(false);
+        panel_edit_email.setVisible(false);
+        panel_search.setVisible(false);
+        panel_issue_card.setVisible(true);
+        panel_edit_passward.setVisible(false);
     }//GEN-LAST:event_btn_back_edit1ActionPerformed
 
     private void btn_edit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_edit1ActionPerformed
