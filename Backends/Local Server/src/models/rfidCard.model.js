@@ -41,7 +41,7 @@ exports.cardIssueing = async (card, callback) => {
 					callback(null)
 				}
 				else {
-					callback("ZERO_ROWS_AFFECTED")
+					callback(Error("ZERO_ROWS_AFFECTED"))
 				}
       }
     })
@@ -83,7 +83,7 @@ exports.cardState = async (card,callback)=>{
           
           }
           else {
-            callback("ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG CARD_ID")
+            callback(Error("ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG CARD_ID"))
           }
         }
          
@@ -98,7 +98,7 @@ exports.cardState = async (card,callback)=>{
 
 '${client.sendQuery(sql)}'
 
-exports.cardRefundng = async (card,callback)=>{
+exports.cardRecharging = async (card,callback)=>{
   if(card){
     const sql_currentAmount = `SELECT Amount from RFID_Card WHERE CardId =  '${card.card_id}'`
  
@@ -110,7 +110,7 @@ exports.cardRefundng = async (card,callback)=>{
         console.log(result.length)
         if(result.length<=0){
       
-          callback("ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG CARD_ID")
+          callback(Error("ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG CARD_ID"))
         }else{
          
           const current_amount = result[0]['Amount'];
@@ -124,7 +124,7 @@ exports.cardRefundng = async (card,callback)=>{
                 callback(null)
               }
               else {
-                callback("ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG CARD_ID")
+                callback(Error("ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG CARD_ID"))
               }
             }
           })
@@ -145,11 +145,12 @@ exports.cardReturning = async (details,callback)=>{
         callback(err.code)
       } else {
         if (result.affectedRows > 0) {
-					console.log(`Key_ID '${details.card_id}' successfully returned!`)
+          console.log(`Key_ID '${details.card_id}' successfully returned!`)
+          //console.log(result.effectedRows)
 					callback(null)
 				}
 				else {
-					callback("ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG CARD_ID")
+					callback(Error("ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG CARD_ID"))
 				}
       }
     })
@@ -181,15 +182,18 @@ exports.cardScanning = async (details,callback)=>{
           console.error(`SQLQueryError: ${err.sqlMessage}`)
           callback(err.code)
         } else {
-          if (result) {
-               
-           // console.log(result[0])
+          if (result[0]) {
+            
+          
             callback(null,result)
+
 
           }
           else {
-           
-            callback(null)
+            
+         
+
+            callback(Error("ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG CARD_ID"));
           }
         }
       })
@@ -207,15 +211,15 @@ exports.cardScanning2 = async (details,callback)=>{
         console.error(`SQLQueryError: ${err.sqlMessage}`)
         callback(err.code)
       } else {
-        if (result) {
-             
-          //console.log(result[0])
+        if (result[0]) {
+           
+        
           callback(null,result)
 
         }
         else {
-         
-          callback(null)
+        
+          callback(Error("ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG NODE_ID"))
         }
       }
     })

@@ -22,7 +22,8 @@
 #define SERVER_IP "192.168.43.27:3000"
 #ifndef STASSID
 #define STASSID "sathira"
-#define STAPSK  "12345678"
+#define STAPSK  "11111111"
+#define NODE_ID "12"
 #endif
 
 //LCD monitor
@@ -49,6 +50,9 @@ byte blockcontent[16] = {"sathiraBasnayak"};  //an array with 16 bytes to be wri
 
 byte readbackblock[18];
 
+ WiFiClient client;
+ HTTPClient http;
+
 void setup() 
 {
  
@@ -67,6 +71,8 @@ void setup()
   for (byte i = 0; i < 6; i++) {
     key.keyByte[i] = 0xFF;  //keyByte is defined in the "MIFARE_Key" 'struct' definition in the .h file of the library
   }
+
+ 
 }
 
 void loop() 
@@ -74,17 +80,19 @@ void loop()
 
 {
   //Serial.print("begin test");
-  String tag ="";
+  //String tag ="";
   String id= "";
 
   // Look for new cards
   if ( ! mfrc522.PICC_IsNewCardPresent()) 
   {
+   // Serial.print(".");
     return;
   }
   // Select one of the cards
   if ( ! mfrc522.PICC_ReadCardSerial()) 
   {
+   // Serial.print("?");
     return;
   }
  
@@ -108,33 +116,32 @@ void loop()
   lcd.print(id);
   Serial.print(id);
   
-  readBlock(block,readbackblock);
+  //readBlock(block,readbackblock);
   
    Serial.print("read block: ");
    
-   for (int j=0 ; j<16 ; j++)
-   {
-     tag.concat(String(readbackblock[j] < 0x10 ? " 0" : " "));
-     tag.concat(String(readbackblock[j],HEX));
-     //Serial.write(readbackblock[j]);
-   }
-   Serial.println("");
-   Serial.println(tag);
+  //  for (int j=0 ; j<16 ; j++)
+  //  {
+  //    tag.concat(String(readbackblock[j] < 0x10 ? " 0" : " "));
+  //    tag.concat(String(readbackblock[j],HEX));
+  //    //Serial.write(readbackblock[j]);
+  //  }
+  //  Serial.println("");
+  //  Serial.println(tag);
    //tag = "73 61 74 68 69 72 61 12 a3 12 ds 12 34 12 as sd 12";
    if ((WiFi.status() == WL_CONNECTED)) {
 
-    WiFiClient client;
-    HTTPClient http;
+    
 
     Serial.print("[HTTP] begin...\n");
     // configure traged server and url
-    http.begin(client, "http://" SERVER_IP "/Id/"); //HTTP
+    http.begin(client, "http://" SERVER_IP "/api/scanCard"); //HTTP
     http.addHeader("Content-Type", "application/json");
     
 
     //creating the body of post request
-    char JSON[150];
-    sprintf(JSON, "{\"Card_id\": \"%s\",\"security\":\"%s\"}",id.c_str(),tag.c_str());
+    char JSON[60];
+    sprintf(JSON, "{\"card_id\": \"%s\",\"node_id\": \"%s\"}",id.c_str(),NODE_ID);
    
 
     Serial.print("[HTTP] POST...\n");
@@ -153,20 +160,23 @@ void loop()
       if (httpCode == HTTP_CODE_OK) {
         const String& payload = http.getString();
         Serial.println("received payload:\n<<");
-        Serial.println(payload);
-        StaticJsonDocument<50> doc; // <- a little more than 200 bytes in the stack
+        // Serial.println(payload);
+        StaticJsonDocument<100> doc; // <- a little more than 200 bytes in the stack
         deserializeJson(doc, payload);
         const char* reply = doc["msg"];
         lcd.clear();
+        lcd.setCursor(1,0);
         lcd.print(reply);
+        Serial.println(reply);
         Serial.println(">>");
       }
     } else {
-      Serial.printf("[HTTP] POST... failed, error: %s\n", http.errorToString(httpCode).c_str());
+      Serial.printf("[HTTP] POST... failed, error: %s\n", http.getString().c_str());
     }
 
     http.end();
-     Serial.println("end");
+    Serial.printf("Free heap: %d\n", ESP.getFreeHeap());
+    Serial.println("end");
   }
 
    

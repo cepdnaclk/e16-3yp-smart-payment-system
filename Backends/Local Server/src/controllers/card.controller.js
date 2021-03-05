@@ -23,7 +23,7 @@ exports.addCard = async (req, res, next) => {
           return res.status(httpStatus.CONFLICT).json({Error: `card ${details.id} is already registered`})
         // Internal server error
         else
-          return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err})
+          return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err.message})
       }
     })    
   } catch (err) {
@@ -32,7 +32,7 @@ exports.addCard = async (req, res, next) => {
 }
 
 //use to refund a a card
-exports.refundCard = async (req, res, next) => {
+exports.rechargeCard = async (req, res, next) => {
   try {
     const details = {
       card_id: req.body.card_id,
@@ -40,13 +40,13 @@ exports.refundCard = async (req, res, next) => {
     }
 
   
-    await card.cardRefundng(details, (err) => {
+    await card.cardRecharging(details, (err) => {
       // sucesfully refunded the card
       if (!err) {
         return res.status(httpStatus.CREATED).json({msg : `card ${details.card_id} is succesfully refunded`})
       } else {
         // refunding was unsuccesfull
-        return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err})
+        return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err.message})
       }
     })    
   } catch (err) {
@@ -59,19 +59,29 @@ exports.returnCard = async (req,res,next)=>{
     const details = {
       card_id: req.body.card_id
     }
-    await card.cardReturning(details,(err)=>{
-      if(!err){
-        return res.status(httpStatus.OK).json({message : `card ${details.card_id} is succesfully returned`});
-      }else if(err === "ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG CARD_ID"){
-        return res.status(httpStatus.BAD_REQUEST).json({Error: err})
+    await card.cardScanning(details,async (err,result)=>{
+      if (!err) {
+        const balance = result;
+        await card.cardReturning(details,(err)=>{
+          if(!err){
+            return res.status(httpStatus.OK).json({message : `card ${details.card_id} is succesfully returned remaining amount is ${balance[0]['Amount']}`});
+          }else if(err === "ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG CARD_ID"){
+            return res.status(httpStatus.BAD_REQUEST).json({Error: err.message})
+          }else{
+            return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err.message})
+          }
+        })
       }else{
-        return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err})
-      }
-    })
+        return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err.message})
+      } 
+    });
+   
   }catch(err){
 
   }
 }
+
+
 
 exports.issueCard = async(req,res,next)=>{
   try{
@@ -87,7 +97,7 @@ exports.issueCard = async(req,res,next)=>{
     }
 
     await card.cardState(details, async (err)=>{
-      if(!err){
+      if (!err){
        
         await card.cardIssueing(details, async (err)=>{
           if (!err) {
@@ -100,14 +110,14 @@ exports.issueCard = async(req,res,next)=>{
            })
           } else {
          
-              return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err})
+              return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err.message})
           }
         })
       }else{
         if(err.message === "Card is already issued"){
           return res.status(httpStatus.CREATED).json({msg : `card ${details.card_id} is allready issued`})
         }else{
-          return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err})
+          return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err.message})
         }
       }
     })
@@ -118,16 +128,19 @@ exports.issueCard = async(req,res,next)=>{
 }
 
 exports.scanCard = async(req,res,next) =>{
+  //console.log(req.body)
    try{
     const details = {
       card_id: req.body.card_id,
       node_id : req.body.node_id,
-      tag : req.body.tag
+      //tag : req.body.tag
     }
+    console.log(details)
    // await card.cardScanning(details);
     await card.cardScanning(details, async (err,result)=>{
       if (!err) {
         const balance = result;
+        console.log(balance)
         await card.cardScanning2(details, async (err,result)=>{
           if (!err) {
             // return res.status(httpStatus.OK).json({msg :"customer can play"})
@@ -165,6 +178,8 @@ exports.scanCard = async(req,res,next) =>{
               return res.status(httpStatus.OK).json({msg :"Hi " +balance[0]['CustomerName'] + " Sorry, Your balance is not enough to play the game"})
             }
 
+          }else{
+            return res.status(httpStatus.BAD_REQUEST).json({Error: "ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG NODE_ID"})
           }
         })
       } else {
@@ -173,7 +188,7 @@ exports.scanCard = async(req,res,next) =>{
           return res.status(httpStatus.CONFLICT).json({Error: `card ${details.card_id} is already issued. Has to return it first`})
         // Internal server error
         else
-          return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err})
+          return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err.message})
       }
     })
 
