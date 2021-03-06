@@ -48,7 +48,7 @@ describe('refundCard',()=>{
        
         expect(()=>{cardController.addCard(req,res,next).toBeCalledWith()})
     });
-    it('Should failed if card id isnot valid',()=>{
+    it('Should failed if card id null',()=>{
         const req = mockups.mockRequest();
         const res = mockups.mockResponse();
         const next = mockups.mockNext();
