@@ -230,6 +230,35 @@ exports.cardScanning2 = async (details,callback)=>{
  
 }
 
+exports.cardDeleteing = async (details,callback)=>{
+  if(details){
+    const sql_delete = `DELETE from RFID_Card WHERE CardId =  '${details.card_id}';`
+
+    await client.sendQuery(sql_delete, (err, result) => {
+      if(err) {
+        console.error(`SQLQueryError: ${err.sqlMessage}`)
+        console.log("test3")
+        callback(err)
+      } else {
+        if (result.affectedRows>0) {
+           
+          console.log("test1")
+          callback(null)
+
+        }
+        else {
+          console.log("test2")
+          callback(Error("ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG CARD_ID"))
+        }
+      }
+    })
+    
+ }
+
+ 
+ 
+}
+
 exports.creatingCurrentBalanace = async (details,callback)=>{
   if(details){
     const sql_currentprice = `UPDATE RFID_Card SET  Amount = ${details.newAmount} WHERE CardId =  '${details.card_id}';`
@@ -253,9 +282,11 @@ exports.creatingCurrentBalanace = async (details,callback)=>{
     
  }
 
+
+
  
  
-}
+
 
 exports.findUser = async (email, callback) => {
   if (email) {
@@ -278,4 +309,9 @@ exports.findUser = async (email, callback) => {
       }
     })
   }
+}
+
+//DELETE FROM table_name WHERE condition;
+
+
 }

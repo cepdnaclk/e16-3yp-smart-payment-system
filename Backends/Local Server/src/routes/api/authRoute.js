@@ -22,6 +22,7 @@ router.post('/issueCard',cardValidation.validateBody(cardValidation.schemas.card
 router.post('/scanCard',cardController.scanCard);
 router.post('/returnCard',cardValidation.validateBody(cardValidation.schemas.cardAddorReturnSchema),cardController.returnCard);
 router.post('/rechargeCard',cardValidation.validateBody(cardValidation.schemas.cardRechargeSchema),cardController.rechargeCard);
+router.post('/deleteCard',cardController.deleteCard);
 
 
 module.exports = router

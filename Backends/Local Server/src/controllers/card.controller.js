@@ -202,3 +202,23 @@ exports.scanCard = async(req,res,next) =>{
    }
 }
 
+exports.deleteCard = async (req,res,next)=>{
+  try{
+    const details = {
+      card_id: req.body.card_id
+    }
+    
+    await card.cardDeleteing(details,async (err)=>{
+      if (!err) {
+        return res.status(httpStatus.OK).json({msg :"card is succesfully deleted"})
+      }else{
+        console.log(err.message)
+        return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err.message})
+      } 
+    });
+   
+  }catch(err){
+    console.log(err.message)
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err.message})
+  }
+}
