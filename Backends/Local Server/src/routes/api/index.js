@@ -13,4 +13,8 @@ router.get('/', (req, res) => {
 // adding authentication routes for the application
 router.use('/api', authRouter)
 
+router.use('/', (req,res)=>{
+	res.status(404).json({message: 'resource not found'})
+})
+
 module.exports = router
