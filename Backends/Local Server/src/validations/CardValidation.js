@@ -10,7 +10,7 @@ module.exports = {
             .required()
             .min(4)
       }),
-      cardRefundSchema : Joi.object().keys({  
+      cardRechargeSchema : Joi.object().keys({  
         card_id : Joi.string()
             .required()
             .min(4),
@@ -39,10 +39,10 @@ module.exports = {
         card_id : Joi.string()
             .required()
             .min(4),
-        node_id :Joi.number()
+        node_id :Joi.string()
             .required()
             .min(0),
-        tag : Joi.string(),
+        // tag : Joi.string(),
 
       }),
     },
