@@ -11,7 +11,7 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800'},
       { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css'}
     ],
@@ -20,8 +20,8 @@ export default {
     }
   },
   router: {
-    linkExactActiveClass: 'active',
-    middleware: ['auth'],
+    middleware: 'auth',
+    linkExactActiveClass: 'active'
   },
   /*
   ** Customize the progress-bar color

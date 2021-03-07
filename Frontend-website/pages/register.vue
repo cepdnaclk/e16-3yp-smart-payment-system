@@ -1,5 +1,5 @@
 <template>
-  <card>
+  <card style="width: 50rem;">
     <h5 slot="header" class="title">Register Form</h5>
     <form @submit.prevent="onSubmit" @reset="onReset">
       <div class="row">
@@ -120,6 +120,7 @@
 <script>
   export default {
     auth: 'guest',
+    layout: 'normal',
     data() {
       return {
         form: {
