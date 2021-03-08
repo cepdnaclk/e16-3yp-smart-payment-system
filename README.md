@@ -9,9 +9,6 @@ This is the 3rd year embedded system project
 >[Nadun welikanda](https://github.com/Nadun360) **E/16/389**
 
 ---
-## Product design     
-
-![Our Design](https://github.com/sathirauop/e16-3yp-smart-payment-system/blob/main/images/Capture.PNG?raw=true)  
 
 ## Table of contents
 
@@ -46,9 +43,9 @@ This is the 3rd year embedded system project
 ## Hardware and Software designs
   
   3D model Design
-  ![Our Design](https://github.com/sathirauop/e16-3yp-smart-payment-system/blob/main/images/frontVies.PNG?raw=true)  
-  ![Our Design](https://github.com/sathirauop/e16-3yp-smart-payment-system/blob/main/images/topView.PNG?raw=true)  
-  ![Our Design](https://github.com/sathirauop/e16-3yp-smart-payment-system/blob/main/images/without_cover.PNG?raw=true)  
+  ![Our Design](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/images/Hardware/1.PNG?raw=true)  
+  ![Our Design](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/images/Hardware/2.PNG?raw=true)  
+  ![Our Design](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/images/Hardware/3.PNG?raw=true)  
   
   Hardware design
 ![Our Design](https://github.com/sathirauop/e16-3yp-smart-payment-system/blob/main/Diagrams/EasyEDA_diagram.png?raw=true)  
