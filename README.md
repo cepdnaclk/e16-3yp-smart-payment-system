@@ -52,6 +52,7 @@ This is the 3rd year embedded system project
   
   Hardware design
 ![Our Design](https://github.com/sathirauop/e16-3yp-smart-payment-system/blob/main/Diagrams/EasyEDA_diagram.png?raw=true)  
+![Our Design](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Diagrams/PCB/PCB.jpeg) 
 
   Software design
   
