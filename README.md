@@ -43,6 +43,7 @@ This is the 3rd year embedded system project
 ## Hardware and Software designs
   
   3D model Design
+  
   ![Our Design](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/images/Hardware/1.PNG?raw=true)  
   ![Our Design](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/images/Hardware/2.PNG?raw=true)  
   ![Our Design](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/images/Hardware/3.PNG?raw=true)  
