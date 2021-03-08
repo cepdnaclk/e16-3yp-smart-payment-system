@@ -26,47 +26,38 @@
       </card>
     </div>
 
-    <!-- <div class="col-md-12">
-      <card class="card-plain" body-classes="table-full-width">
-        <template slot="header">
-          <h4 class="card-title">Table on Plain Background</h4>
-          <p class="category">Here is a subtitle for this table</p>
-        </template>
-        <el-table
-          header-cell-class-name="table-transparent"
-          header-row-class-name="table-transparent"
-          row-class-name="table-transparent"
-          :data="tableData"
-        >
+    <div class="col-lg-6">
+      <card card-body-classes="table-full-width">
+        <h4 slot="header" class="card-title">Working Cards</h4>
+        <el-table :data="tableData1">
           <el-table-column
-            min-width="150"
+            min-width="110"
             sortable
-            label="Name"
+            label="Card ID"
+            property="id"
+          ></el-table-column>
+          <el-table-column
+            min-width="115"
+            sortable
+            label="Node ID"
+            property="value"
+          ></el-table-column>
+          <el-table-column
+            min-width="200"
+            sortable
+            label="Customer Name"
             property="name"
           ></el-table-column>
           <el-table-column
-            min-width="150"
+            min-width="130"
             sortable
-            label="Country"
-            property="country"
-          ></el-table-column>
-          <el-table-column
-            min-width="150"
-            sortable
-            label="City"
-            property="city"
-          ></el-table-column>
-          <el-table-column
-            min-width="150"
-            sortable
-            align="right"
-            header-align="right"
-            label="Salary"
-            property="salary"
+            label="Due Time"
+            property="time"
           ></el-table-column>
         </el-table>
       </card>
-    </div> -->
+    </div>
+    
   </div>
 </template>
 <script>
@@ -97,6 +88,11 @@ export default {
           value: 'RS: 120.00'
         },
         {
+          id: 'BBA34DB74',
+          name: 'Pin Pon machine-4',
+          value: 'RS: 120.00'
+        },
+        {
           id: '90BAEDB89',
           name: 'Gift Round machine-1',
           value: 'RS: 120.00'
@@ -110,6 +106,49 @@ export default {
           id: 'AA34782BC',
           name: 'Gift Round machine-3',
           value: 'RS: 120.00'
+        },
+        {
+          id: 'BA34723BC',
+          name: 'Gift Round machine-4',
+          value: 'RS: 120.00'
+        }
+      ],
+      tableData1: [
+        {
+          value: 'AB23D751F',
+          name: 'Sudam Shaluka',
+          id: '214ABEFB',
+          time: '25 min'
+        },
+        {
+          value: '655AEDB00',
+          name: 'Sathira Basnayake',
+          id: '87BCBEFB',
+          time: '20 min'
+        },
+        {
+          value: 'BB534DB74',
+          name: 'Nimantha Bhanuka',
+          id: '894ABE78',
+          time: '26 min'
+        },
+        {
+          value: 'BBA34DB74',
+          name: 'Tharindu Sandaruwan',
+          id: '39BDBEFB',
+          time: '37 min'
+        },
+        {
+          value: '90BAEDB89',
+          name: 'Maduaha Shanaka',
+          id: 'BB65AD23',
+          time: '43 min'
+        },
+        {
+          value: '623BC87DE',
+          name: 'Supun Vindula',
+          id:'98FEA67D',
+          time: '58 min' 
         }
       ]
     };
