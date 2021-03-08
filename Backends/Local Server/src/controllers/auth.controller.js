@@ -72,8 +72,8 @@ exports.login = async (req, res, next) => {
           } else {
 
             // user account is not activated *** have some issues ***
-            if (!result[0].Active)
-              return res.status(httpStatus.UNAUTHORIZED).json({Error : `User account ${req.body.email} is not activated!`})
+            //if (!result[0].Active)
+            //  return res.status(httpStatus.UNAUTHORIZED).json({Error : `User account ${req.body.email} is not activated!`})
 
             // permission given to log in
             //else {

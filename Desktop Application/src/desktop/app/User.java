@@ -42,9 +42,8 @@ public class User {
 	    for (int c; (c = in.read()) >= 0;)
 	        sb.append((char)c);
 	    String response = sb.toString();
-	    //System.out.println(response);
+	    System.out.println(response);
 	    JSONObject myResponse = new JSONObject(response.toString());
-	    //System.out.println("result after Reading JSON Response");
             try{
                 Menu.token = myResponse.getString("token");
                 int res_code = conn.getResponseCode();
@@ -52,19 +51,16 @@ public class User {
             }catch(Exception e){
                 return (false);
             }
-            
-            //System.out.println("Response code "+res_code);
-            //System.out.println("Token is"+Menu.token);
-            //return(!("".equals(Menu.token))); 
    }
     
-   public static boolean issue_card(String name,String amount,String card_id,String employer_id) throws Exception {
-     URL url = new URL("http://localhost:3000/api/issuecard");
-
+   public static void issue_card(String name,String amount,String card_id,String employer_id) throws Exception {
+     URL url = new URL("http://localhost:3000/api/issueCard");
+            
             StringBuilder postData = new StringBuilder();
-            postData.append(URLEncoder.encode("first_name", "UTF-8"));
+            
+            postData.append(URLEncoder.encode("card_id", "UTF-8"));
 	    postData.append('=');
-	    postData.append(URLEncoder.encode((String) name, "UTF-8"));
+	    postData.append(URLEncoder.encode((String) card_id, "UTF-8"));
      
             postData.append('&');
             postData.append(URLEncoder.encode("amount", "UTF-8"));
@@ -72,18 +68,56 @@ public class User {
 	    postData.append(URLEncoder.encode((String) amount, "UTF-8"));
             
             postData.append('&');
-            postData.append(URLEncoder.encode("card_id", "UTF-8"));
+            postData.append(URLEncoder.encode("is_issued", "UTF-8"));
 	    postData.append('=');
-	    postData.append(URLEncoder.encode((String) card_id, "UTF-8"));
+	    postData.append(URLEncoder.encode((String) "True", "UTF-8"));
             
             postData.append('&');
             postData.append(URLEncoder.encode("employer_id", "UTF-8"));
 	    postData.append('=');
 	    postData.append(URLEncoder.encode((String) employer_id, "UTF-8"));
             
+            postData.append('&');
+            postData.append(URLEncoder.encode("customer_name", "UTF-8"));
+	    postData.append('=');
+	    postData.append(URLEncoder.encode((String) name, "UTF-8"));
+            
 	    byte[] postDataBytes = postData.toString().getBytes("UTF-8");
 	    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-            conn.setRequestProperty("Authorization", "admin2021");
+            //conn.setRequestProperty("Authorization", "admin2021");
+	    conn.setRequestMethod("POST");
+	    conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+	    conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
+	    conn.setDoOutput(true);
+	    conn.getOutputStream().write(postDataBytes);
+	    java.io.Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            System.out.println("Madusha");
+	    StringBuilder sb = new StringBuilder();
+            System.out.println("Madusha");
+	    for (int c; (c = in.read()) >= 0;)
+	        sb.append((char)c);
+	    String response = sb.toString();
+	    System.out.println(response);
+	    JSONObject myResponse = new JSONObject(response.toString());
+            try{
+                int res_code = conn.getResponseCode();
+                //return (res_code == 200);
+            }catch(Exception e){
+                //return (false);
+            }
+   }
+   
+   
+       public static boolean addCard(String card_id) throws Exception {
+     URL url = new URL("http://localhost:3000/api/addCard");
+
+            StringBuilder postData = new StringBuilder();
+            postData.append(URLEncoder.encode("card_id", "UTF-8"));
+	    postData.append('=');
+	    postData.append(URLEncoder.encode((String) card_id, "UTF-8"));
+         
+	    byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+	    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 	    conn.setRequestMethod("POST");
 	    conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 	    conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
@@ -96,14 +130,8 @@ public class User {
 	    String response = sb.toString();
 	    System.out.println(response);
 	    JSONObject myResponse = new JSONObject(response.toString());
-	    System.out.println("result after Reading JSON Response");
-	    System.out.println("origin- "+myResponse.getString("origin"));
-	    System.out.println("url- "+myResponse.getString("url"));
-	    JSONObject form_data = myResponse.getJSONObject("form");
-	    System.out.println("First name- "+form_data.getString("first_name"));
-	    System.out.println("Last name- "+form_data.getString("last_name"));
-            
             try{
+                Menu.token = myResponse.getString("token");
                 int res_code = conn.getResponseCode();
                 return (res_code == 200);
             }catch(Exception e){
