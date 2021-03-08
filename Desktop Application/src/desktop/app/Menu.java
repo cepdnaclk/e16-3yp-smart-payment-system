@@ -17,8 +17,9 @@ import java.util.logging.Logger;
  *
  * @author Madusha Shanaka
  */
-public class Menu extends javax.swing.JFrame {
 
+public class Menu extends javax.swing.JFrame {
+    User user = new User();
     int mousepX;
     int mousepY;
     public static String token = "";
@@ -886,8 +887,8 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 40, Short.MAX_VALUE)
-                    .addComponent(Toolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(0, 37, Short.MAX_VALUE)
+                    .addComponent(Toolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(issue_card, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -995,18 +996,25 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_issue_scanActionPerformed
 
     private void btn_issue_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_issue_submitActionPerformed
-        try{
+        //try{
             if(!(issue_amount.getText().equals("") || issue_name.getText().equals("") || issue_card_id.getText().equals(""))){
+                
                 int i = Integer.parseInt(issue_amount.getText());
                 JOptionPane.showMessageDialog(null, "Card Updated Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
                 issue_amount.setText("");
                 issue_name.setText("");
                 issue_card_id.setText("");
+                try {
+                    User.issue_card(issue_name.getText(), issue_amount.getText(), issue_card_id.getText(), "973131559V");
+                } catch (Exception ex) {
+                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println(ex.getClass());
+                }
                 issue_onlyno.setVisible(false);
             }
-        }catch(Exception e){
-
-        }
+        //}catch(Exception e){
+        //    System.out.println("Error");
+        //}
 
     }//GEN-LAST:event_btn_issue_submitActionPerformed
 
@@ -1136,11 +1144,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Password Updated Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Email Updated Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
@@ -1166,7 +1174,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void add_card_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_card_submitActionPerformed
         try{
-            if(!(refund_card_id.getText().equals(""))){
+            if(!(add_card_id.getText().equals(""))){
+                //boolean addCard = user.addCard(add_card_id.getText());
                 JOptionPane.showMessageDialog(null, "Card added Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
                 //refund_card_id.setText("");
             }
@@ -1176,7 +1185,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_add_card_submitActionPerformed
 
     private void add_card_submit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_card_submit1ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Card Removed Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_add_card_submit1ActionPerformed
 
     /**
