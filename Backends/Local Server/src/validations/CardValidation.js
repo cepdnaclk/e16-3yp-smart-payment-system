@@ -32,7 +32,8 @@ module.exports = {
         customer_name: Joi.string()
             .required(),
         time: Joi.string(),
-        data: Joi.date()
+        data: Joi.date(),
+        tag:Joi.string().required()
 
       }),
       cardScanSchema : Joi.object().keys({  

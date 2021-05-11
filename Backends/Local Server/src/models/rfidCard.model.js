@@ -27,7 +27,7 @@ exports.cardIssueing = async (card, callback) => {
   if (card) {
     // sql query to register a user
     console.log(card)
-    const sql_issue_card = `UPDATE RFID_Card SET IsIssued = ${card.is_issued}, Amount = ${card.amount}, CustomerName = '${card.customer_name}', EmployeeId  = '${card.employee_id}' WHERE CardId =  '${card.card_id}';`
+    const sql_issue_card = `UPDATE RFID_Card SET IsIssued = ${card.is_issued}, Amount = ${card.amount}, CustomerName = '${card.customer_name}',SecurityTag = '${card.tag}' ,EmployeeId  = '${card.employee_id}' WHERE CardId =  '${card.card_id}';`
     
     // executing the query
     await client.sendQuery(sql_issue_card, (err, result) => {
@@ -175,7 +175,7 @@ exports.addtolog = async(details,callback)=>{
 }
 exports.cardScanning = async (details,callback)=>{
     if(details){
-      const sql_findBalance = `SELECT CustomerName,Amount,IsIssued from RFID_Card WHERE CardId =  '${details.card_id}';`
+      const sql_findBalance = `SELECT CustomerName,Amount,IsIssued,SecurityTag from RFID_Card WHERE CardId =  '${details.card_id}';`
 
       await client.sendQuery(sql_findBalance, (err, result) => {
         if(err) {
@@ -184,16 +184,12 @@ exports.cardScanning = async (details,callback)=>{
         } else {
           if (result[0]) {
               if(!result[0]['IsIssued']){
-                   console.log("test")
                    callback(Error("UNAUTHORIZED CARD"))
               }else{
                 callback(null,result)
               }
             
          
-           
-
-
           }
         
           else {
