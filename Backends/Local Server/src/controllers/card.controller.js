@@ -133,7 +133,7 @@ exports.scanCard = async(req,res,next) =>{
     const details = {
       card_id: req.body.card_id,
       node_id : req.body.node_id,
-      //tag : req.body.tag
+      tag : req.body.tag
     }
     console.log(details)
    // await card.cardScanning(details);
@@ -145,8 +145,8 @@ exports.scanCard = async(req,res,next) =>{
           if (!err) {
             // return res.status(httpStatus.OK).json({msg :"customer can play"})
             const price = result
-            console.log(price);
-            console.log(balance);
+            //console.log(price);
+            //console.log(balance);
             if(balance[0]['Amount']>=price[0]['Price']){
               const newPrice = balance[0]['Amount']-price[0]['Price']
               const newDetails = {
@@ -154,7 +154,7 @@ exports.scanCard = async(req,res,next) =>{
                 newAmount :newPrice
               } 
               await card.creatingCurrentBalanace(newDetails, async (err)=>{
-                 if(!err){
+                 if(!err){     
                   //return res.status(httpStatus.OK).json({msg :"Hi " +balance[0]['CustomerName'] + " You can play the game"})
                   const log = {
                     card_id: details.card_id,
@@ -162,20 +162,20 @@ exports.scanCard = async(req,res,next) =>{
                   }
                   await card.addtolog(log, async(err)=>{
                      if(!err){
-                       return res.status(httpStatus.OK).json({msg :"Hi " +balance[0]['CustomerName'] + " You can play the game"})
+                       return res.status(httpStatus.OK).json({msg :"Hi You can play the game",name : balance[0]['CustomerName']})
                      }else{
                       return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({msg :"Hi " +balance[0]['CustomerName'] + " Something went wrong please try again"})
                      }
                   })
                  }else{
-                  console.log(err.message)
+                  //console.log(err.message)
                   return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({msg :"Hi " +balance[0]['CustomerName'] + " Something went wrong please try again"})
                  }
               })
               
             }else{
-              console.log(price[0]['Price'])
-              return res.status(httpStatus.OK).json({msg :"Hi " +balance[0]['CustomerName'] + " Sorry, Your balance is not enough to play the game"})
+              //console.log(price[0]['Price'])
+              return res.status(httpStatus.PAYMENT_REQUIRED).json({msg :"Sorry, Your balance is not enough to play the game",name:balance[0]['CustomerName']})
             }
 
           }else{
@@ -184,11 +184,17 @@ exports.scanCard = async(req,res,next) =>{
         })
       } else {
         // card is already issued
-        if(err == "ER_DUP_ENTRY")
-          return res.status(httpStatus.CONFLICT).json({Error: `card ${details.card_id} is already issued. Has to return it first`})
+        if(err.message == "ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG CARD_ID"){
+          
+          return res.status(httpStatus.CONFLICT).json({Error: `card is UNIDENTIFIED`})
         // Internal server error
-        else
+        }else if(err.message ==="UNAUTHORIZED CARD"){
+          return res.status(httpStatus.UNAUTHORIZED).json({Error: `card is UNAUTHORIZED`})
+        
+        }else{
+         
           return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err.message})
+        } 
       }
     })
 

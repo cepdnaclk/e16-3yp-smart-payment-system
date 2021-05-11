@@ -3,7 +3,6 @@
 
 /*
  *  Created by E/16/054 E/16/351 E/16/389
-
 */
 
 #define SS_PIN D4
@@ -22,12 +21,11 @@
 #define SERVER_IP "192.168.43.27:3000"
 #ifndef STASSID
 #define STASSID "sathira"
-#define STAPSK  "11111111"
-#define NODE_ID "12"
+#define STAPSK  "12345678"
 #endif
 
 //LCD monitor
-LiquidCrystal_I2C lcd(0x27, 20, 4);
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 //Rfid
 MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance/object.
@@ -50,9 +48,6 @@ byte blockcontent[16] = {"sathiraBasnayak"};  //an array with 16 bytes to be wri
 
 byte readbackblock[18];
 
-WiFiClient client;
-HTTPClient http;
-
 void setup() 
 {
  
@@ -71,8 +66,6 @@ void setup()
   for (byte i = 0; i < 6; i++) {
     key.keyByte[i] = 0xFF;  //keyByte is defined in the "MIFARE_Key" 'struct' definition in the .h file of the library
   }
-
- 
 }
 
 void loop() 
@@ -80,25 +73,24 @@ void loop()
 
 {
   //Serial.print("begin test");
-  //String tag ="";
+  String tag ="";
   String id= "";
 
   // Look for new cards
-  if(!mfrc522.PICC_IsNewCardPresent()) 
+  if ( ! mfrc522.PICC_IsNewCardPresent()) 
   {
-     //Serial.print(".");
     return;
   }
   // Select one of the cards
   if ( ! mfrc522.PICC_ReadCardSerial()) 
   {
-   // Serial.print("?");
     return;
   }
  
   //lcd monitor
-  
-  
+  lcd.clear();
+  lcd.print("UID tag:");
+  lcd.setCursor(0,1);
 
   Serial.println();
   Serial.print(" UID tag :");
@@ -112,38 +104,36 @@ void loop()
      id.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
      id.concat(String(mfrc522.uid.uidByte[i], HEX));
   }
-  lcd.clear();
-  lcd.print("card is scanning...");
-   lcd.setCursor(0,1);
-   lcd.print("wait a little");
+  lcd.print(id);
   Serial.print(id);
   
-  //readBlock(block,readbackblock);
+  readBlock(block,readbackblock);
   
    Serial.print("read block: ");
    
-  //  for (int j=0 ; j<16 ; j++)
-  //  {
-  //    tag.concat(String(readbackblock[j] < 0x10 ? " 0" : " "));
-  //    tag.concat(String(readbackblock[j],HEX));
-  //    //Serial.write(readbackblock[j]);
-  //  }
-  //  Serial.println("");
-  //  Serial.println(tag);
+   for (int j=0 ; j<16 ; j++)
+   {
+     tag.concat(String(readbackblock[j] < 0x10 ? " 0" : " "));
+     tag.concat(String(readbackblock[j],HEX));
+     //Serial.write(readbackblock[j]);
+   }
+   Serial.println("");
+   Serial.println(tag);
    //tag = "73 61 74 68 69 72 61 12 a3 12 ds 12 34 12 as sd 12";
    if ((WiFi.status() == WL_CONNECTED)) {
 
-    
+    WiFiClient client;
+    HTTPClient http;
 
     Serial.print("[HTTP] begin...\n");
     // configure traged server and url
-    http.begin(client, "http://" SERVER_IP "/api/scanCard"); //HTTP
+    http.begin(client, "http://" SERVER_IP "/Id/"); //HTTP
     http.addHeader("Content-Type", "application/json");
     
 
     //creating the body of post request
-    char JSON[60];
-    sprintf(JSON, "{\"card_id\": \"%s\",\"node_id\": \"%s\"}",id.c_str(),NODE_ID);
+    char JSON[150];
+    sprintf(JSON, "{\"Card_id\": \"%s\",\"security\":\"%s\"}",id.c_str(),tag.c_str());
    
 
     Serial.print("[HTTP] POST...\n");
@@ -162,75 +152,20 @@ void loop()
       if (httpCode == HTTP_CODE_OK) {
         const String& payload = http.getString();
         Serial.println("received payload:\n<<");
-        // Serial.println(payload);
-        StaticJsonDocument<100> doc; // <- a little more than 200 bytes in the stack
+        Serial.println(payload);
+        StaticJsonDocument<50> doc; // <- a little more than 200 bytes in the stack
         deserializeJson(doc, payload);
-        const char* name = doc["name"];
+        const char* reply = doc["msg"];
         lcd.clear();
-        lcd.print("Hi");
-        lcd.setCursor(3,0);
-        lcd.print(name);
-        lcd.setCursor(0,1);
-        lcd.print("ACCESS GRANTED");
-        lcd.setCursor(0,2);
-        lcd.print("Enjoy the game");
-        Serial.println(name);
+        lcd.print(reply);
         Serial.println(">>");
-        delay(1500);
-
-      }
-      else if(httpCode == 401){
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Sorry");
-        lcd.setCursor(0,1);
-        lcd.print("Card is UNAUTHORIZED");
-
-      }
-      else if(httpCode == 402){
-        const String& payload = http.getString();
-        StaticJsonDocument<100> doc; // <- a little more than 200 bytes in the stack
-        deserializeJson(doc, payload);
-        const char* name = doc["name"];
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Sorry ");
-        lcd.print(name);
-        lcd.setCursor(0,1);
-        lcd.print("your balance is");
-        lcd.setCursor(0,2);
-        lcd.print("Insufficient");
-        lcd.setCursor(0,3);
-        lcd.print("Please Recharge");
-
-
-      }
-      else if(httpCode == 409){
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Sorry");
-        lcd.setCursor(0,1);
-        lcd.print("Card is INVALID");
-
       }
     } else {
-      Serial.printf("[HTTP] POST... failed, error: %s\n", http.getString().c_str());
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Sorry,");
-        lcd.setCursor(0,1);
-        lcd.print("Something went wrong");
-        lcd.setCursor(0,2);
-        lcd.print("Please try again");
+      Serial.printf("[HTTP] POST... failed, error: %s\n", http.errorToString(httpCode).c_str());
     }
 
     http.end();
-    Serial.printf("Free heap: %d\n", ESP.getFreeHeap());
-    Serial.println("end");
-    delay(2000);
-  }
-  else{
-    wifi_init();
+     Serial.println("end");
   }
 
    
@@ -300,20 +235,15 @@ int writeBlock(int blockNumber, byte arrayAddress[])
 }
 
 void lcd_init(){
-  
+  Wire.begin(D2, D1);
+  lcd.init();
   lcd.init();
   lcd.backlight();
-  lcd.setCursor(0,0);
-  lcd.print("       Welcome   ");
-  lcd.setCursor(0,2);
-  lcd.print("Connecting...");
-
+  lcd.print("Show your card");
 }
 
 void wifi_init(){
    WiFi.begin(STASSID, STAPSK);
-   lcd.clear();
-   lcd.print("Connecting...");
 
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
@@ -321,9 +251,5 @@ void wifi_init(){
   }
   Serial.println("");
   Serial.print("Connected! IP address: ");
-  lcd.clear();
-  lcd.print("Connected");
-  lcd.setCursor(1,1);
-  lcd.print("Sacan your card!");
   Serial.println(WiFi.localIP());
 }

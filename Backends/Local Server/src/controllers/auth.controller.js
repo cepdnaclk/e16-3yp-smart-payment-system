@@ -71,10 +71,10 @@ exports.login = async (req, res, next) => {
             // user/password are correct
           } else {
             // user account is not activated *** have some issues ***
-            if (!result[0].Active)
-              return res.status(httpStatus.UNAUTHORIZED).json({Error : `User account ${req.body.email} is not activated!`})
+            // if (!result[0].Active)
+            //   return res.status(httpStatus.UNAUTHORIZED).json({Error : `User account ${req.body.email} is not activated!`})
             // permission given to log in
-            else {
+            //else {
               const user = {
                 id : result[0].Security_ID,
                 role : result[0].Role,
@@ -85,7 +85,7 @@ exports.login = async (req, res, next) => {
             }
           }
         }
-      }
+      //}
     })
   } catch (err) {
     return next(err)
