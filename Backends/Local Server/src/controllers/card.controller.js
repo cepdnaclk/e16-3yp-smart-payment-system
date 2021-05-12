@@ -92,7 +92,8 @@ exports.issueCard = async(req,res,next)=>{
       date: req.body.date,
       is_issued :req.body.is_issued,
       employee_id :req.body.employee_id,
-      customer_name: req.body.customer_name
+      customer_name: req.body.customer_name,
+      tag : req.body.tag
       
     }
 
@@ -141,12 +142,13 @@ exports.scanCard = async(req,res,next) =>{
       if (!err) {
         const balance = result;
         console.log(balance)
+        if(balance[0]['SecurityTag'] != details.tag){
+          return res.status(httpStatus.UNAUTHORIZED).json({Error: `card is UNAUTHORIZED`})
+        }
         await card.cardScanning2(details, async (err,result)=>{
           if (!err) {
-            // return res.status(httpStatus.OK).json({msg :"customer can play"})
             const price = result
-            //console.log(price);
-            //console.log(balance);
+           
             if(balance[0]['Amount']>=price[0]['Price']){
               const newPrice = balance[0]['Amount']-price[0]['Price']
               const newDetails = {
