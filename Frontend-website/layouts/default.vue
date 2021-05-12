@@ -1,92 +1,170 @@
 <template>
-  <v-app>
-    <Snackbar></Snackbar>
-    <div>
-      <Nuxt />
-    </div>
-  </v-app>
-</template>
+  <div class="wrapper" :class="{ 'nav-open': $sidebar.showSidebar }">
+    <notifications></notifications>
+    <side-bar
+      :background-color="sidebarBackground"
+      :short-title="$t('sidebar.shortTitle')"
+      :title="$t('sidebar.title')"
+    >
+      <template slot-scope="props" slot="links">
+        <sidebar-item
+          :link="{
+            name: $t('sidebar.dashboard'),
+            icon: 'tim-icons icon-chart-pie-36',
+            path: '/'
+          }"
+        >
+        </sidebar-item>
 
+        <sidebar-item
+          :link="{
+            name: $t('sidebar.notifications'),
+            icon: 'tim-icons icon-bell-55',
+            path: '/notifications'
+          }"
+        >
+        </sidebar-item>
+
+        <sidebar-item
+          :link="{
+            name: $t('sidebar.userProfile'),
+            icon: 'tim-icons icon-single-02',
+            path: '/user' }"
+        >
+        </sidebar-item>
+
+        <sidebar-item
+          :link="{
+            name: $t('sidebar.regularTables'),
+            icon: 'tim-icons icon-puzzle-10',
+            path: '/regular'
+          }"
+        ></sidebar-item>
+
+        <!-- <sidebar-item
+          :link="{
+            name: $t('sidebar.rtl'),
+            icon: 'tim-icons icon-world',
+            path: localePath('/rtl', 'ar') }"
+        ></sidebar-item> -->
+      </template>
+    </side-bar>
+    <!--Share plugin (for demo purposes). You can remove it if don't plan on using it-->
+    <sidebar-share :background-color.sync="sidebarBackground"> </sidebar-share>
+    <div class="main-panel" :data="sidebarBackground">
+      <dashboard-navbar></dashboard-navbar>
+      <router-view name="header"></router-view>
+
+      <div
+        :class="{ content: !isFullScreenRoute }"
+        @click="toggleSidebar"
+      >
+        <zoom-center-transition :duration="200" mode="out-in">
+          <!-- your content here -->
+          <nuxt></nuxt>
+        </zoom-center-transition>
+      </div>
+      <content-footer v-if="!isFullScreenRoute"></content-footer>
+    </div>
+  </div>
+</template>
 <script>
-  import Snackbar from '~/components/Snackbar.vue'
+  /* eslint-disable no-new */
+  import PerfectScrollbar from 'perfect-scrollbar';
+  import 'perfect-scrollbar/css/perfect-scrollbar.css';
+  import SidebarShare from '@/components/Layout/SidebarSharePlugin';
+  function hasElement(className) {
+    return document.getElementsByClassName(className).length > 0;
+  }
+
+  function initScrollbar(className) {
+    if (hasElement(className)) {
+      new PerfectScrollbar(`.${className}`);
+    } else {
+      // try to init it later in case this component is loaded async
+      setTimeout(() => {
+        initScrollbar(className);
+      }, 100);
+    }
+  }
+
+  import DashboardNavbar from '@/components/Layout/DashboardNavbar.vue';
+  import ContentFooter from '@/components/Layout/ContentFooter.vue';
+  import DashboardContent from '@/components/Layout/Content.vue';
+  import { SlideYDownTransition, ZoomCenterTransition } from 'vue2-transitions';
 
   export default {
-    components: { Snackbar }
-  }
+    components: {
+      DashboardNavbar,
+      ContentFooter,
+      DashboardContent,
+      SlideYDownTransition,
+      ZoomCenterTransition,
+      SidebarShare
+    },
+    data() {
+      return {
+        sidebarBackground: 'vue' //vue|blue|orange|green|red|primary
+      };
+    },
+    computed: {
+      isFullScreenRoute() {
+        return this.$route.path === '/maps/full-screen'
+      }
+    },
+    methods: {
+      toggleSidebar() {
+        if (this.$sidebar.showSidebar) {
+          this.$sidebar.displaySidebar(false);
+        }
+      },
+      initScrollbar() {
+        let docClasses = document.body.classList;
+        let isWindows = navigator.platform.startsWith('Win');
+        if (isWindows) {
+          // if we are on windows OS we activate the perfectScrollbar function
+          initScrollbar('sidebar');
+          initScrollbar('main-panel');
+          initScrollbar('sidebar-wrapper');
+
+          docClasses.add('perfect-scrollbar-on');
+        } else {
+          docClasses.add('perfect-scrollbar-off');
+        }
+      }
+    },
+    mounted() {
+      this.initScrollbar();
+    }
+  };
 </script>
+<style lang="scss">
+  $scaleSize: 0.95;
+  @keyframes zoomIn95 {
+    from {
+      opacity: 0;
+      transform: scale3d($scaleSize, $scaleSize, $scaleSize);
+    }
+    to {
+      opacity: 1;
+    }
+  }
 
-<style>
-html {
-  font-family:
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
+  .main-panel .zoomIn {
+    animation-name: zoomIn95;
+  }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-}
+  @keyframes zoomOut95 {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+      transform: scale3d($scaleSize, $scaleSize, $scaleSize);
+    }
+  }
 
-.back-ground {
-  color: #000;
-  background: #fff;
-  /*background: linear-gradient(30deg,#00bcd4,#060c21,#00bcd4);*/
-
-}
-
-.outer-boarder {
-  box-shadow: 0px 0px 3px 2px #060c21;
-  background: linear-gradient(560deg,#00bcd4,#060c21,#00bcd4);
-  /* 89ff00 */
-}
-
-.inner-boarder {
-	box-shadow: 0px 0px 12px 1px #27ae60;
-	border-radius: 15px;
-  /*background: linear-gradient(600deg,#00bcd4,#060c21,#00bcd4);*/
-}
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
-}
+  .main-panel .zoomOut {
+    animation-name: zoomOut95;
+  }
 </style>

@@ -5,8 +5,8 @@ const mysql = require('./services/mysql')
 
 ///////////////////////// TESTING AREA START ///////////////////
 
-const user = require('./models/user.model')
-const center = require('./models/center.model')
+// const user = require('./models/user.model')
+// const center = require('./models/center.model')
 
 ///////////////////////////TESTING AREA OVER ///////////////////
 
