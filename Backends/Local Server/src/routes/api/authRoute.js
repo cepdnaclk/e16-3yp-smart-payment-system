@@ -13,7 +13,7 @@ const nodeValidation = require('../../validations/NodeValidation')
 const isAuth = require("../../middlewares/authorization")
 
 
-//router.post('/register',authController.register)
+router.post('/register',authController.register)
 router.post('/login', authController.login)
 
 router.post('/addCard',cardValidation.validateBody(cardValidation.schemas.cardAddorReturnSchema),cardController.addCard);
