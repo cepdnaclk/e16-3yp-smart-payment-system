@@ -118,7 +118,7 @@ void loop()
    lcd.print("wait a little");
   Serial.print(id);
   
-  //readBlock(block,readbackblock);
+  readBlock(block,readbackblock);
   
    Serial.print("read block: ");
    
@@ -142,8 +142,8 @@ void loop()
     
 
     //creating the body of post request
-    char JSON[60];
-    sprintf(JSON, "{\"card_id\": \"%s\",\"node_id\": \"%s\"}",id.c_str(),NODE_ID);
+    char JSON[80];
+    sprintf(JSON, "{\"card_id\": \"%s\",\"node_id\": \"%s\",\"tag\":\"%s\"}",id.c_str(),NODE_ID,readbackblock);
    
 
     Serial.print("[HTTP] POST...\n");
