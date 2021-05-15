@@ -110,13 +110,13 @@ exports.issueCard = async(req,res,next)=>{
               }
            })
           } else {
-         
-              return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err.message})
+              console.log("test 1");
+              return res.status(httpStatus.BAD_REQUEST).json({Error: err})
           }
         })
       }else{
         if(err.message === "Card is already issued"){
-          return res.status(httpStatus.CREATED).json({msg : `card ${details.card_id} is allready issued`})
+          return res.status(httpStatus.ALREADY_REPORTED).json({msg : `card ${details.card_id} is allready issued`})
         }else{
           return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err.message})
         }
