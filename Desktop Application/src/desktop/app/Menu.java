@@ -37,6 +37,9 @@ public class Menu extends javax.swing.JFrame {
         refund_card.setVisible(false);
         setting.setVisible(false);
         add_card.setVisible(false);
+        //for ttesting purposes
+        login_email.setText("madusha@gmail.com");
+        login_password.setText("123456789");
     }
 
     /**
@@ -578,6 +581,11 @@ public class Menu extends javax.swing.JFrame {
         jLabel2.setText("Password");
 
         login_email.setBorder(null);
+        login_email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                login_emailActionPerformed(evt);
+            }
+        });
 
         login_password.setToolTipText("");
         login_password.setBorder(null);
@@ -1173,20 +1181,34 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_add_card_scanActionPerformed
 
     private void add_card_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_card_submitActionPerformed
-        try{
-            if(!(add_card_id.getText().equals(""))){
-                //boolean addCard = user.addCard(add_card_id.getText());
-                JOptionPane.showMessageDialog(null, "Card added Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-                //refund_card_id.setText("");
-            }
-        }catch(Exception e){
-
+        
+        if(!(add_card_id.getText().equals(""))){
+            boolean val = false;
+            try{
+                val = User.addCard(add_card_id.getText());
+            }catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if(val){
+                    JOptionPane.showMessageDialog(null, "Card added Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Some thing went wrong", "Error", JOptionPane.ERROR_MESSAGE);
+                }   
+            //boolean addCard = user.addCard(add_card_id.getText());
+            
+            //refund_card_id.setText("");
+        }else{
+                JOptionPane.showMessageDialog(null, "Please enter the card ID", "Error", JOptionPane.ERROR);
         }
     }//GEN-LAST:event_add_card_submitActionPerformed
 
     private void add_card_submit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_card_submit1ActionPerformed
         JOptionPane.showMessageDialog(null, "Card Removed Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_add_card_submit1ActionPerformed
+
+    private void login_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_emailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_login_emailActionPerformed
 
     /**
      * @param args the command line arguments

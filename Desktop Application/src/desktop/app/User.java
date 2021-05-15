@@ -29,8 +29,8 @@ public class User {
             postData.append(URLEncoder.encode("password", "UTF-8"));
 	    postData.append('=');
 	    postData.append(URLEncoder.encode((String) pward, "UTF-8"));
-            
-	    byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+
+            byte[] postDataBytes = postData.toString().getBytes("UTF-8");
 	    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 	    conn.setRequestMethod("POST");
 	    conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -44,6 +44,8 @@ public class User {
 	    String response = sb.toString();
 	    System.out.println(response);
 	    JSONObject myResponse = new JSONObject(response.toString());
+            in.close();
+            conn.disconnect();
             try{
                 Menu.token = myResponse.getString("token");
                 int res_code = conn.getResponseCode();
@@ -115,25 +117,35 @@ public class User {
             postData.append(URLEncoder.encode("card_id", "UTF-8"));
 	    postData.append('=');
 	    postData.append(URLEncoder.encode((String) card_id, "UTF-8"));
-         
+            
+            postData.append('&');
+            postData.append(URLEncoder.encode("card_id", "UTF-8"));
+	    postData.append('=');
+	    postData.append(URLEncoder.encode((String) card_id, "UTF-8"));
+            
+         System.out.println(postData);
 	    byte[] postDataBytes = postData.toString().getBytes("UTF-8");
-	    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-	    conn.setRequestMethod("POST");
-	    conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-	    conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
-	    conn.setDoOutput(true);
-	    conn.getOutputStream().write(postDataBytes);
-	    java.io.Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+             
+	    HttpURLConnection conn1 = (HttpURLConnection)url.openConnection();
+	    conn1.setRequestMethod("POST");
+	    conn1.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+	    conn1.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
+	    conn1.setDoOutput(true);
+	    conn1.getOutputStream().write(postDataBytes);
+            
+	    java.io.Reader in = new BufferedReader(new InputStreamReader(conn1.getInputStream(), "UTF-8"));
+            System.out.println(postDataBytes);
 	    StringBuilder sb = new StringBuilder();
+            System.out.println(postDataBytes);
 	    for (int c; (c = in.read()) >= 0;)
 	        sb.append((char)c);
 	    String response = sb.toString();
-	    System.out.println(response);
+	    //System.out.println(response);
 	    JSONObject myResponse = new JSONObject(response.toString());
             try{
-                Menu.token = myResponse.getString("token");
-                int res_code = conn.getResponseCode();
-                return (res_code == 200);
+                //Menu.token = myResponse.getString("msg");
+                int res_code = conn1.getResponseCode();
+                return (res_code == 201);
             }catch(Exception e){
                 return (false);
             }
