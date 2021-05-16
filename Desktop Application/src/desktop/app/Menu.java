@@ -22,7 +22,7 @@ public class Menu extends javax.swing.JFrame {
     User user = new User();
     int mousepX;
     int mousepY;
-    public static String token = "";
+    
     public Menu() {
         initComponents();
         Toolkit toolkit = getToolkit();
@@ -37,6 +37,9 @@ public class Menu extends javax.swing.JFrame {
         refund_card.setVisible(false);
         setting.setVisible(false);
         add_card.setVisible(false);
+        //for ttesting purposes
+        login_email.setText("madusha@gmail.com");
+        login_password.setText("123456789");
     }
 
     /**
@@ -578,6 +581,11 @@ public class Menu extends javax.swing.JFrame {
         jLabel2.setText("Password");
 
         login_email.setBorder(null);
+        login_email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                login_emailActionPerformed(evt);
+            }
+        });
 
         login_password.setToolTipText("");
         login_password.setBorder(null);
@@ -996,25 +1004,30 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_issue_scanActionPerformed
 
     private void btn_issue_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_issue_submitActionPerformed
-        //try{
-            if(!(issue_amount.getText().equals("") || issue_name.getText().equals("") || issue_card_id.getText().equals(""))){
-                
-                int i = Integer.parseInt(issue_amount.getText());
-                JOptionPane.showMessageDialog(null, "Card Updated Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-                issue_amount.setText("");
-                issue_name.setText("");
-                issue_card_id.setText("");
-                try {
-                    User.issue_card(issue_name.getText(), issue_amount.getText(), issue_card_id.getText(), "973131559V");
-                } catch (Exception ex) {
-                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-                    System.out.println(ex.getClass());
+        if(!(issue_name.getText().equals(""))){
+            if(!(issue_amount.getText().equals(""))){
+                if(!(issue_card_id.getText().equals(""))){
+                    int i = Integer.parseInt(issue_amount.getText());
+                    JOptionPane.showMessageDialog(null, "Card Updated Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                    issue_amount.setText("");
+                    issue_name.setText("");
+                    issue_card_id.setText("");
+                    try {
+                        User.issue_card(issue_name.getText(), issue_amount.getText(), issue_card_id.getText(), User.id,"asd2021");
+                    } catch (Exception ex) {
+                        Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                        System.out.println(ex.getClass());
+                    }
+                    issue_onlyno.setVisible(false);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Please enter the card ID", "Message", JOptionPane.ERROR_MESSAGE);
                 }
-                issue_onlyno.setVisible(false);
+            }else{
+                JOptionPane.showMessageDialog(null, "Please enter the amount in LKR", "Message", JOptionPane.ERROR_MESSAGE);
             }
-        //}catch(Exception e){
-        //    System.out.println("Error");
-        //}
+        }else{
+            JOptionPane.showMessageDialog(null, "Please enter the customer's name", "Message", JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_btn_issue_submitActionPerformed
 
@@ -1131,7 +1144,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_logout3MouseClicked
 
     private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
-        token = "";
+        User.token = "";
         Toolbar.setVisible(false);
         issue_card.setVisible(false);
         login.setVisible(true);
@@ -1173,20 +1186,65 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_add_card_scanActionPerformed
 
     private void add_card_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_card_submitActionPerformed
-        try{
-            if(!(add_card_id.getText().equals(""))){
-                //boolean addCard = user.addCard(add_card_id.getText());
-                JOptionPane.showMessageDialog(null, "Card added Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-                //refund_card_id.setText("");
+        
+        if(!(add_card_id.getText().equals(""))){
+            if(add_card_id.getText().length()>3){
+                int val = 0;
+                try{
+                    val = User.addCard(add_card_id.getText());
+                }catch (Exception e) {
+                        e.printStackTrace();
+                }
+                switch (val) {
+                    case 1:
+                        JOptionPane.showMessageDialog(null, "Card added Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                    case 2:
+                        JOptionPane.showMessageDialog(null, "Sorry! Card is already added", "Error", JOptionPane.WARNING_MESSAGE);
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Some thing went wrong", "Error", JOptionPane.ERROR_MESSAGE);
+                        break;
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Card ID must contains more than 4 characters", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        }catch(Exception e){
-
+        }else{
+            JOptionPane.showMessageDialog(null, "Please enter the card ID", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_add_card_submitActionPerformed
 
     private void add_card_submit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_card_submit1ActionPerformed
-        JOptionPane.showMessageDialog(null, "Card Removed Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+        if(!(add_card_id.getText().equals(""))){
+            if(add_card_id.getText().length()>3){
+                int val = 0;
+                try{
+                    val = User.deleteCard(add_card_id.getText());
+                }catch (Exception e) {
+                        e.printStackTrace();
+                }
+                switch (val) {
+                    case 1:
+                        JOptionPane.showMessageDialog(null, "Card removed Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                    case 2:
+                        JOptionPane.showMessageDialog(null, "Sorry! Card is not exist", "Error", JOptionPane.WARNING_MESSAGE);
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Some thing went wrong", "Error", JOptionPane.ERROR_MESSAGE);
+                        break;
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Card ID must contains more than 4 characters", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Please enter the card ID", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_add_card_submit1ActionPerformed
+
+    private void login_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_emailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_login_emailActionPerformed
 
     /**
      * @param args the command line arguments
