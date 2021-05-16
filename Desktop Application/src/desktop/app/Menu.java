@@ -60,6 +60,8 @@ public class Menu extends javax.swing.JFrame {
         Taskbar = new javax.swing.JPanel();
         javax.swing.JLabel close = new javax.swing.JLabel();
         javax.swing.JLabel minimize = new javax.swing.JLabel();
+        Header = new javax.swing.JLabel();
+        icon = new javax.swing.JLabel();
         Toolbar = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         logout = new javax.swing.JLabel();
@@ -223,12 +225,21 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        Header.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Header.setText("Smart Payment System");
+
+        icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/money.png"))); // NOI18N
+
         javax.swing.GroupLayout TaskbarLayout = new javax.swing.GroupLayout(Taskbar);
         Taskbar.setLayout(TaskbarLayout);
         TaskbarLayout.setHorizontalGroup(
             TaskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TaskbarLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
+                .addComponent(icon)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(minimize, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(close, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -236,8 +247,14 @@ public class Menu extends javax.swing.JFrame {
         );
         TaskbarLayout.setVerticalGroup(
             TaskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(minimize, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+            .addComponent(minimize, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(close, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(TaskbarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(TaskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(icon)
+                    .addComponent(Header))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         Toolbar.setBackground(new java.awt.Color(39, 39, 39));
@@ -654,7 +671,7 @@ public class Menu extends javax.swing.JFrame {
         loginLayout.setVerticalGroup(
             loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loginLayout.createSequentialGroup()
-                .addContainerGap(213, Short.MAX_VALUE)
+                .addContainerGap(223, Short.MAX_VALUE)
                 .addGroup(loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(login_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -915,25 +932,25 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 37, Short.MAX_VALUE)
+                    .addGap(0, 56, Short.MAX_VALUE)
                     .addComponent(Toolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(issue_card, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 36, Short.MAX_VALUE)
+                    .addGap(0, 55, Short.MAX_VALUE)
                     .addComponent(recharge_card, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 40, Short.MAX_VALUE)
+                    .addGap(0, 59, Short.MAX_VALUE)
                     .addComponent(refund_card, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 32, Short.MAX_VALUE)
+                    .addGap(0, 51, Short.MAX_VALUE)
                     .addComponent(setting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 31, Short.MAX_VALUE)
+                    .addGap(0, 50, Short.MAX_VALUE)
                     .addComponent(add_card, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
@@ -1349,6 +1366,7 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Header;
     private javax.swing.JPanel Taskbar;
     private javax.swing.JPanel Toolbar;
     private javax.swing.JPanel add_card;
@@ -1361,6 +1379,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btn_login;
     private javax.swing.JButton btn_recharge_scan;
     private javax.swing.JButton btn_recharge_submit;
+    private javax.swing.JLabel icon;
     private javax.swing.JTextField issue_amount;
     private javax.swing.JPanel issue_card;
     private javax.swing.JTextField issue_card_id;
