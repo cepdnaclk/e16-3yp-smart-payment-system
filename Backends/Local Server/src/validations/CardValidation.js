@@ -32,7 +32,7 @@ module.exports = {
         customer_name: Joi.string()
             .required(),
         time: Joi.string(),
-        data: Joi.date(),
+        date: Joi.date(),
         tag:Joi.string().required()
 
       }),
