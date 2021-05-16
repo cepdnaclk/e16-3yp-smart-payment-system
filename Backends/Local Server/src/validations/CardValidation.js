@@ -25,14 +25,11 @@ module.exports = {
         amount :Joi.number()
             .required()
             .min(0),
-        is_issued : Joi.boolean()
-            .required(),
         employee_id : Joi.string()
             .required(),
         customer_name: Joi.string()
             .required(),
-        time: Joi.string(),
-        date: Joi.date(),
+       
         tag:Joi.string().required()
 
       }),
@@ -43,7 +40,7 @@ module.exports = {
         node_id :Joi.string()
             .required()
             .min(0),
-        // tag : Joi.string(),
+        tag : Joi.string().required(),
 
       }),
     },

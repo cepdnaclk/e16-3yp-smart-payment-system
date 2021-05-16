@@ -79,7 +79,7 @@ exports.login = async (req, res, next) => {
             // permission given to log in
             //else {
               const user = {
-                id : result[0].Security_ID,
+                id : result[0].NIC,
                 role : result[0].Role,
                 name: `${result[0].FName} ${result[0].LName}`,
               }

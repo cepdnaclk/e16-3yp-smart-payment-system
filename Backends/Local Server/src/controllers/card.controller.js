@@ -88,9 +88,7 @@ exports.issueCard = async(req,res,next)=>{
     const details = {
       card_id: req.body.card_id,
       amount : req.body.amount,
-      time: req.body.time,
-      date: req.body.date,
-      is_issued :req.body.is_issued,
+      is_issued :true,
       employee_id :req.body.employee_id,
       customer_name: req.body.customer_name,
       tag : req.body.tag
@@ -110,7 +108,7 @@ exports.issueCard = async(req,res,next)=>{
               }
            })
           } else {
-              console.log("test 1");
+             
               return res.status(httpStatus.BAD_REQUEST).json({Error: err})
           }
         })
