@@ -50,7 +50,12 @@ exports.cardIssueing = async (card, callback) => {
 
 exports.addtoIssuelog = async(details,callback)=>{
   if(details){
-    const sql_addtoissuelog = `INSERT INTO ISSUE_LOG(CardId, NIC, CustomerName, DepositAmount) VALUES ('${details.card_id}','${details.employee_id}','${details.customer_name}','${details.amount}');`
+    let ts = Date.now();
+    let date_ob = new Date(ts);
+    let date = date_ob.getDate();
+    let month = date_ob.getMonth() + 1;
+    let year = date_ob.getFullYear();
+    const sql_addtoissuelog = `INSERT INTO ISSUE_LOG(CardId, NIC, CustomerName, DepositAmount,Date) VALUES ('${details.card_id}','${details.employee_id}','${details.customer_name}','${details.amount}','${year + "-" + month + "-" + date}');`
     await client.sendQuery(sql_addtoissuelog, (err, result) => {
       if(err) {
         
@@ -179,8 +184,8 @@ exports.cardScanning = async (details,callback)=>{
 
       await client.sendQuery(sql_findBalance, (err, result) => {
         if(err) {
-          console.error(`SQLQueryError: ${err.sqlMessage}`)
-          callback(err.code)
+          console.error(`SQLQueryError: ${err.code}`)
+          callback(err)
         } else {
           if (result[0]) {
               if(!result[0]['IsIssued']){
@@ -211,17 +216,13 @@ exports.cardScanning2 = async (details,callback)=>{
 
     await client.sendQuery(sql_findPrice, (err, result) => {
       if(err) {
-        console.error(`SQLQueryError: ${err.sqlMessage}`)
-        callback(err.code)
+        console.error(`SQLQueryError: ${err.code}`)
+        callback(err)
       } else {
-        if (result[0]) {
-           
-             
+        if (result[0]) {   
           callback(null,result)
-
         }
         else {
-        
           callback(Error("ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG NODE_ID"))
         }
       }
