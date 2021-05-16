@@ -390,9 +390,29 @@ public class Menu extends javax.swing.JFrame {
         jLabel5.setText("Card ID");
 
         issue_amount.setToolTipText("");
+        issue_amount.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                issue_amountComponentAdded(evt);
+            }
+        });
+        issue_amount.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                issue_amountInputMethodTextChanged(evt);
+            }
+        });
+        issue_amount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                issue_amountActionPerformed(evt);
+            }
+        });
         issue_amount.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 issue_amountKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                issue_amountKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 issue_amountKeyTyped(evt);
@@ -979,12 +999,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void issue_amountKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_issue_amountKeyPressed
-        try{
-            int i = Integer.parseInt(issue_amount.getText());
-            issue_onlyno.setVisible(false);
-        }catch(Exception e){
-            issue_onlyno.setVisible(true);
-        }
+        
     }//GEN-LAST:event_issue_amountKeyPressed
 
     private void issue_amountKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_issue_amountKeyTyped
@@ -1005,25 +1020,34 @@ public class Menu extends javax.swing.JFrame {
 
     private void btn_issue_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_issue_submitActionPerformed
         if(!(issue_name.getText().equals(""))){
-            if(!(issue_amount.getText().equals(""))){
+            if(!(issue_amount.getText().equals("")) && !(issue_onlyno.isVisible())){
                 if(!(issue_card_id.getText().equals(""))){
+                    int val = 0;
                     int i = Integer.parseInt(issue_amount.getText());
-                    JOptionPane.showMessageDialog(null, "Card Updated Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-                    issue_amount.setText("");
-                    issue_name.setText("");
-                    issue_card_id.setText("");
-                    try {
-                        User.issue_card(issue_name.getText(), issue_amount.getText(), issue_card_id.getText(), User.id,"asd2021");
-                    } catch (Exception ex) {
-                        Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-                        System.out.println(ex.getClass());
+                    try{
+                        val = User.issue_card(issue_name.getText(), i, issue_card_id.getText(), User.id,"asd2021");
+                    }catch (Exception e) {
+                            e.printStackTrace();
                     }
-                    issue_onlyno.setVisible(false);
+                    switch (val) {
+                        case 1:
+                            JOptionPane.showMessageDialog(null, "Card is ready to issue", "Message", JOptionPane.INFORMATION_MESSAGE);
+                            issue_amount.setText("");
+                            issue_name.setText("");
+                            issue_card_id.setText("");
+                            break;
+                        case 2:
+                            JOptionPane.showMessageDialog(null, "Sorry! Card is not exist", "Error", JOptionPane.WARNING_MESSAGE);
+                            break;
+                        default:
+                            JOptionPane.showMessageDialog(null, "Some thing went wrong", "Error", JOptionPane.ERROR_MESSAGE);
+                            break;
+                    }
                 }else{
                     JOptionPane.showMessageDialog(null, "Please enter the card ID", "Message", JOptionPane.ERROR_MESSAGE);
                 }
             }else{
-                JOptionPane.showMessageDialog(null, "Please enter the amount in LKR", "Message", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Please enter the valid amount in LKR", "Message", JOptionPane.ERROR_MESSAGE);
             }
         }else{
             JOptionPane.showMessageDialog(null, "Please enter the customer's name", "Message", JOptionPane.ERROR_MESSAGE);
@@ -1076,17 +1100,37 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_refund_scanActionPerformed
 
     private void refund_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refund_submitActionPerformed
-        try{
-            if(!(refund_card_id.getText().equals(""))){
-                //JOptionPane.showMessageDialog(null, "Card Updated Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-                //refund_card_id.setText("");
-                txt_refund.setText("Card refunded successfully!\n" +
-"--------------------------\n" +
-" Card Balance   -  Rs.170");
+        if(!(refund_card_id.getText().equals(""))){
+            if(refund_card_id.getText().length()>3){
+                int val = 0;
+                try{
+                    val = User.refundCard(add_card_id.getText());
+                }catch (Exception e) {
+                        e.printStackTrace();
+                }
+                switch (val) {
+                    case 1:
+                        txt_refund.setText("Card refunded successfully!\n" + "--------------------------\n" + " Card Balance   -  Rs.170");
+                        break;
+                    case 2:
+                        JOptionPane.showMessageDialog(null, "Sorry! Card is not exist", "Error", JOptionPane.WARNING_MESSAGE);
+                        break;
+                    case 3:
+                        JOptionPane.showMessageDialog(null, "Card is not issued yet", "Error", JOptionPane.WARNING_MESSAGE);
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Some thing went wrong", "Error", JOptionPane.ERROR_MESSAGE);
+                        break;
+                }
+                
+            }else{
+                JOptionPane.showMessageDialog(null, "Card ID must contains minimum 4 4 characters", "Message", JOptionPane.ERROR_MESSAGE);
             }
-        }catch(Exception e){
-
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Please enter the card ID", "Message", JOptionPane.ERROR_MESSAGE);
         }
+        
     }//GEN-LAST:event_refund_submitActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -1198,6 +1242,7 @@ public class Menu extends javax.swing.JFrame {
                 switch (val) {
                     case 1:
                         JOptionPane.showMessageDialog(null, "Card added Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                        add_card_id.setText("");
                         break;
                     case 2:
                         JOptionPane.showMessageDialog(null, "Sorry! Card is already added", "Error", JOptionPane.WARNING_MESSAGE);
@@ -1207,7 +1252,7 @@ public class Menu extends javax.swing.JFrame {
                         break;
                 }
             }else{
-                JOptionPane.showMessageDialog(null, "Card ID must contains more than 4 characters", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Card ID must contains minimum 4 characters", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }else{
             JOptionPane.showMessageDialog(null, "Please enter the card ID", "Error", JOptionPane.ERROR_MESSAGE);
@@ -1226,6 +1271,7 @@ public class Menu extends javax.swing.JFrame {
                 switch (val) {
                     case 1:
                         JOptionPane.showMessageDialog(null, "Card removed Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                        add_card_id.setText("");
                         break;
                     case 2:
                         JOptionPane.showMessageDialog(null, "Sorry! Card is not exist", "Error", JOptionPane.WARNING_MESSAGE);
@@ -1235,7 +1281,7 @@ public class Menu extends javax.swing.JFrame {
                         break;
                 }
             }else{
-                JOptionPane.showMessageDialog(null, "Card ID must contains more than 4 characters", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Card ID must contains minimum 4 characters", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }else{
             JOptionPane.showMessageDialog(null, "Please enter the card ID", "Error", JOptionPane.ERROR_MESSAGE);
@@ -1245,6 +1291,27 @@ public class Menu extends javax.swing.JFrame {
     private void login_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_emailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_login_emailActionPerformed
+
+    private void issue_amountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_issue_amountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_issue_amountActionPerformed
+
+    private void issue_amountComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_issue_amountComponentAdded
+        
+    }//GEN-LAST:event_issue_amountComponentAdded
+
+    private void issue_amountInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_issue_amountInputMethodTextChanged
+
+    }//GEN-LAST:event_issue_amountInputMethodTextChanged
+
+    private void issue_amountKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_issue_amountKeyReleased
+        try{
+            int i = Integer.parseInt(issue_amount.getText());
+            issue_onlyno.setVisible(false);
+        }catch(Exception e){
+            issue_onlyno.setVisible(true);
+        }
+    }//GEN-LAST:event_issue_amountKeyReleased
 
     /**
      * @param args the command line arguments
