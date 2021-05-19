@@ -14,7 +14,7 @@ module.exports = {
         card_id : Joi.string()
             .required()
             .min(4),
-        refund_amount :Joi.number()
+        refund_amount :Joi.string()
             .required()
             .min(0)    
       }),
@@ -22,7 +22,7 @@ module.exports = {
         card_id : Joi.string()
             .required()
             .min(4),
-        amount :Joi.number()
+        amount :Joi.string()
             .required()
             .min(0),
         employee_id : Joi.string()
