@@ -26,8 +26,16 @@ exports.cardAdding = async (card, callback) => {
 exports.cardIssueing = async (card, callback) => {
   if (card) {
     // sql query to register a user
+    let ts = Date.now();
+    let date_ob = new Date(ts);
+    let date = date_ob.getDate();
+    let month = date_ob.getMonth() + 1;
+    let year = date_ob.getFullYear();
+    let hours = date_ob.getHours();
+    let minutes = date_ob.getMinutes();
+    let seconds = date_ob.getSeconds();
     console.log(card)
-    const sql_issue_card = `UPDATE RFID_Card SET IsIssued = ${card.is_issued}, Amount = ${card.amount}, CustomerName = '${card.customer_name}', EmployeeId  = '${card.employee_id}' WHERE CardId =  '${card.card_id}';`
+    const sql_issue_card = `UPDATE RFID_Card SET IsIssued = ${card.is_issued}, Amount = ${card.amount}, CustomerName = '${card.customer_name}',SecurityTag = '${card.tag}' ,EmployeeId  = '${card.employee_id}',date = '${year + "-" + month + "-" + date}',time = '${hours + ":" + minutes + ":" + seconds}' WHERE CardId =  '${card.card_id}';`
     
     // executing the query
     await client.sendQuery(sql_issue_card, (err, result) => {
@@ -50,7 +58,15 @@ exports.cardIssueing = async (card, callback) => {
 
 exports.addtoIssuelog = async(details,callback)=>{
   if(details){
-    const sql_addtoissuelog = `INSERT INTO ISSUE_LOG(CardId, NIC, CustomerName, DepositAmount) VALUES ('${details.card_id}','${details.employee_id}','${details.customer_name}','${details.amount}');`
+    let ts = Date.now();
+    let date_ob = new Date(ts);
+    let date = date_ob.getDate();
+    let month = date_ob.getMonth() + 1;
+    let year = date_ob.getFullYear();
+    let hours = date_ob.getHours();
+    let minutes = date_ob.getMinutes();
+    let seconds = date_ob.getSeconds();
+    const sql_addtoissuelog = `INSERT INTO ISSUE_LOG(CardId, NIC, CustomerName, DepositAmount,Date,time) VALUES ('${details.card_id}','${details.employee_id}','${details.customer_name}','${details.amount}','${year + "-" + month + "-" + date}','${hours + ":" + minutes + ":" + seconds}');`
     await client.sendQuery(sql_addtoissuelog, (err, result) => {
       if(err) {
         
@@ -159,8 +175,16 @@ exports.cardReturning = async (details,callback)=>{
 
 
 exports.addtolog = async(details,callback)=>{
+    let ts = Date.now();
+    let date_ob = new Date(ts);
+    let date = date_ob.getDate();
+    let month = date_ob.getMonth() + 1;
+    let year = date_ob.getFullYear();
+    let hours = date_ob.getHours();
+    let minutes = date_ob.getMinutes();
+    let seconds = date_ob.getSeconds();
     if(details){
-      const sql_addtolog = `INSERT INTO GAMING_LOG(CardId, NodeId) VALUES ('${details.card_id}',${details.node_id});`
+      const sql_addtolog = `INSERT INTO GAMING_LOG(CardId, NodeId, Date,time) VALUES ('${details.card_id}','${details.node_id}','${year + "-" + month + "-" + date}','${hours + ":" + minutes + ":" + seconds}');`
       await client.sendQuery(sql_addtolog, (err, result) => {
         if(err) {
           
@@ -175,23 +199,26 @@ exports.addtolog = async(details,callback)=>{
 }
 exports.cardScanning = async (details,callback)=>{
     if(details){
-      const sql_findBalance = `SELECT CustomerName,Amount from RFID_Card WHERE CardId =  '${details.card_id}';`
+      const sql_findBalance = `SELECT CustomerName,Amount,IsIssued,SecurityTag from RFID_Card WHERE CardId =  '${details.card_id}';`
 
       await client.sendQuery(sql_findBalance, (err, result) => {
         if(err) {
-          console.error(`SQLQueryError: ${err.sqlMessage}`)
-          callback(err.code)
+          console.error(`SQLQueryError: ${err.code}`)
+          callback(err)
         } else {
           if (result[0]) {
-            
-          
-            callback(null,result)
-
-
-          }
-          else {
+              if(!result[0]['IsIssued']){
+                   callback(Error("UNAUTHORIZED CARD"))
+              }else{
+                callback(null,result)
+              }
             
          
+          }
+        
+          else {
+            
+            
 
             callback(Error("ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG CARD_ID"));
           }
@@ -208,17 +235,13 @@ exports.cardScanning2 = async (details,callback)=>{
 
     await client.sendQuery(sql_findPrice, (err, result) => {
       if(err) {
-        console.error(`SQLQueryError: ${err.sqlMessage}`)
-        callback(err.code)
+        console.error(`SQLQueryError: ${err.code}`)
+        callback(err)
       } else {
-        if (result[0]) {
-           
-        
+        if (result[0]) {   
           callback(null,result)
-
         }
         else {
-        
           callback(Error("ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG NODE_ID"))
         }
       }

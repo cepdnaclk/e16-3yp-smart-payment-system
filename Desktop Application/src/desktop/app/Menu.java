@@ -17,11 +17,12 @@ import java.util.logging.Logger;
  *
  * @author Madusha Shanaka
  */
-public class Menu extends javax.swing.JFrame {
 
+public class Menu extends javax.swing.JFrame {
+    User user = new User();
     int mousepX;
     int mousepY;
-    public static String token = "";
+    
     public Menu() {
         initComponents();
         Toolkit toolkit = getToolkit();
@@ -36,6 +37,9 @@ public class Menu extends javax.swing.JFrame {
         refund_card.setVisible(false);
         setting.setVisible(false);
         add_card.setVisible(false);
+        //for ttesting purposes
+        login_email.setText("madusha@gmail.com");
+        login_password.setText("123456789");
     }
 
     /**
@@ -56,6 +60,8 @@ public class Menu extends javax.swing.JFrame {
         Taskbar = new javax.swing.JPanel();
         javax.swing.JLabel close = new javax.swing.JLabel();
         javax.swing.JLabel minimize = new javax.swing.JLabel();
+        Header = new javax.swing.JLabel();
+        icon = new javax.swing.JLabel();
         Toolbar = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         logout = new javax.swing.JLabel();
@@ -219,12 +225,21 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        Header.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Header.setText("Smart Payment System");
+
+        icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/money.png"))); // NOI18N
+
         javax.swing.GroupLayout TaskbarLayout = new javax.swing.GroupLayout(Taskbar);
         Taskbar.setLayout(TaskbarLayout);
         TaskbarLayout.setHorizontalGroup(
             TaskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TaskbarLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
+                .addComponent(icon)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(minimize, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(close, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -232,8 +247,14 @@ public class Menu extends javax.swing.JFrame {
         );
         TaskbarLayout.setVerticalGroup(
             TaskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(minimize, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+            .addComponent(minimize, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(close, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(TaskbarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(TaskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(icon)
+                    .addComponent(Header))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         Toolbar.setBackground(new java.awt.Color(39, 39, 39));
@@ -386,9 +407,29 @@ public class Menu extends javax.swing.JFrame {
         jLabel5.setText("Card ID");
 
         issue_amount.setToolTipText("");
+        issue_amount.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                issue_amountComponentAdded(evt);
+            }
+        });
+        issue_amount.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                issue_amountInputMethodTextChanged(evt);
+            }
+        });
+        issue_amount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                issue_amountActionPerformed(evt);
+            }
+        });
         issue_amount.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 issue_amountKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                issue_amountKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 issue_amountKeyTyped(evt);
@@ -577,6 +618,11 @@ public class Menu extends javax.swing.JFrame {
         jLabel2.setText("Password");
 
         login_email.setBorder(null);
+        login_email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                login_emailActionPerformed(evt);
+            }
+        });
 
         login_password.setToolTipText("");
         login_password.setBorder(null);
@@ -625,7 +671,7 @@ public class Menu extends javax.swing.JFrame {
         loginLayout.setVerticalGroup(
             loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loginLayout.createSequentialGroup()
-                .addContainerGap(213, Short.MAX_VALUE)
+                .addContainerGap(223, Short.MAX_VALUE)
                 .addGroup(loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(login_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -886,25 +932,25 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 40, Short.MAX_VALUE)
-                    .addComponent(Toolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(0, 56, Short.MAX_VALUE)
+                    .addComponent(Toolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(issue_card, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 36, Short.MAX_VALUE)
+                    .addGap(0, 55, Short.MAX_VALUE)
                     .addComponent(recharge_card, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 40, Short.MAX_VALUE)
+                    .addGap(0, 59, Short.MAX_VALUE)
                     .addComponent(refund_card, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 32, Short.MAX_VALUE)
+                    .addGap(0, 51, Short.MAX_VALUE)
                     .addComponent(setting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 31, Short.MAX_VALUE)
+                    .addGap(0, 50, Short.MAX_VALUE)
                     .addComponent(add_card, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
@@ -970,12 +1016,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void issue_amountKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_issue_amountKeyPressed
-        try{
-            int i = Integer.parseInt(issue_amount.getText());
-            issue_onlyno.setVisible(false);
-        }catch(Exception e){
-            issue_onlyno.setVisible(true);
-        }
+        
     }//GEN-LAST:event_issue_amountKeyPressed
 
     private void issue_amountKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_issue_amountKeyTyped
@@ -995,17 +1036,38 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_issue_scanActionPerformed
 
     private void btn_issue_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_issue_submitActionPerformed
-        try{
-            if(!(issue_amount.getText().equals("") || issue_name.getText().equals("") || issue_card_id.getText().equals(""))){
-                int i = Integer.parseInt(issue_amount.getText());
-                JOptionPane.showMessageDialog(null, "Card Updated Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-                issue_amount.setText("");
-                issue_name.setText("");
-                issue_card_id.setText("");
-                issue_onlyno.setVisible(false);
+        if(!(issue_name.getText().equals(""))){
+            if(!(issue_amount.getText().equals("")) && !(issue_onlyno.isVisible())){
+                if(!(issue_card_id.getText().equals(""))){
+                    int val = 0;
+                    int i = Integer.parseInt(issue_amount.getText());
+                    try{
+                        val = User.issue_card(issue_name.getText(), i, issue_card_id.getText(), User.id,"asd2021");
+                    }catch (Exception e) {
+                            e.printStackTrace();
+                    }
+                    switch (val) {
+                        case 1:
+                            JOptionPane.showMessageDialog(null, "Card is ready to issue", "Message", JOptionPane.INFORMATION_MESSAGE);
+                            issue_amount.setText("");
+                            issue_name.setText("");
+                            issue_card_id.setText("");
+                            break;
+                        case 2:
+                            JOptionPane.showMessageDialog(null, "Sorry! Card is not exist", "Error", JOptionPane.WARNING_MESSAGE);
+                            break;
+                        default:
+                            JOptionPane.showMessageDialog(null, "Some thing went wrong", "Error", JOptionPane.ERROR_MESSAGE);
+                            break;
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Please enter the card ID", "Message", JOptionPane.ERROR_MESSAGE);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Please enter the valid amount in LKR", "Message", JOptionPane.ERROR_MESSAGE);
             }
-        }catch(Exception e){
-
+        }else{
+            JOptionPane.showMessageDialog(null, "Please enter the customer's name", "Message", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_btn_issue_submitActionPerformed
@@ -1055,17 +1117,37 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_refund_scanActionPerformed
 
     private void refund_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refund_submitActionPerformed
-        try{
-            if(!(refund_card_id.getText().equals(""))){
-                //JOptionPane.showMessageDialog(null, "Card Updated Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-                //refund_card_id.setText("");
-                txt_refund.setText("Card refunded successfully!\n" +
-"--------------------------\n" +
-" Card Balance   -  Rs.170");
+        if(!(refund_card_id.getText().equals(""))){
+            if(refund_card_id.getText().length()>3){
+                int val = 0;
+                try{
+                    val = User.refundCard(add_card_id.getText());
+                }catch (Exception e) {
+                        e.printStackTrace();
+                }
+                switch (val) {
+                    case 1:
+                        txt_refund.setText("Card refunded successfully!\n" + "--------------------------\n" + " Card Balance   -  Rs.170");
+                        break;
+                    case 2:
+                        JOptionPane.showMessageDialog(null, "Sorry! Card is not exist", "Error", JOptionPane.WARNING_MESSAGE);
+                        break;
+                    case 3:
+                        JOptionPane.showMessageDialog(null, "Card is not issued yet", "Error", JOptionPane.WARNING_MESSAGE);
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Some thing went wrong", "Error", JOptionPane.ERROR_MESSAGE);
+                        break;
+                }
+                
+            }else{
+                JOptionPane.showMessageDialog(null, "Card ID must contains minimum 4 4 characters", "Message", JOptionPane.ERROR_MESSAGE);
             }
-        }catch(Exception e){
-
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Please enter the card ID", "Message", JOptionPane.ERROR_MESSAGE);
         }
+        
     }//GEN-LAST:event_refund_submitActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -1123,7 +1205,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_logout3MouseClicked
 
     private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
-        token = "";
+        User.token = "";
         Toolbar.setVisible(false);
         issue_card.setVisible(false);
         login.setVisible(true);
@@ -1136,11 +1218,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Password Updated Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Email Updated Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
@@ -1165,19 +1247,88 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_add_card_scanActionPerformed
 
     private void add_card_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_card_submitActionPerformed
-        try{
-            if(!(refund_card_id.getText().equals(""))){
-                JOptionPane.showMessageDialog(null, "Card added Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-                //refund_card_id.setText("");
+        
+        if(!(add_card_id.getText().equals(""))){
+            if(add_card_id.getText().length()>3){
+                int val = 0;
+                try{
+                    val = User.addCard(add_card_id.getText());
+                }catch (Exception e) {
+                        e.printStackTrace();
+                }
+                switch (val) {
+                    case 1:
+                        JOptionPane.showMessageDialog(null, "Card added Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                        add_card_id.setText("");
+                        break;
+                    case 2:
+                        JOptionPane.showMessageDialog(null, "Sorry! Card is already added", "Error", JOptionPane.WARNING_MESSAGE);
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Some thing went wrong", "Error", JOptionPane.ERROR_MESSAGE);
+                        break;
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Card ID must contains minimum 4 characters", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        }catch(Exception e){
-
+        }else{
+            JOptionPane.showMessageDialog(null, "Please enter the card ID", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_add_card_submitActionPerformed
 
     private void add_card_submit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_card_submit1ActionPerformed
-        // TODO add your handling code here:
+        if(!(add_card_id.getText().equals(""))){
+            if(add_card_id.getText().length()>3){
+                int val = 0;
+                try{
+                    val = User.deleteCard(add_card_id.getText());
+                }catch (Exception e) {
+                        e.printStackTrace();
+                }
+                switch (val) {
+                    case 1:
+                        JOptionPane.showMessageDialog(null, "Card removed Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                        add_card_id.setText("");
+                        break;
+                    case 2:
+                        JOptionPane.showMessageDialog(null, "Sorry! Card is not exist", "Error", JOptionPane.WARNING_MESSAGE);
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Some thing went wrong", "Error", JOptionPane.ERROR_MESSAGE);
+                        break;
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Card ID must contains minimum 4 characters", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Please enter the card ID", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_add_card_submit1ActionPerformed
+
+    private void login_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_emailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_login_emailActionPerformed
+
+    private void issue_amountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_issue_amountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_issue_amountActionPerformed
+
+    private void issue_amountComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_issue_amountComponentAdded
+        
+    }//GEN-LAST:event_issue_amountComponentAdded
+
+    private void issue_amountInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_issue_amountInputMethodTextChanged
+
+    }//GEN-LAST:event_issue_amountInputMethodTextChanged
+
+    private void issue_amountKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_issue_amountKeyReleased
+        try{
+            int i = Integer.parseInt(issue_amount.getText());
+            issue_onlyno.setVisible(false);
+        }catch(Exception e){
+            issue_onlyno.setVisible(true);
+        }
+    }//GEN-LAST:event_issue_amountKeyReleased
 
     /**
      * @param args the command line arguments
@@ -1215,6 +1366,7 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Header;
     private javax.swing.JPanel Taskbar;
     private javax.swing.JPanel Toolbar;
     private javax.swing.JPanel add_card;
@@ -1227,6 +1379,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btn_login;
     private javax.swing.JButton btn_recharge_scan;
     private javax.swing.JButton btn_recharge_submit;
+    private javax.swing.JLabel icon;
     private javax.swing.JTextField issue_amount;
     private javax.swing.JPanel issue_card;
     private javax.swing.JTextField issue_card_id;

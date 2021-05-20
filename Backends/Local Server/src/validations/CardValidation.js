@@ -14,7 +14,7 @@ module.exports = {
         card_id : Joi.string()
             .required()
             .min(4),
-        refund_amount :Joi.number()
+        refund_amount :Joi.string()
             .required()
             .min(0)    
       }),
@@ -22,17 +22,15 @@ module.exports = {
         card_id : Joi.string()
             .required()
             .min(4),
-        amount :Joi.number()
+        amount :Joi.string()
             .required()
             .min(0),
-        is_issued : Joi.boolean()
-            .required(),
         employee_id : Joi.string()
             .required(),
         customer_name: Joi.string()
             .required(),
-        time: Joi.string(),
-        data: Joi.date()
+       
+        tag:Joi.string().required()
 
       }),
       cardScanSchema : Joi.object().keys({  
@@ -42,7 +40,7 @@ module.exports = {
         node_id :Joi.string()
             .required()
             .min(0),
-        // tag : Joi.string(),
+        tag : Joi.string().required(),
 
       }),
     },

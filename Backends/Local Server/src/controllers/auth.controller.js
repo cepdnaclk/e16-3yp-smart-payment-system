@@ -1,3 +1,4 @@
+
 'use strict'
 
 const config = require('../config')
@@ -72,13 +73,13 @@ exports.login = async (req, res, next) => {
           } else {
 
             // user account is not activated *** have some issues ***
-            if (!result[0].Active)
-              return res.status(httpStatus.UNAUTHORIZED).json({Error : `User account ${req.body.email} is not activated!`})
+            //if (!result[0].Active)
+            //  return res.status(httpStatus.UNAUTHORIZED).json({Error : `User account ${req.body.email} is not activated!`})
 
             // permission given to log in
             //else {
               const user = {
-                id : result[0].Security_ID,
+                id : result[0].NIC,
                 role : result[0].Role,
                 name: `${result[0].FName} ${result[0].LName}`,
               }
@@ -113,4 +114,5 @@ exports.logout = async (req, res, next) => {
   } catch (err) {
     return next(err)
   }
+
 }
