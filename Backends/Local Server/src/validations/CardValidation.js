@@ -16,7 +16,8 @@ module.exports = {
             .min(4),
         refund_amount :Joi.string()
             .required()
-            .min(0)    
+            .min(0),
+            tag:Joi.string().required()    
       }),
       cardIssueSchema : Joi.object().keys({  
         card_id : Joi.string()

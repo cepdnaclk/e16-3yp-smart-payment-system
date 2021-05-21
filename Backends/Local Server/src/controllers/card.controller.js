@@ -36,7 +36,8 @@ exports.rechargeCard = async (req, res, next) => {
   try {
     const details = {
       card_id: req.body.card_id,
-      refund_amount: Number(req.body.refund_amount)
+      refund_amount: parseFloat(req.body.refund_amount),
+      tag : req.body.tag
     }
 
   
