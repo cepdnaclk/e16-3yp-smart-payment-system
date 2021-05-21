@@ -36,7 +36,7 @@ exports.rechargeCard = async (req, res, next) => {
   try {
     const details = {
       card_id: req.body.card_id,
-      refund_amount: req.body.refund_amount
+      refund_amount: Number(req.body.refund_amount)
     }
 
   
@@ -87,7 +87,7 @@ exports.issueCard = async(req,res,next)=>{
   try{
     const details = {
       card_id: req.body.card_id,
-      amount : req.body.amount,
+      amount : Number(req.body.amount),
       is_issued :true,
       employee_id :req.body.employee_id,
       customer_name: req.body.customer_name,
