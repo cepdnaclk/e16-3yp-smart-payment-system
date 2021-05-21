@@ -9,6 +9,7 @@ import static java.lang.System.exit;
 import java.awt.Toolkit;
 import java.awt.Dimension;
 import java.io.IOException;
+import java.net.ConnectException;
 import java.util.logging.Level;
 import javax.swing.JOptionPane;
 import java.util.logging.Logger;
@@ -22,7 +23,7 @@ public class Menu extends javax.swing.JFrame {
     User user = new User();
     int mousepX;
     int mousepY;
-    
+    String security_tag = "";
     public Menu() {
         initComponents();
         Toolkit toolkit = getToolkit();
@@ -980,13 +981,13 @@ public class Menu extends javax.swing.JFrame {
         txt_error_login.setText("");
         try {
             if((!("".equals(login_email.getText()))) && (!("".equals(login_password.getText())))){
-                boolean val = false;
+                int val = 2; //Co0nnection failed
                 try{
                    val = User.login(login_email.getText(),login_password.getText());
                 }catch (Exception e) {
                     e.printStackTrace();
                 }
-                if(val){
+                if(val == 1){
                     Toolbar.setVisible(true);
                     issue_card.setVisible(true);
                     login.setVisible(false);
@@ -996,8 +997,12 @@ public class Menu extends javax.swing.JFrame {
                     add_card.setVisible(false);
                     issue_onlyno.setVisible(false);
                     recharge_onlyno.setVisible(false);
-                }else{
+                }else if (val == 0){
                     txt_error_login.setText("Invalid email or password");
+                }else if(val == 2){
+                    JOptionPane.showMessageDialog(null, "Server Connection failed", "Message", JOptionPane.ERROR_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Something went wrong", "Message", JOptionPane.ERROR_MESSAGE);
                 }
             }else{
                 txt_error_login.setText("Email or password can't be empty");
@@ -1027,12 +1032,20 @@ public class Menu extends javax.swing.JFrame {
         try {
             issue_card_id.setText("");
             Reader rdr = new Reader();
-            //JSerialComm01 card = new JSerialComm01();
-            //id = card.scan();
-            issue_card_id.setText(rdr.test());
-        } catch (IOException ex) {
+            String tmp = rdr.getID();
+            security_tag = tmp.substring(0,16);
+            System.out.println(security_tag);
+            issue_card_id.setText(tmp.substring(18,26));
+        } catch (Exception ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        /*try{
+            Writer writer = new Writer();
+            writer.pass("Madusha Shanaka");
+        }catch(Exception e){
+            System.out.println(e);
+        }*/
     }//GEN-LAST:event_btn_issue_scanActionPerformed
 
     private void btn_issue_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_issue_submitActionPerformed
@@ -1084,7 +1097,7 @@ public class Menu extends javax.swing.JFrame {
         try {
             recharge_card_id.setText("");
             Reader rdr = new Reader();
-            recharge_card_id.setText(rdr.test());
+            recharge_card_id.setText(rdr.getID());
         } catch (IOException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1109,7 +1122,7 @@ public class Menu extends javax.swing.JFrame {
             txt_refund.setText("");  
             refund_card_id.setText("");
             Reader rdr = new Reader();
-            refund_card_id.setText(rdr.test());
+            refund_card_id.setText(rdr.getID());
                   
         } catch (IOException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
@@ -1239,7 +1252,7 @@ public class Menu extends javax.swing.JFrame {
         try {
             add_card_id.setText("");
             Reader rdr = new Reader();
-            add_card_id.setText(rdr.test());
+            add_card_id.setText(rdr.getID());
                   
         } catch (IOException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);

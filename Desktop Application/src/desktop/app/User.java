@@ -7,6 +7,7 @@ package desktop.app;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -29,7 +30,8 @@ public class User {
    public static String token = "";
    public static String name = "";
    public static String id = "973131559V";
-   public static boolean login(String email,String pward) throws Exception {
+   
+   public static int login(String email,String pward) throws Exception {
        URL url = new URL("http://localhost:3000/api/login");
 
             StringBuilder postData = new StringBuilder();
@@ -52,14 +54,17 @@ public class User {
                 String header = new String(decoder.decode(chunks[0]));
                 String payload = new String(decoder.decode(chunks[1]));  
                 JSONObject json = new JSONObject(payload);
+                System.out.println(json);
                 //extrct the name
                 name = json.getString("name");
                 System.out.println("Hello,"+name);
+                
                 int res_code = res.responseCode;
-                return (res_code == 200);
+                return (res_code == 200)? 1:0;
             }catch(Exception e){
                 System.out.println(e);
-                return (false);
+                if(e instanceof ConnectException) return 2;
+                return 3;
             }
        
    }
