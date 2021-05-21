@@ -20,30 +20,38 @@ public class Reader {
     SerialPort ports[] = SerialPort.getCommPorts();
     String out = "";
     char code[] = {'M','a','d','u','s','h','a'};
-    String test() throws IOException{
+    String getID() throws IOException{
         SerialPort port = ports[0];
         port.openPort();
      
         port.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
         
-        OutputStream output = port.getOutputStream();
-        for(int j=0;j<code.length;j++){
+        //OutputStream output = port.getOutputStream();
+        //output.write("M".getBytes());
+        /*for(int j=0;j<code.length;j++){
             int k = code[j];
             output.write(k);
-        }
+        }*/
       
         InputStream in = port.getInputStream();
         in.skip(in.available());
         try
         {
-           for (int j = 0; j < 8; ++j){
+            
+            /*for (int j = 0; j < 16; ++j){
+              System.out.print((char)in.read());
+              //out = out+(char)in.read();
+              in.close();
+           }*/
+            
+           for (int j = 0; j < 26; ++j){
               //System.out.print((char)in.read());
               out = out+(char)in.read();
               in.close();
            }
         } catch (Exception e) { e.printStackTrace(); }
         port.closePort();
-        //System.out.println(out);
+        
         return out;
     }
 }

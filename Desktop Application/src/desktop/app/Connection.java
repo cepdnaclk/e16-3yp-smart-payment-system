@@ -34,6 +34,7 @@ public class Connection {
 	    for (int c; (c = in.read()) >= 0;)
 	        sb.append((char)c);
 	    String response = sb.toString();
+            
 	    System.out.println(response);
 	    JSONObject myResponse = new JSONObject(response.toString());
             Response res = new Response(conn.getResponseCode(),myResponse);
