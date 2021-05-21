@@ -1,6 +1,6 @@
 <template>
 <!-- If the user is logged in -->
-<div>
+<div v-if="$auth.loggedIn">
     <base-nav
       v-model="showMenu"
       class="navbar-absolute top-navbar"
@@ -68,7 +68,7 @@
           <template
             slot="title"
           >
-            <div class="photo"><img src="img/user.png" /></div>
+            <div class="photo"><img src="img/default-avatar.png" /></div>
             <!-- <div v-else><img src="img/default-avatar.png" /></div> -->
             <b class="caret d-none d-lg-block d-xl-block"></b>
             <p class="d-lg-none">User</p>
@@ -89,7 +89,7 @@
 </div>
 
 <!-- User does not logged in -->
-<!-- <div v-else>
+<div v-else>
   <base-nav
       v-model="showMenu"
       class="navbar-absolute top-navbar"
@@ -137,8 +137,9 @@
         </base-dropdown>
       </ul>
     </base-nav>
-</div> -->
+</div>
 </template>
+
 <script>
 import { CollapseTransition } from 'vue2-transitions';
 import { BaseNav, Modal } from '@/components';
