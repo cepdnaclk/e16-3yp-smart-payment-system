@@ -11,6 +11,9 @@
 #include <MFRC522.h>
 #include <ArduinoJson.h>
 
+//serial comuncation
+#include <SoftwareSerial.h>
+
 //LCD monitor
 #include <LiquidCrystal_I2C.h>
 #include <Wire.h>
@@ -41,7 +44,7 @@ int readBlock(int, byte[]);
 int writeBlock(int, byte[]);
 void lcd_screen1(String);
 void lcd_screen2(int balance);
-void lcd_toggler(bool input);
+void lcd_toggler(bool input1,bool input2);
 void lcd_init();
 void wifi_init();
 
@@ -52,6 +55,12 @@ unsigned long lastButtonPress = 0;
 bool isBalance = false;
 bool isBack = false;
 bool isScreen2 = false;
+
+
+//serial comunication
+SoftwareSerial softSerial(3, 1);
+char isStop ;
+//bool  = false;
 
 //this is the block number we will write into and then read.
 int block = 2;
@@ -79,6 +88,9 @@ void setup()
   lastStateCLK = digitalRead(CLK);
   //lcd monitor
   lcd_init();
+
+  //serial communication
+  //softSerial.begin(9600);
 
   //wifi
   wifi_init();
@@ -151,7 +163,7 @@ void loop()
     char JSON[80];
     sprintf(JSON, "{\"card_id\": \"%s\",\"node_id\": \"%s\",\"tag\":\"%s\"}", id.c_str(), NODE_ID, readbackblock);
 
-    Serial.print("[HTTP] POST...\n");
+    softSerial.print("[HTTP] POST...\n");
     // start connection and send HTTP header and body
 
     //sending the post request
@@ -167,13 +179,15 @@ void loop()
       if (httpCode == HTTP_CODE_OK)
       {
         const String &payload = http.getString();
-        Serial.println("received payload:\n<<");
+        softSerial.println("received payload:\n<<");
         // Serial.println(payload);
         StaticJsonDocument<100> doc; // <- a little more than 200 bytes in the stack
         deserializeJson(doc, payload);
         String name = doc["name"];
+        float balance = doc["amount"];
         lcd_screen1(name);
-
+        //softSerial.write("HIGHtest");
+        //isStop = ' ';
         while (true)
         {
           currentStateCLK = digitalRead(CLK);
@@ -190,22 +204,9 @@ void loop()
               isBalance = !isBalance;
             }
 
-            if (isBalance || isBack)
-            {
-              lcd.setCursor(0, 3);
-              lcd.print(">>");
-              lcd.setCursor(0, 0);
-              lcd.print("  ");
-            }
-            else
-            {
-              lcd.setCursor(0, 0);
-              lcd.print(">>");
-              lcd.setCursor(0, 3);
-              lcd.print("  ");
-            }
+          
             //Serial.println(digitalRead(DT));
-           // lcd_toggler(isBalance);
+           lcd_toggler(isBalance,isBack);
             
           }
           lastStateCLK = currentStateCLK;
@@ -225,7 +226,7 @@ void loop()
               {
                 isBalance = false;
                 lcd.clear();
-                lcd_screen2(2000);
+                lcd_screen2(balance);
                 isScreen2 = true;
               }
               if (isBack && isScreen2)
@@ -240,6 +241,19 @@ void loop()
             lastButtonPress = millis();
           }
           delay(10);
+          // if (softSerial.available())
+          // {
+          //   isStop=softSerial.read();
+          //    lcd.clear();
+          //    lcd.print(isStop);
+           
+          // }
+          //  if(isStop == 'a'){
+            
+          //    break;
+          //  }
+         
+          
         }
       
       }
@@ -276,10 +290,19 @@ void loop()
         lcd.setCursor(0, 1);
         lcd.print("Card is INVALID");
       }
+      else{
+        lcd.clear();
+        lcd.setCursor(0, 0);
+        lcd.print("Sorry,");
+        lcd.setCursor(0, 1);
+        lcd.print("Something went wrong");
+        lcd.setCursor(0, 2);
+        lcd.print("Please try again");
+      }
     }
     else
     {
-      Serial.printf("[HTTP] POST... failed, error: %s\n", http.getString().c_str());
+      softSerial.printf("[HTTP] POST... failed, error: %s\n", http.getString().c_str());
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print("Sorry,");
@@ -435,9 +458,9 @@ void lcd_screen2(int balance)
   lcd.print("Back");
 }
 
-void lcd_toggler(bool input)
+void lcd_toggler(bool input1,bool input2)
 {
-  if (input)
+  if (input1 || input2)
   {
     lcd.setCursor(0, 3);
     lcd.print(">>");

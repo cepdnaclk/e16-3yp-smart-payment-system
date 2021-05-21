@@ -130,7 +130,7 @@ exports.cardRecharging = async (card,callback)=>{
         }else{
          
           const current_amount = result[0]['Amount'];
-          await client.sendQuery(`UPDATE RFID_Card SET  Amount = '${card.refund_amount}'+'${current_amount}' WHERE CardId =  '${card.card_id}';`, (err, result) => {
+          await client.sendQuery(`UPDATE RFID_Card SET  Amount = '${card.refund_amount}'+'${current_amount}',SecurityTag = '${card.tag}'  WHERE CardId =  '${card.card_id}';`, (err, result) => {
             if(err) {
               console.error(`SQLQueryError: ${err.sqlMessage}`)
               callback(err.code)
