@@ -7,6 +7,7 @@ package desktop.app;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -14,6 +15,13 @@ import java.util.Base64;
 import javax.swing.JOptionPane;
 import org.json.JSONObject;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.CloseableHttpClient;
 /**
  *
  * @author Madusha Shanaka
@@ -22,7 +30,8 @@ public class User {
    public static String token = "";
    public static String name = "";
    public static String id = "973131559V";
-   public static boolean login(String email,String pward) throws Exception {
+   
+   public static int login(String email,String pward) throws Exception {
        URL url = new URL("http://localhost:3000/api/login");
 
             StringBuilder postData = new StringBuilder();
@@ -45,20 +54,48 @@ public class User {
                 String header = new String(decoder.decode(chunks[0]));
                 String payload = new String(decoder.decode(chunks[1]));  
                 JSONObject json = new JSONObject(payload);
+                System.out.println(json);
                 //extrct the name
                 name = json.getString("name");
                 System.out.println("Hello,"+name);
+                
                 int res_code = res.responseCode;
-                return (res_code == 200);
+                return (res_code == 200)? 1:0;
             }catch(Exception e){
                 System.out.println(e);
-                return (false);
+                if(e instanceof ConnectException) return 2;
+                return 3;
             }
        
    }
-   public static int issue_card(String name,String amount,String card_id,String employer_id,String security_tag) throws Exception {
+   
+   public static int issue_card(String name,int amount,String card_id,String employer_id,String security_tag) throws Exception {
+       URL url = new URL("http://localhost:3000/api/issueCard");
+       JSONObject json = new JSONObject();
+       json.put("card_id", card_id);  
+       json.put("amount", amount);  
+       json.put("employer_id", employer_id);  
+       json.put("customer_name", name);  
+       json.put("tag", security_tag);  
+       
+       CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+       
+       try {
+            HttpPost request = new HttpPost("http://localhost:3000/api/issueCard");
+            StringEntity params = new StringEntity(json.toString());
+            request.addHeader("content-type", "application/json");
+            request.setEntity(params);
+            HttpResponse  response = httpClient.execute(request);
+            System.out.println(response);        // handle response here...
+        } catch (Exception ex) {
+            // handle exception here
+        } finally {
+            httpClient.close();
+            return 0;
+        }
+   }
+   public static int issue_card1(String name,int amount,String card_id,String employer_id,String security_tag) throws Exception {
             URL url = new URL("http://localhost:3000/api/issueCard");
-            
             StringBuilder postData = new StringBuilder();
             
             postData.append(URLEncoder.encode("card_id", "UTF-8"));
@@ -68,12 +105,7 @@ public class User {
             postData.append('&');
             postData.append(URLEncoder.encode("amount", "UTF-8"));
 	    postData.append('=');
-	    postData.append(URLEncoder.encode((String) amount, "UTF-8"));
-            
-            postData.append('&');
-            postData.append(URLEncoder.encode("is_issued", "UTF-8"));
-	    postData.append('=');
-	    postData.append(URLEncoder.encode((String) "True", "UTF-8"));
+	    postData.append(URLEncoder.encode(String.valueOf(amount), "UTF-8"));
             
             postData.append('&');
             postData.append(URLEncoder.encode("employer_id", "UTF-8"));
@@ -90,14 +122,9 @@ public class User {
 	    postData.append('=');
 	    postData.append(URLEncoder.encode((String) security_tag, "UTF-8"));
             
-            postData.append('&');
-            postData.append(URLEncoder.encode("is_issued", "UTF-8"));
-	    postData.append('=');
-	    postData.append(URLEncoder.encode((String) "True", "UTF-8"));
-            
+            System.out.println(postData);
             Response res = Connection.connect(url, postData);
-	    
-	   
+            
             try{
                 int res_code = res.responseCode;
                 System.out.println(res.myResponse);
@@ -154,5 +181,9 @@ public class User {
             System.out.println(e.getMessage());
         }
         return 0;    
+    }
+
+    static int refundCard(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

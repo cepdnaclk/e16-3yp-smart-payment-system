@@ -60,9 +60,9 @@ This is the 3rd year embedded system project
 
     2. Cashier Application
     
- ![login](https://github.com/cepdnaclk/e16-3yp-smart-payment-system/blob/main/images/Desktop%20Application/login.PNG?raw=true)  
- ![issue card](https://github.com/cepdnaclk/e16-3yp-smart-payment-system/blob/main/images/Desktop%20Application/issue_card.PNG?raw=true)  
- ![add employer](https://github.com/cepdnaclk/e16-3yp-smart-payment-system/blob/main/images/Desktop%20Application/add_employer.PNG?raw=true)  
+ ![login](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/images/Desktop%20Application/login.PNG?raw=true)  
+ ![issue card](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/images/Desktop%20Application/issue_card.PNG?raw=true)  
+ ![change_details](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/images/Desktop%20Application/change_details.PNG?raw=true)  
 
     3. Web Application
     
