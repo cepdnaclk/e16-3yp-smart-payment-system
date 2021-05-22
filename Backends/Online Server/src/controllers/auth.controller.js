@@ -91,7 +91,8 @@ exports.getuser = async (req, res, next) => {
               nic : result[0].NIC,
               fname: result[0].FName,
               lname: result[0].LName,
-              role: result[0].Role
+              role: result[0].Role,
+              email: result[0].Email
             }
             return res.status(httpStatus.CREATED).json({user : usertmp})
           }

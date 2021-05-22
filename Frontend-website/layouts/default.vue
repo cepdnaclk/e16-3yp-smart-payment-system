@@ -53,7 +53,7 @@
     <sidebar-share :background-color.sync="sidebarBackground"> </sidebar-share>
     <div class="main-panel" :data="sidebarBackground">
       <dashboard-navbar></dashboard-navbar>
-      <router-view name="header"></router-view>
+      <!-- <router-view name="header"></router-view> -->
 
       <div
         :class="{ content: !isFullScreenRoute }"

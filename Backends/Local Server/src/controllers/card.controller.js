@@ -36,7 +36,8 @@ exports.rechargeCard = async (req, res, next) => {
   try {
     const details = {
       card_id: req.body.card_id,
-      refund_amount: Number(req.body.refund_amount)
+      refund_amount: parseFloat(req.body.refund_amount),
+      tag : req.body.tag
     }
 
   
@@ -87,7 +88,7 @@ exports.issueCard = async(req,res,next)=>{
   try{
     const details = {
       card_id: req.body.card_id,
-      amount : Number(req.body.amount),
+      amount : parseFloat(req.body.amount),
       is_issued :true,
       employee_id :req.body.employee_id,
       customer_name: req.body.customer_name,
@@ -97,7 +98,7 @@ exports.issueCard = async(req,res,next)=>{
 
     await card.cardState(details, async (err)=>{
       if (!err){
-       
+        console.log(details.amount);
         await card.cardIssueing(details, async (err)=>{
           if (!err) {
             await card.addtoIssuelog(details, async(err)=>{
@@ -162,7 +163,7 @@ exports.scanCard = async(req,res,next) =>{
                   }
                   await card.addtolog(log, async(err)=>{
                      if(!err){
-                       return res.status(httpStatus.OK).json({msg :"Hi You can play the game",name : balance[0]['CustomerName']})
+                       return res.status(httpStatus.OK).json({msg :"Hi You can play the game",name : balance[0]['CustomerName'],amount :newDetails.newAmount})
                      }else{
                       return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({msg :"Hi " +balance[0]['CustomerName'] + " Something went wrong please try again"})
                      }
