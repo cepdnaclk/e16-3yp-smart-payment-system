@@ -29,7 +29,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 public class User {
    public static String token = "";
    public static String name = "";
-   public static String id = "973131559V";
+   public static String id = "";
    
    public static int login(String email,String pward) throws Exception {
        URL url = new URL("http://localhost:3000/api/login");
@@ -54,9 +54,9 @@ public class User {
                 String header = new String(decoder.decode(chunks[0]));
                 String payload = new String(decoder.decode(chunks[1]));  
                 JSONObject json = new JSONObject(payload);
-                System.out.println(json);
                 //extrct the name
                 name = json.getString("name");
+                id = json.getString("id");
                 System.out.println("Hello,"+name);
                 
                 int res_code = res.responseCode;
