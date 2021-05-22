@@ -101,7 +101,7 @@ public class Menu extends javax.swing.JFrame {
         btn_login = new javax.swing.JButton();
         txt_error_login = new javax.swing.JLabel();
         refund_card = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
+        refund_result = new javax.swing.JLabel();
         refund_card_id = new javax.swing.JTextField();
         refund_scan = new javax.swing.JButton();
         refund_submit = new javax.swing.JButton();
@@ -444,7 +444,6 @@ public class Menu extends javax.swing.JFrame {
 
         issue_name.setToolTipText("");
 
-        issue_card_id.setEditable(false);
         issue_card_id.setToolTipText("");
 
         btn_issue_scan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -537,6 +536,9 @@ public class Menu extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 recharge_amountKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                recharge_amountKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 recharge_amountKeyTyped(evt);
             }
@@ -545,7 +547,6 @@ public class Menu extends javax.swing.JFrame {
         recharge_onlyno.setForeground(new java.awt.Color(255, 0, 0));
         recharge_onlyno.setText("You can enter numbers only!");
 
-        recharge_card_id.setEditable(false);
         recharge_card_id.setToolTipText("");
 
         btn_recharge_scan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -569,7 +570,9 @@ public class Menu extends javax.swing.JFrame {
         recharge_cardLayout.setHorizontalGroup(
             recharge_cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, recharge_cardLayout.createSequentialGroup()
-                .addContainerGap(265, Short.MAX_VALUE)
+                .addContainerGap(77, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(recharge_cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(recharge_card_id, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(recharge_onlyno, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -585,10 +588,7 @@ public class Menu extends javax.swing.JFrame {
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(recharge_cardLayout.createSequentialGroup()
                                     .addGap(275, 275, 275)
-                                    .addComponent(btn_recharge_scan))
-                                .addGroup(recharge_cardLayout.createSequentialGroup()
-                                    .addGap(2, 2, 2)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(btn_recharge_scan)))
                             .addGap(151, 151, 151)))
                     .addContainerGap(78, Short.MAX_VALUE)))
         );
@@ -599,16 +599,19 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(recharge_amount, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(recharge_onlyno)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(recharge_card_id, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(recharge_cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(recharge_cardLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(recharge_card_id, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(recharge_cardLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(recharge_cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(recharge_cardLayout.createSequentialGroup()
                     .addGap(186, 186, 186)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(44, 44, 44)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGap(92, 92, 92)
                     .addComponent(btn_recharge_scan)
                     .addGap(26, 26, 26)
                     .addComponent(btn_recharge_submit)
@@ -700,10 +703,9 @@ public class Menu extends javax.swing.JFrame {
 
         refund_card.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel8.setText("Card ID");
+        refund_result.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        refund_result.setText("Card ID");
 
-        refund_card_id.setEditable(false);
         refund_card_id.setToolTipText("");
 
         refund_scan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -741,7 +743,7 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, refund_cardLayout.createSequentialGroup()
                         .addGroup(refund_cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(refund_cardLayout.createSequentialGroup()
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(refund_result, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(refund_card_id, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(refund_cardLayout.createSequentialGroup()
@@ -760,7 +762,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(160, 160, 160)
                 .addGroup(refund_cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(refund_card_id, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(refund_result, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(refund_scan)
                 .addGap(26, 26, 26)
@@ -1052,27 +1054,35 @@ public class Menu extends javax.swing.JFrame {
         if(!(issue_name.getText().equals(""))){
             if(!(issue_amount.getText().equals("")) && !(issue_onlyno.isVisible())){
                 if(!(issue_card_id.getText().equals(""))){
-                    int val = 0;
-                    int i = Integer.parseInt(issue_amount.getText());
-                    try{
-                        val = User.issue_card(issue_name.getText(), i, issue_card_id.getText(), User.id,security_tag);
-                    }catch (Exception e) {
-                            e.printStackTrace();
-                    }
-                    switch (val) {
-                        case 1:
-                            JOptionPane.showMessageDialog(null, "Card is ready to issue", "Message", JOptionPane.INFORMATION_MESSAGE);
-                            issue_amount.setText("");
-                            issue_name.setText("");
-                            issue_card_id.setText("");
-                            security_tag = "";
-                            break;
-                        case 2:
-                            JOptionPane.showMessageDialog(null, "Sorry! Card is not exist", "Error", JOptionPane.WARNING_MESSAGE);
-                            break;
-                        default:
-                            JOptionPane.showMessageDialog(null, "Some thing went wrong", "Error", JOptionPane.ERROR_MESSAGE);
-                            break;
+                    if((issue_card_id.getText().length()>=4)){
+                        int val = 0;
+                        int i = Integer.parseInt(issue_amount.getText());
+                        try{
+                            val = User.issue_card(issue_name.getText(), i, issue_card_id.getText(), User.id,security_tag);
+                        }catch (Exception e) {
+                                e.printStackTrace();
+                        }
+                        switch (val) {
+                            case 201:
+                                JOptionPane.showMessageDialog(null, "Card is ready to issue", "Message", JOptionPane.INFORMATION_MESSAGE);
+                                issue_amount.setText("");
+                                issue_name.setText("");
+                                issue_card_id.setText("");
+                                issue_onlyno.setVisible(false);
+                                security_tag = "";
+                                break;
+                            case 500:
+                                JOptionPane.showMessageDialog(null, "Sorry! Card is not exist", "Error", JOptionPane.WARNING_MESSAGE);
+                                break;
+                            case 208:
+                                JOptionPane.showMessageDialog(null, "Sorry! Card is issued already", "Error", JOptionPane.WARNING_MESSAGE);
+                                break;
+                            default:
+                                JOptionPane.showMessageDialog(null, "Some thing went wrong", "Error", JOptionPane.ERROR_MESSAGE);
+                                break;
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Invalid card id. Must contain minimum 4 characters", "Message", JOptionPane.ERROR_MESSAGE);
                     }
                 }else{
                     JOptionPane.showMessageDialog(null, "Please scan the card", "Message", JOptionPane.ERROR_MESSAGE);
@@ -1098,24 +1108,54 @@ public class Menu extends javax.swing.JFrame {
         try {
             recharge_card_id.setText("");
             Reader rdr = new Reader();
-            recharge_card_id.setText(rdr.getID());
-        } catch (IOException ex) {
+            String tmp = rdr.getID();
+            security_tag = tmp.substring(0,16);
+            recharge_card_id.setText(tmp.substring(18,26));
+        } catch (Exception ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_recharge_scanActionPerformed
 
     private void btn_recharge_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_recharge_submitActionPerformed
-        try{
-            if(!(recharge_amount.getText().equals("") || recharge_card_id.getText().equals(""))){
-                int i = Integer.parseInt(recharge_amount.getText());
-                JOptionPane.showMessageDialog(null, "Card Updated Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-                recharge_amount.setText("");
-                recharge_card_id.setText("");
-                recharge_onlyno.setVisible(false);
+            if(!(recharge_amount.getText().equals("")) && !(recharge_onlyno.isVisible())){
+                if(!(recharge_card_id.getText().equals(""))){
+                    if((recharge_card_id.getText().length()>=4)){
+                        int val = 0;
+                        
+                        try{
+                            int i = Integer.parseInt(recharge_amount.getText());
+                            val = User.recharge_card(i, recharge_card_id.getText(), security_tag);
+                        }catch (Exception e) {
+                            System.out.println(e);
+                            //e.printStackTrace();
+                        }
+                        switch (val) {
+                            case 201:
+                                JOptionPane.showMessageDialog(null, "Card is succesfully recharged", "Message", JOptionPane.INFORMATION_MESSAGE);
+                                recharge_amount.setText("");
+                                recharge_card_id.setText("");
+                                recharge_onlyno.setVisible(false);
+                                security_tag = "";
+                                break;
+                            case 500:
+                                JOptionPane.showMessageDialog(null, "Sorry! Card is not exist", "Error", JOptionPane.WARNING_MESSAGE);
+                                break;
+                            case 400:
+                                JOptionPane.showMessageDialog(null, "Sorry! Card is issued already", "Error", JOptionPane.WARNING_MESSAGE);
+                                break;
+                            default:
+                                JOptionPane.showMessageDialog(null, "Some thing went wrong", "Error", JOptionPane.ERROR_MESSAGE);
+                                break;
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Invalid card id. Must contain minimum 4 characters", "Message", JOptionPane.ERROR_MESSAGE);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Please scan the card", "Message", JOptionPane.ERROR_MESSAGE);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Please enter the valid amount in LKR", "Message", JOptionPane.ERROR_MESSAGE);
             }
-        }catch(Exception e){
-
-        }
     }//GEN-LAST:event_btn_recharge_submitActionPerformed
 
     private void refund_scanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refund_scanActionPerformed
@@ -1123,7 +1163,9 @@ public class Menu extends javax.swing.JFrame {
             txt_refund.setText("");  
             refund_card_id.setText("");
             Reader rdr = new Reader();
-            refund_card_id.setText(rdr.getID());
+            String tmp = rdr.getID();
+            security_tag = "";
+            refund_card_id.setText(tmp.substring(18,26));
                   
         } catch (IOException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
@@ -1135,18 +1177,18 @@ public class Menu extends javax.swing.JFrame {
             if(refund_card_id.getText().length()>3){
                 int val = 0;
                 try{
-                    val = User.refundCard(add_card_id.getText());
+                    val = User.refundCard(refund_card_id.getText());
                 }catch (Exception e) {
                         e.printStackTrace();
                 }
                 switch (val) {
-                    case 1:
-                        txt_refund.setText("Card refunded successfully!\n" + "--------------------------\n" + " Card Balance   -  Rs.170");
+                    case 200:
+                        txt_refund.setText("Card refunded successfully!\n" + "--------------------------\n" + " Card Balance   -  Rs."+User.refund_amount);
                         break;
-                    case 2:
+                    case 500:
                         JOptionPane.showMessageDialog(null, "Sorry! Card is not exist", "Error", JOptionPane.WARNING_MESSAGE);
                         break;
-                    case 3:
+                    case 400:
                         JOptionPane.showMessageDialog(null, "Card is not issued yet", "Error", JOptionPane.WARNING_MESSAGE);
                         break;
                     default:
@@ -1222,6 +1264,7 @@ public class Menu extends javax.swing.JFrame {
         User.token = "";
         User.id = "";
         User.name = "";
+        User.refund_amount="";
         Toolbar.setVisible(false);
         issue_card.setVisible(false);
         login.setVisible(true);
@@ -1231,6 +1274,8 @@ public class Menu extends javax.swing.JFrame {
         add_card.setVisible(false);
         login_email.setText("");
         login_password.setText("");
+        refund_card_id.setText("");
+        refund_result.setText("");
     }//GEN-LAST:event_logoutMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1255,8 +1300,9 @@ public class Menu extends javax.swing.JFrame {
         try {
             add_card_id.setText("");
             Reader rdr = new Reader();
-            add_card_id.setText(rdr.getID());
-                  
+            String tmp = rdr.getID();
+            security_tag = tmp.substring(0,16);
+            add_card_id.setText(tmp.substring(18,26));        
         } catch (IOException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1350,6 +1396,15 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_recharge_card_menuActionPerformed
 
+    private void recharge_amountKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_recharge_amountKeyReleased
+        try{
+            int i = Integer.parseInt(recharge_amount.getText());
+            recharge_onlyno.setVisible(false);
+        }catch(Exception e){
+            recharge_onlyno.setVisible(true);
+        }
+    }//GEN-LAST:event_recharge_amountKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -1426,7 +1481,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
@@ -1452,6 +1506,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel refund_card;
     private javax.swing.JTextField refund_card_id;
     private javax.swing.JButton refund_card_menu;
+    private javax.swing.JLabel refund_result;
     private javax.swing.JButton refund_scan;
     private javax.swing.JButton refund_submit;
     private javax.swing.JPanel setting;
