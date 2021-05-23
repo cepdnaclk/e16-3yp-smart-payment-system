@@ -1,7 +1,7 @@
 <template>
-  <card>
+  <card style="width: 450px;">
     <h5 slot="header" class="title">Login Form</h5>
-    <form @submit.prevent="onSubmit" @reset="onReset">
+    <form @submit.prevent="onSubmit" @reset="onReset" style="width: 75rem;">
       <div class="col-md-6">
         <div class=row>
           <base-input
@@ -42,6 +42,7 @@
 
 <script>
   export default {
+    layout: 'normal',
     data() {
       return {
         form: {

@@ -7,8 +7,8 @@
       <div class="block block-three"></div>
       <div class="block block-four"></div>
       <a href="javascript:void(0)">
-        <div class="photo"><img class="avatar" src="img/user.png" alt="..." /></div>
-        <h5 class="title">Nadun Welikanda</h5>
+        <div class="photo"><img class="avatar" src="img/default-avatar.png" alt="..." /></div>
+        <h5 class="title">{{$auth.user.fname + ' ' +$auth.user.lname}}</h5>
       </a>
       <p class="description">Ceo/Co-Founder</p>
     </div>

@@ -101,7 +101,7 @@
           <base-input label="About Me">
             <textarea
               class="form-control"
-              placeholder="ZIP Code"
+              placeholder="Tell us something about you"
               v-model="user.aboutMe"
             >
             </textarea>
@@ -122,9 +122,9 @@ export default {
       user: {
         company: 'World Play - KCC',
         username: 'Nadun360',
-        email: 'e16389@eng.pdn.ac.lk',
-        firstName: 'Nadun',
-        lastName: 'Welikanda',
+        email: this.$auth.user.email,
+        firstName: this.$auth.user.fname,
+        lastName: this.$auth.user.lname,
         address: '687/3, Kalatuwagoda Waththa, Nagolla',
         city: 'Kegalle',
         country: 'Sri Lanka',
