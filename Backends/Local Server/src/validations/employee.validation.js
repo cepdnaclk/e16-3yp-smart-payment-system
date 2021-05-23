@@ -11,6 +11,14 @@ module.exports = {
       email : Joi.string().email().required(),
       password : Joi.string().regex(/[a-zA-Z0-9]{6,20}/).required()
 	}),
+	updatePasswordSchema : Joi.object().keys({
+		oldPassword : Joi.string().regex(/[a-zA-Z0-9]{6,20}/).required(),
+		newPassword : Joi.string().regex(/[a-zA-Z0-9]{6,20}/).required(),
+		NIC:Joi.string()
+		.max(11)
+		.min(10)
+		.required(),
+	}),
 	registerSchema : Joi.object().keys({
 		NIC:Joi.string()
 					.max(11)

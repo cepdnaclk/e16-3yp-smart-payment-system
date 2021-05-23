@@ -19,7 +19,7 @@ exports.addCard = async (req, res, next) => {
         return res.status(httpStatus.CREATED).json({msg : `card ${details.id} is added to the system`})
       } else {
         // Email already in the database
-        if(err == "ER_DUP_ENTRY")
+        if(err == "ZERO_ROWS_AFFECTED")
           return res.status(httpStatus.CONFLICT).json({Error: `card ${details.id} is already registered`})
         // Internal server error
         else
@@ -45,7 +45,11 @@ exports.rechargeCard = async (req, res, next) => {
       // sucesfully refunded the card
       if (!err) {
         return res.status(httpStatus.CREATED).json({msg : `card ${details.card_id} is succesfully refunded`})
-      } else {
+      } 
+      else if(err.message === "ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG CARD_ID"){
+        return res.status(httpStatus.BAD_REQUEST).json({Error: err.message})
+      }
+      else {
         // refunding was unsuccesfull
         return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err.message})
       }
@@ -72,7 +76,12 @@ exports.returnCard = async (req,res,next)=>{
             return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err.message})
           }
         })
-      }else{
+      }
+      else if(err.message === "ZERO_ROWS_AFFECTED POSSIBLY BECAUSE WRONG CARD_ID"){
+        return res.status(httpStatus.BAD_REQUEST).json({Error: err.message})
+      }
+      else{
+        console.log("test latest 2");
         return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err.message})
       } 
     });

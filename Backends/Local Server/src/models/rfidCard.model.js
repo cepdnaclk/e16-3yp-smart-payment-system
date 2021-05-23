@@ -39,7 +39,7 @@ exports.cardIssueing = async (card, callback) => {
     
     // executing the query
     await client.sendQuery(sql_issue_card, (err, result) => {
-      console.log("test 1")
+      
       if(err) {
         console.error(`SQLQueryError: ${err.sqlMessage}`)
 				callback(err.code)
