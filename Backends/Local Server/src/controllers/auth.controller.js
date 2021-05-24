@@ -54,6 +54,61 @@ exports.register = async (req, res, next) => {
 }
 
 
+
+exports.updatePassword = async (req,res,next)=>{
+  try {
+    // Find the user if exist
+    await user.findUserwithNic(req.body.NIC, async (err, result) => {
+      // There could be an internal server error
+      if(err){
+        if(err.message == "INSUFFICIENT DATA")
+            return res.status(httpStatus.BAD_REQUEST).json({Error: err.message})
+        return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err.message})
+      } else {
+        // Requested user is not in the database
+        if(result.length == 0) {
+          return res.status(httpStatus.UNAUTHORIZED).json({Error : `${req.body.NIC} is not a user`})
+        } 
+        else {
+    
+          if(!bcrypt.compareSync(req.body.oldPassword, result[0].Password)) {
+         
+            return res.status(httpStatus.UNAUTHORIZED).json({Error : `Old password doesn't match`})
+            // user/password are correct
+          } 
+          else {
+       
+ 
+                  const newPwd = bcrypt.hashSync(req.body.newPassword)
+                  const details = {
+                    NIC : result[0].NIC,
+                    newPwd : newPwd
+                  }
+
+                  await user.updatingPassword(details, async (err,result)=>{
+                 if(!err){
+                   
+                  return res.status(httpStatus.OK).json({msg : `Updated Succesfully`})
+                 }else{
+                  if(err.message == "ZERO_ROWS_AFFECTED")
+                      return res.status(httpStatus.BAD_REQUEST).json({Error: `Something went wrong`})
+                    // Internal server error
+                  else
+                      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({Error: err.message})
+               }
+            })
+           
+           }
+        }
+       }
+    })
+  } catch (err) {
+    return next(err)
+  }
+}
+
+
+
 exports.login = async (req, res, next) => {
   try {
     // Find the user if exist
