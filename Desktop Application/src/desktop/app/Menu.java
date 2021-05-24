@@ -39,6 +39,7 @@ public class Menu extends javax.swing.JFrame {
         setting.setVisible(false);
         add_card.setVisible(false);
         //for ttesting purposes
+        login_email.setFocusable(true);
         login_email.setText("madusha@gmail.com");
         login_password.setText("123456789");
     }
@@ -109,22 +110,14 @@ public class Menu extends javax.swing.JFrame {
         txt_refund = new javax.swing.JTextArea();
         setting = new javax.swing.JPanel();
         logout3 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
-        jPasswordField3 = new javax.swing.JPasswordField();
+        btn_change_password = new javax.swing.JButton();
+        old_password = new javax.swing.JPasswordField();
+        new_password = new javax.swing.JPasswordField();
+        confirm_new_password = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -443,6 +436,11 @@ public class Menu extends javax.swing.JFrame {
         });
 
         issue_name.setToolTipText("");
+        issue_name.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                issue_nameKeyPressed(evt);
+            }
+        });
 
         issue_card_id.setToolTipText("");
 
@@ -634,12 +632,22 @@ public class Menu extends javax.swing.JFrame {
                 login_emailActionPerformed(evt);
             }
         });
+        login_email.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                login_emailKeyPressed(evt);
+            }
+        });
 
         login_password.setToolTipText("");
         login_password.setBorder(null);
         login_password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 login_passwordActionPerformed(evt);
+            }
+        });
+        login_password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                login_passwordKeyPressed(evt);
             }
         });
 
@@ -783,20 +791,8 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel9.setText("Change the email");
-
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("Change the password");
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel11.setText("Old email");
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel12.setText("Confirm new email");
-
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel13.setText("New email");
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel14.setText("Old passwrod");
@@ -807,17 +803,28 @@ public class Menu extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel16.setText("Confirm new passwrod");
 
-        jButton1.setText("Change password");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_change_password.setText("Change password");
+        btn_change_password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_change_passwordActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Change email");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+        old_password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                old_passwordKeyPressed(evt);
+            }
+        });
+
+        new_password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                new_passwordKeyPressed(evt);
+            }
+        });
+
+        confirm_new_password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                confirm_new_passwordKeyPressed(evt);
             }
         });
 
@@ -831,78 +838,48 @@ public class Menu extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(logout3))
                     .addGroup(settingLayout.createSequentialGroup()
-                        .addGap(123, 123, 123)
-                        .addComponent(jLabel9))
-                    .addGroup(settingLayout.createSequentialGroup()
-                        .addGap(91, 91, 91)
+                        .addGap(109, 109, 109)
                         .addGroup(settingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(settingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel10)
                                 .addGroup(settingLayout.createSequentialGroup()
                                     .addGap(53, 53, 53)
                                     .addGroup(settingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jButton1)
+                                        .addComponent(btn_change_password)
                                         .addGroup(settingLayout.createSequentialGroup()
                                             .addGroup(settingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jLabel15)
                                                 .addComponent(jLabel14)
                                                 .addComponent(jLabel16))
                                             .addGap(423, 423, 423)))))
-                            .addGroup(settingLayout.createSequentialGroup()
-                                .addGroup(settingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel12))
-                                .addGap(30, 30, 30)
-                                .addGroup(settingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField1)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
-                                    .addComponent(jPasswordField1)
-                                    .addComponent(jPasswordField2)
-                                    .addComponent(jPasswordField3)))
-                            .addComponent(jButton5))))
-                .addContainerGap(173, Short.MAX_VALUE))
+                            .addGroup(settingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(old_password)
+                                .addComponent(new_password)
+                                .addComponent(confirm_new_password, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         settingLayout.setVerticalGroup(
             settingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(settingLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(logout3)
-                .addGap(41, 41, 41)
-                .addComponent(jLabel9)
-                .addGap(21, 21, 21)
-                .addGroup(settingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(settingLayout.createSequentialGroup()
-                        .addGroup(settingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel11)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(11, 11, 11)
-                        .addGroup(settingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel12))
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addComponent(jButton5)
-                .addGap(25, 25, 25)
+                .addGap(146, 146, 146)
                 .addComponent(jLabel10)
                 .addGap(29, 29, 29)
                 .addGroup(settingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel14)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(old_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(settingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(new_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(settingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(confirm_new_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
-                .addComponent(jButton1)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addComponent(btn_change_password)
+                .addContainerGap(192, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -943,8 +920,8 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 56, Short.MAX_VALUE)
-                    .addComponent(Toolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(0, 48, Short.MAX_VALUE)
+                    .addComponent(Toolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(issue_card, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -997,7 +974,7 @@ public class Menu extends javax.swing.JFrame {
                 }catch (Exception e) {
                     e.printStackTrace();
                 }
-                if(val == 1){
+                if(val == 200){
                     Toolbar.setVisible(true);
                     issue_card.setVisible(true);
                     login.setVisible(false);
@@ -1007,7 +984,7 @@ public class Menu extends javax.swing.JFrame {
                     add_card.setVisible(false);
                     issue_onlyno.setVisible(false);
                     recharge_onlyno.setVisible(false);
-                }else if (val == 0){
+                }else if (val == 401){
                     txt_error_login.setText("Invalid email or password");
                 }else if(val == 2){
                     JOptionPane.showMessageDialog(null, "Server Connection failed", "Message", JOptionPane.ERROR_MESSAGE);
@@ -1031,7 +1008,9 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_refund_card_menuActionPerformed
 
     private void issue_amountKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_issue_amountKeyPressed
-        
+        if(evt.getKeyCode()==10){
+            btn_issue_submit.doClick();
+        }
     }//GEN-LAST:event_issue_amountKeyPressed
 
     private void issue_amountKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_issue_amountKeyTyped
@@ -1097,7 +1076,9 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_issue_submitActionPerformed
 
     private void recharge_amountKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_recharge_amountKeyPressed
-        // TODO add your handling code here:
+        if(evt.getKeyCode()==10){
+            btn_recharge_submit.doClick();
+        }
     }//GEN-LAST:event_recharge_amountKeyPressed
 
     private void recharge_amountKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_recharge_amountKeyTyped
@@ -1124,6 +1105,7 @@ public class Menu extends javax.swing.JFrame {
                         
                         try{
                             int i = Integer.parseInt(recharge_amount.getText());
+                            System.out.println(security_tag);
                             val = User.recharge_card(i, recharge_card_id.getText(), security_tag);
                         }catch (Exception e) {
                             System.out.println(e);
@@ -1137,11 +1119,11 @@ public class Menu extends javax.swing.JFrame {
                                 recharge_onlyno.setVisible(false);
                                 security_tag = "";
                                 break;
-                            case 500:
+                            case 400:
                                 JOptionPane.showMessageDialog(null, "Sorry! Card is not exist", "Error", JOptionPane.WARNING_MESSAGE);
                                 break;
-                            case 400:
-                                JOptionPane.showMessageDialog(null, "Sorry! Card is issued already", "Error", JOptionPane.WARNING_MESSAGE);
+                            case 500:
+                                JOptionPane.showMessageDialog(null, "Sorry! Card is not issued yet", "Error", JOptionPane.WARNING_MESSAGE);
                                 break;
                             default:
                                 JOptionPane.showMessageDialog(null, "Some thing went wrong", "Error", JOptionPane.ERROR_MESSAGE);
@@ -1185,10 +1167,10 @@ public class Menu extends javax.swing.JFrame {
                     case 200:
                         txt_refund.setText("Card refunded successfully!\n" + "--------------------------\n" + " Card Balance   -  Rs."+User.refund_amount);
                         break;
-                    case 500:
+                    case 400:
                         JOptionPane.showMessageDialog(null, "Sorry! Card is not exist", "Error", JOptionPane.WARNING_MESSAGE);
                         break;
-                    case 400:
+                    case 500:
                         JOptionPane.showMessageDialog(null, "Card is not issued yet", "Error", JOptionPane.WARNING_MESSAGE);
                         break;
                     default:
@@ -1214,6 +1196,7 @@ public class Menu extends javax.swing.JFrame {
         refund_card.setVisible(false);
         setting.setVisible(false);
         add_card.setVisible(false);
+        issue_name.requestFocus();
     }//GEN-LAST:event_issue_card_menuMouseClicked
 
     private void recharge_card_menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_recharge_card_menuMouseClicked
@@ -1224,6 +1207,7 @@ public class Menu extends javax.swing.JFrame {
         refund_card.setVisible(false);
         setting.setVisible(false);
         add_card.setVisible(false);
+        recharge_amount.requestFocus();
     }//GEN-LAST:event_recharge_card_menuMouseClicked
 
     private void refund_card_menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refund_card_menuMouseClicked
@@ -1248,6 +1232,7 @@ public class Menu extends javax.swing.JFrame {
         refund_card.setVisible(false);
         setting.setVisible(true);
         add_card.setVisible(false);
+        old_password.requestFocus();
     }//GEN-LAST:event_account_settingMouseClicked
 
     private void logout3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logout3MouseClicked
@@ -1276,15 +1261,56 @@ public class Menu extends javax.swing.JFrame {
         login_password.setText("");
         refund_card_id.setText("");
         refund_result.setText("");
+        login_email.requestFocus();
     }//GEN-LAST:event_logoutMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JOptionPane.showMessageDialog(null, "Password Updated Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        JOptionPane.showMessageDialog(null, "Email Updated Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void btn_change_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_change_passwordActionPerformed
+        if(!(old_password.getText().equals(""))){
+            if(old_password.getText().length()>=6){
+                if(!new_password.getText().equals("")){
+                    if(new_password.getText().length()>=6){
+                        if(!confirm_new_password.getText().equals("")){
+                            if(new_password.getText().equals(confirm_new_password.getText())){
+                                if(!new_password.getText().equals(old_password.getText())){
+                                    int val = 0;
+                                    val = User.changePassword(old_password.getText(),new_password.getText());
+                                    switch(val){
+                                        case 200:
+                                            JOptionPane.showMessageDialog(null, "Password Updated Succcessfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+                                            old_password.setText("");
+                                            new_password.setText("");
+                                            confirm_new_password.setText("");
+                                            break;
+                                        case 401:
+                                            JOptionPane.showMessageDialog(null, "Old password is wrong", "Message", JOptionPane.WARNING_MESSAGE);
+                                            break;
+                                        default:
+                                            JOptionPane.showMessageDialog(null, "Something went wrong", "Message", JOptionPane.WARNING_MESSAGE);
+                                            break;
+                                    }
+                                }else{
+                                    JOptionPane.showMessageDialog(null, "Warning!\n New password can't be same with old password", "Message", JOptionPane.WARNING_MESSAGE);
+                                }
+                            }else{
+                                JOptionPane.showMessageDialog(null, "Mismatch new password", "Message", JOptionPane.WARNING_MESSAGE);
+                            }
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Please confirm the new password", "Message", JOptionPane.WARNING_MESSAGE);
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Warning! Weak Password\n Password must contain minimum 6 characters", "Message", JOptionPane.WARNING_MESSAGE);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Please enter the new password", "Message", JOptionPane.WARNING_MESSAGE);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Old password is wrong", "Message", JOptionPane.WARNING_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Please enter the old password", "Message", JOptionPane.WARNING_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_btn_change_passwordActionPerformed
 
     private void add_remove_menueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_add_remove_menueMouseClicked
         Toolbar.setVisible(true);
@@ -1405,6 +1431,42 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_recharge_amountKeyReleased
 
+    private void login_emailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_login_emailKeyPressed
+        if(evt.getKeyCode()==10){
+            login_password.requestFocusInWindow();
+        }
+    }//GEN-LAST:event_login_emailKeyPressed
+
+    private void login_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_login_passwordKeyPressed
+        if(evt.getKeyCode()==10){
+            btn_login.doClick();
+        }
+    }//GEN-LAST:event_login_passwordKeyPressed
+
+    private void issue_nameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_issue_nameKeyPressed
+        if(evt.getKeyCode()==10){
+            issue_amount.requestFocusInWindow();
+        }
+    }//GEN-LAST:event_issue_nameKeyPressed
+
+    private void old_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_old_passwordKeyPressed
+        if(evt.getKeyCode()==10){
+            new_password.requestFocus();
+        }
+    }//GEN-LAST:event_old_passwordKeyPressed
+
+    private void new_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_new_passwordKeyPressed
+        if(evt.getKeyCode()==10){
+            confirm_new_password.requestFocus();
+        }
+    }//GEN-LAST:event_new_passwordKeyPressed
+
+    private void confirm_new_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_confirm_new_passwordKeyPressed
+        if(evt.getKeyCode()==10){
+            btn_change_password.doClick();
+        }
+    }//GEN-LAST:event_confirm_new_passwordKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -1452,11 +1514,13 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton add_card_submit;
     private javax.swing.JButton add_card_submit1;
     private javax.swing.JButton add_remove_menue;
+    private javax.swing.JButton btn_change_password;
     private javax.swing.JButton btn_issue_scan;
     private javax.swing.JButton btn_issue_submit;
     private javax.swing.JButton btn_login;
     private javax.swing.JButton btn_recharge_scan;
     private javax.swing.JButton btn_recharge_submit;
+    private javax.swing.JPasswordField confirm_new_password;
     private javax.swing.JLabel icon;
     private javax.swing.JTextField issue_amount;
     private javax.swing.JPanel issue_card;
@@ -1464,13 +1528,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton issue_card_menu;
     private javax.swing.JTextField issue_name;
     private javax.swing.JLabel issue_onlyno;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -1481,23 +1540,18 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JPanel login;
     private javax.swing.JTextField login_email;
     private javax.swing.JPasswordField login_password;
     private javax.swing.JLabel logout;
     private javax.swing.JLabel logout3;
+    private javax.swing.JPasswordField new_password;
+    private javax.swing.JPasswordField old_password;
     private javax.swing.JTextField recharge_amount;
     private javax.swing.JPanel recharge_card;
     private javax.swing.JTextField recharge_card_id;

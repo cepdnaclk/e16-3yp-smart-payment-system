@@ -31,21 +31,22 @@ public class User {
    public static String name = "";
    public static String id = "";
    public static String refund_amount = "";
-   public static int login(String email,String pward) throws Exception {
-       URL url = new URL("http://localhost:3000/api/login");
-
-            StringBuilder postData = new StringBuilder();
-            postData.append(URLEncoder.encode("email", "UTF-8"));
-	    postData.append('=');
-	    postData.append(URLEncoder.encode((String) email, "UTF-8"));
-            
-            postData.append('&');
-            postData.append(URLEncoder.encode("password", "UTF-8"));
-	    postData.append('=');
-	    postData.append(URLEncoder.encode((String) pward, "UTF-8"));
-            
-            Response res = Connection.connect(url, postData);
+   public static int login(String email,String pward){
             try{
+                URL url = new URL("http://localhost:3000/api/login");
+
+                StringBuilder postData = new StringBuilder();
+                postData.append(URLEncoder.encode("email", "UTF-8"));
+                postData.append('=');
+                postData.append(URLEncoder.encode((String) email, "UTF-8"));
+
+                postData.append('&');
+                postData.append(URLEncoder.encode("password", "UTF-8"));
+                postData.append('=');
+                postData.append(URLEncoder.encode((String) pward, "UTF-8"));
+
+                Response res = Connection.connect(url, postData);
+            
                 //Get the token
                 token = res.myResponse.getString("token");
                 //JWT decording process
@@ -60,8 +61,9 @@ public class User {
                 System.out.println("Hello,"+name);
                 
                 int res_code = res.responseCode;
-                return (res_code == 200)? 1:0;
+                return (res_code);
             }catch(Exception e){
+                if(e.toString().contains("response code: 401")) return 401;
                 System.out.println(e);
                 if(e instanceof ConnectException) return 2;
                 return 3;
@@ -257,6 +259,44 @@ public class User {
             }
             if(e.getMessage().contains("response code: 400")){
                 return 400;
+            }
+            
+        }
+        return 0;
+    }
+
+    static int changePassword(String old_password, String new_password){
+        try{
+            URL url = new URL("http://localhost:3000/api/updatePassword");
+            StringBuilder postData = new StringBuilder();
+            postData.append(URLEncoder.encode("NIC", "UTF-8"));
+            postData.append('=');
+            postData.append(URLEncoder.encode((String) User.id, "UTF-8"));
+            
+            postData.append('&');
+            postData.append(URLEncoder.encode("oldPassword", "UTF-8"));
+	    postData.append('=');
+	    postData.append(URLEncoder.encode(String.valueOf(old_password), "UTF-8"));
+            
+            postData.append('&');
+            postData.append(URLEncoder.encode("newPassword", "UTF-8"));
+	    postData.append('=');
+	    postData.append(URLEncoder.encode((String) new_password, "UTF-8"));
+            //Connecting to server
+            Response res = Connection.connect(url, postData);
+            try{
+                int res_code = res.responseCode;
+                return (res_code);
+            }catch(Exception e){
+                return 0;
+            }
+        }catch(Exception e){
+            System.out.println(e);
+            if(e.getMessage().contains("response code: 500")){
+                return 500;
+            }
+            if(e.getMessage().contains("response code: 401")){
+                return 401;
             }
             
         }
