@@ -66,7 +66,12 @@ This is the 3rd year embedded system project
 
     3. Web Application
     
- ![web](https://github.com/cepdnaclk/e16-3yp-smart-payment-system/blob/main/images/Web%20Application/web.png?raw=true)  
+ ![web](https://github.com/cepdnaclk/e16-3yp-smart-payment-system/blob/main/images/Web%20Application/web.png?raw=true) 
+
+## Hardware and Software demonstrations
+  Gaming Node
+  ![Gaming Node demonstration](https://github.com/Nadun360/e16-3yp-smart-payment-system/blob/main/Demonstration/gaming_node.mp4?raw=true)
+   
 ## Testing
       Under testing we checked for unit testing and intergration testing. In unit testing we checked all functions related to 
       adding a card, refunding, return, scanning a card, issue a card, register and login.
