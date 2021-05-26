@@ -70,7 +70,7 @@ This is the 3rd year embedded system project
 
 ## Hardware and Software demonstrations
   Gaming Node
-  ![Gaming Node demonstration](https://user-images.githubusercontent.com/56257286/119728175-c4b9a180-be90-11eb-88e5-b88ab5bca1d9.mp4)
+  https://user-images.githubusercontent.com/56257286/119728175-c4b9a180-be90-11eb-88e5-b88ab5bca1d9.mp4
    
 ## Testing
       Under testing we checked for unit testing and intergration testing. In unit testing we checked all functions related to 
