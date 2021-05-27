@@ -184,7 +184,7 @@ let bigChartData = [
   [40, 100, 140, 230, 189, 205, 190, 199, 150, 230, 220, 260, 310, 239],
   [4800, 12000, 16800, 27600, 22680, 24600, 22800, 23880, 18000, 27600, 26400, 31200, 37200, 28680]
 ]
-let bigChartLabels = ['FEB-23', 'FEB-24', 'FEB-25', 'FEB-26', 'FEB-27', 'FEB-28', 'MAR-1', 'MAR-2', 'MAR-3', 'MAR-4', 'MAR-5', 'MAR-6', 'MAR-7', 'MAR-8']
+let bigChartLabels = ['MAY-14', 'MAY-15', 'MAY-16', 'MAY-17', 'MAY-18', 'MAY-19', 'MAY-20', 'MAY-21', 'MAY-22', 'MAY-23', 'MAY-24', 'MAY-25', 'MAY-26', 'MAY-27']
 let bigChartDatasetOptions = {
   fill: true,
   borderColor: config.colors.primary,
