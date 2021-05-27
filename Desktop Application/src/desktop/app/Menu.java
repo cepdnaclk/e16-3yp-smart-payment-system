@@ -42,6 +42,7 @@ public class Menu extends javax.swing.JFrame {
         login_email.setFocusable(true);
         login_email.setText("madusha@gmail.com");
         login_password.setText("123456789");
+        txt_refund.setVisible(false);
     }
 
     /**
@@ -252,6 +253,7 @@ public class Menu extends javax.swing.JFrame {
         );
 
         Toolbar.setBackground(new java.awt.Color(39, 39, 39));
+        Toolbar.setAlignmentY(0.4F);
 
         Upeer.setBackground(new java.awt.Color(39, 39, 39));
         Upeer.setPreferredSize(new java.awt.Dimension(240, 40));
@@ -442,6 +444,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        issue_card_id.setEditable(false);
         issue_card_id.setToolTipText("");
 
         btn_issue_scan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -545,6 +548,7 @@ public class Menu extends javax.swing.JFrame {
         recharge_onlyno.setForeground(new java.awt.Color(255, 0, 0));
         recharge_onlyno.setText("You can enter numbers only!");
 
+        recharge_card_id.setEditable(false);
         recharge_card_id.setToolTipText("");
 
         btn_recharge_scan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -604,7 +608,7 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(recharge_cardLayout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(324, Short.MAX_VALUE))
             .addGroup(recharge_cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(recharge_cardLayout.createSequentialGroup()
                     .addGap(186, 186, 186)
@@ -690,7 +694,7 @@ public class Menu extends javax.swing.JFrame {
         loginLayout.setVerticalGroup(
             loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loginLayout.createSequentialGroup()
-                .addContainerGap(223, Short.MAX_VALUE)
+                .addContainerGap(232, Short.MAX_VALUE)
                 .addGroup(loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(login_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -714,6 +718,7 @@ public class Menu extends javax.swing.JFrame {
         refund_result.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         refund_result.setText("Card ID");
 
+        refund_card_id.setEditable(false);
         refund_card_id.setToolTipText("");
 
         refund_scan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -732,7 +737,9 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane1.setBackground(new java.awt.Color(204, 204, 204));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jScrollPane1.setEnabled(false);
 
         txt_refund.setBackground(new java.awt.Color(240, 240, 240));
         txt_refund.setColumns(20);
@@ -777,7 +784,7 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(refund_submit)
                 .addGap(65, 65, 65)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
 
         setting.setBackground(new java.awt.Color(255, 255, 255));
@@ -879,7 +886,7 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(confirm_new_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addComponent(btn_change_password)
-                .addContainerGap(192, Short.MAX_VALUE))
+                .addContainerGap(220, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -920,25 +927,25 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 48, Short.MAX_VALUE)
-                    .addComponent(Toolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(0, 21, Short.MAX_VALUE)
+                    .addComponent(Toolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(issue_card, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 55, Short.MAX_VALUE)
-                    .addComponent(recharge_card, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap()
+                    .addComponent(recharge_card, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 59, Short.MAX_VALUE)
+                    .addGap(0, 21, Short.MAX_VALUE)
                     .addComponent(refund_card, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 51, Short.MAX_VALUE)
+                    .addGap(0, 32, Short.MAX_VALUE)
                     .addComponent(setting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 50, Short.MAX_VALUE)
+                    .addGap(0, 59, Short.MAX_VALUE)
                     .addComponent(add_card, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
@@ -1143,6 +1150,7 @@ public class Menu extends javax.swing.JFrame {
     private void refund_scanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refund_scanActionPerformed
         try {
             txt_refund.setText("");  
+            txt_refund.setVisible(false);
             refund_card_id.setText("");
             Reader rdr = new Reader();
             String tmp = rdr.getID();
@@ -1165,6 +1173,7 @@ public class Menu extends javax.swing.JFrame {
                 }
                 switch (val) {
                     case 200:
+                        txt_refund.setVisible(true);
                         txt_refund.setText("Card refunded successfully!\n" + "--------------------------\n" + " Card Balance   -  Rs."+User.refund_amount);
                         break;
                     case 400:
