@@ -53,7 +53,7 @@ This is the 3rd year embedded system project
 ![Our Design](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Diagrams/PCB/PCB.jpeg) 
 
   Demonstration
-  ![Cashier Hardware demonstration](https://youtu.be/FA2izcUz030)
+  [![Cashier Hardware demonstration](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Demonstration/mq2.jpg)](https://youtu.be/FA2izcUz030)
 
   Software design
   
