@@ -46,7 +46,7 @@ This is the 3rd year embedded system project
   
   1. Cashier Node
   
-  [![Cashier Hardware 3D](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Demonstration/img_cashier_hard_3d.jpg)](https://youtu.be/4YNhmeZaI7E)
+  [![Cashier Hardware 3D](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Demonstration/img_cashier_hard_3d.jpg?raw=true)](https://youtu.be/4YNhmeZaI7E)
   
   2. Gaming Node
 
