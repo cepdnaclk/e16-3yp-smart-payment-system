@@ -44,14 +44,27 @@ This is the 3rd year embedded system project
   
   3D model Design
   
-  ![Our Design](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/images/Hardware/1.PNG?raw=true)  
-  ![Our Design](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/images/Hardware/2.PNG?raw=true)  
-  ![Our Design](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/images/Hardware/3.PNG?raw=true)  
+  1. Cashier Node
+  
+  [![Cashier Hardware 3D](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Demonstration/img_cashier_hard_3d.jpg)](https://youtu.be/4YNhmeZaI7E)
+  
+  2. Gaming Node
+
+  [![Gaming Node Hardware 3D](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Demonstration/img_gaming_node_hard_3d.jpg)](https://youtu.be/KYDXmXD5vWg)
   
   Hardware design
 ![Our Design](https://github.com/sathirauop/e16-3yp-smart-payment-system/blob/main/Diagrams/EasyEDA_diagram.png?raw=true)  
 ![Our Design](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Diagrams/PCB/PCB.jpeg) 
 
+  Demonstration
+  1. Cashier Node
+  
+  [![Cashier Hardware demonstration](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Demonstration/img_cashier_hard.jpg)](https://youtu.be/FA2izcUz030)
+  
+  2. Gaming Node
+
+  [![Gaming Node Hardware demonstration](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Demonstration/img_gaming_node.jpg)](https://youtu.be/XCwr7IixzDE)
+  
   Software design
   
     1. Database
@@ -60,19 +73,12 @@ This is the 3rd year embedded system project
 
     2. Cashier Application
     
- ![login](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/images/Desktop%20Application/login.PNG?raw=true)  
- ![issue card](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/images/Desktop%20Application/issue_card.PNG?raw=true)  
- ![change_details](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/images/Desktop%20Application/change_details.PNG?raw=true)  
-
+ [![Cashier App](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Demonstration/img_cashier_app.jpg)](https://youtu.be/9UNsXmhzdWU)
+ 
     3. Web Application
     
- ![web](https://github.com/cepdnaclk/e16-3yp-smart-payment-system/blob/main/images/Web%20Application/web.png?raw=true) 
+[![Web App](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Demonstration/img_web_app.jpg)](https://youtu.be/JaxcWVb3in4)
 
-## Hardware and Software demonstrations
-  Gaming Node
-  [![Gaming Node Demonstration](https://github.com/Nadun360/e16-3yp-smart-payment-system/blob/main/images/Hardware/1.PNG?raw=true)](https://user-images.githubusercontent.com/56257286/119728175-c4b9a180-be90-11eb-88e5-b88ab5bca1d9.mp4)
-  
-   
 ## Testing
       Under testing we checked for unit testing and intergration testing. In unit testing we checked all functions related to 
       adding a card, refunding, return, scanning a card, issue a card, register and login.
