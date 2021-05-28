@@ -1,3 +1,4 @@
+
 # Smart-payment-system
 ---
 This is the 3rd year embedded system project
@@ -77,7 +78,7 @@ This is the 3rd year embedded system project
  
     3. Web Application
     
-[![Web App](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Demonstration/img_web_app.jpg)](https://youtu.be/JaxcWVb3in4)
+[![img_web_app](https://user-images.githubusercontent.com/54934856/120007420-84286800-bff7-11eb-9ab5-6f6fdeaf4f03.jpg)](https://youtu.be/JaxcWVb3in4)
 
 ## Testing
       Under testing we checked for unit testing and intergration testing. In unit testing we checked all functions related to 
