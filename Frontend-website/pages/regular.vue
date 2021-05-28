@@ -115,40 +115,46 @@ export default {
       ],
       tableData1: [
         {
-          value: 'AB23D751F',
-          name: 'Sudam Shaluka',
-          id: '214ABEFB',
-          time: '25 min'
-        },
-        {
           value: '655AEDB00',
           name: 'Sathira Basnayake',
           id: '87BCBEFB',
-          time: '20 min'
+          time: '26 min'
         },
         {
           value: 'BB534DB74',
           name: 'Nimantha Bhanuka',
           id: '894ABE78',
-          time: '26 min'
+          time: '30 min'
         },
         {
           value: 'BBA34DB74',
           name: 'Tharindu Sandaruwan',
           id: '39BDBEFB',
-          time: '37 min'
+          time: '38 min'
         },
         {
           value: '90BAEDB89',
           name: 'Maduaha Shanaka',
           id: 'BB65AD23',
-          time: '43 min'
+          time: '46 min'
         },
         {
           value: '623BC87DE',
           name: 'Supun Vindula',
           id:'98FEA67D',
-          time: '58 min' 
+          time: '53 min' 
+        },
+        {
+          value: '7033C812E',
+          name: 'Shihan Janith',
+          id:'AB23D751F',
+          time: '1 hour' 
+        },
+        {
+          value: '56AB6CD2F',
+          name: 'Nilushka Chandimal',
+          id:'BA34723BC',
+          time: '1 hour' 
         }
       ]
     };

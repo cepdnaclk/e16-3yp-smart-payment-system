@@ -79,7 +79,7 @@
         <template slot="header">
           <h5 class="card-category">Completed Purchases</h5>
           <h3 class="card-title">
-            <i class="tim-icons icon-send text-success "></i> 239
+            <i class="tim-icons icon-send text-success "></i> 262
           </h3>
         </template>
         <div class="chart-area">
@@ -98,7 +98,7 @@
         <template slot="header">
           <h5 class="card-category">Daily Income</h5>
           <h3 class="card-title">
-            <i class="tim-icons icon-delivery-fast text-info "></i> RS:28,680
+            <i class="tim-icons icon-delivery-fast text-info "></i> RS:31,440
           </h3>
         </template>
         <div class="chart-area">
@@ -181,10 +181,10 @@ import { Table, TableColumn } from 'element-ui';
 
 let bigChartData = [
   [30, 50, 80, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 97],
-  [40, 100, 140, 230, 189, 205, 190, 199, 150, 230, 220, 260, 310, 239],
-  [4800, 12000, 16800, 27600, 22680, 24600, 22800, 23880, 18000, 27600, 26400, 31200, 37200, 28680]
+  [40, 100, 140, 230, 189, 205, 190, 199, 150, 230, 220, 260, 310, 262],
+  [4800, 12000, 16800, 27600, 22680, 24600, 22800, 23880, 18000, 27600, 26400, 31200, 37200, 31440]
 ]
-let bigChartLabels = ['FEB-23', 'FEB-24', 'FEB-25', 'FEB-26', 'FEB-27', 'FEB-28', 'MAR-1', 'MAR-2', 'MAR-3', 'MAR-4', 'MAR-5', 'MAR-6', 'MAR-7', 'MAR-8']
+let bigChartLabels = ['MAY-15', 'MAY-16', 'MAY-17', 'MAY-18', 'MAY-19', 'MAY-20', 'MAY-21', 'MAY-22', 'MAY-23', 'MAY-24', 'MAY-25', 'MAY-26', 'MAY-27', 'MAY-28']
 let bigChartDatasetOptions = {
   fill: true,
   borderColor: config.colors.primary,
@@ -281,7 +281,7 @@ export default {
               pointHoverRadius: 4,
               pointHoverBorderWidth: 15,
               pointRadius: 4,
-              data: [4, 4, 17, 53, 9, 0]
+              data: [4, 4, 17, 53, 9, 10]
             }
           ]
         },
@@ -307,7 +307,7 @@ export default {
               pointHoverRadius: 4,
               pointHoverBorderWidth: 15,
               pointRadius: 4,
-              data: [14, 64, 100, 40, 21, 0]
+              data: [14, 64, 100, 40, 21, 23]
             }
           ]
         },
@@ -330,7 +330,7 @@ export default {
               borderWidth: 2,
               borderDash: [],
               borderDashOffset: 0.0,
-              data: [1680, 7680, 12000, 4800, 2520, 0]
+              data: [1680, 7680, 12000, 4800, 2520, 2760]
             }
           ]
         },
