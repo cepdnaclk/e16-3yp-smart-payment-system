@@ -51,7 +51,7 @@ This is the 3rd year embedded system project
   
   2. Gaming Node
 
-  [![Gaming Node Hardware 3D](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Demonstration/img_gaming_node_hard_3d.jpg)](https://youtu.be/KYDXmXD5vWg)
+  [![Gaming Node Hardware 3D](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Demonstration/img_gaming_node_hard_3d.jpg?raw=true)](https://youtu.be/KYDXmXD5vWg)
   
   Hardware design
 ![Our Design](https://github.com/sathirauop/e16-3yp-smart-payment-system/blob/main/Diagrams/EasyEDA_diagram.png?raw=true)  
@@ -60,11 +60,11 @@ This is the 3rd year embedded system project
   Demonstration
   1. Cashier Node
   
-  [![Cashier Hardware demonstration](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Demonstration/img_cashier_hard.jpg)](https://youtu.be/FA2izcUz030)
+  [![Cashier Hardware demonstration](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Demonstration/img_cashier_hard.jpg?raw=true)](https://youtu.be/FA2izcUz030)
   
   2. Gaming Node
 
-  [![Gaming Node Hardware demonstration](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Demonstration/img_gaming_node.jpg)](https://youtu.be/XCwr7IixzDE)
+  [![Gaming Node Hardware demonstration](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Demonstration/img_gaming_node.jpg?raw=true)](https://youtu.be/XCwr7IixzDE)
   
   Software design
   
@@ -74,11 +74,11 @@ This is the 3rd year embedded system project
 
     2. Cashier Application
     
- [![Cashier App](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Demonstration/img_cashier_app.jpg)](https://youtu.be/9UNsXmhzdWU)
+ [![Cashier App](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Demonstration/img_cashier_app.jpg?raw=true)](https://youtu.be/9UNsXmhzdWU)
  
     3. Web Application
     
-[![img_web_app](https://user-images.githubusercontent.com/54934856/120007420-84286800-bff7-11eb-9ab5-6f6fdeaf4f03.jpg)](https://youtu.be/JaxcWVb3in4)
+[![img_web_app](https://user-images.githubusercontent.com/54934856/120007420-84286800-bff7-11eb-9ab5-6f6fdeaf4f03.jpg?raw=true)](https://youtu.be/JaxcWVb3in4)
 
 ## Testing
       Under testing we checked for unit testing and intergration testing. In unit testing we checked all functions related to 
