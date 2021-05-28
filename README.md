@@ -44,9 +44,13 @@ This is the 3rd year embedded system project
   
   3D model Design
   
-  [![Our Design](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/images/Hardware/1.PNG?raw=true)](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/3D%20models/Hardware%20at%20gaming%20node/Gaming%20node.mp4)  
-  ![Our Design](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/images/Hardware/2.PNG?raw=true)  
-  ![Our Design](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/images/Hardware/3.PNG?raw=true)  
+  1. Cashier Node
+  
+  [![Cashier Hardware 3D](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Demonstration/img_cashier_hard_3d.jpg)](https://youtu.be/4YNhmeZaI7E)
+  
+  2. Gaming Node
+
+  [![Gaming Node Hardware 3D](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Demonstration/img_gaming_node_hard_3d.jpg)](https://youtu.be/KYDXmXD5vWg)
   
   Hardware design
 ![Our Design](https://github.com/sathirauop/e16-3yp-smart-payment-system/blob/main/Diagrams/EasyEDA_diagram.png?raw=true)  
@@ -55,7 +59,7 @@ This is the 3rd year embedded system project
   Demonstration
   1. Cashier Node
   
-  [![Cashier Hardware demonstration](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Demonstration/mq2.jpg)](https://youtu.be/FA2izcUz030)
+  [![Cashier Hardware demonstration](https://github.com/MadushaShanaka/e16-3yp-smart-payment-system/blob/main/Demonstration/img_cashier_hard.jpg)](https://youtu.be/FA2izcUz030)
   
   2. Gaming Node
 
