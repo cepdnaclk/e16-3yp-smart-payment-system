@@ -94,7 +94,7 @@ export default {
   },
   
   axios: {
-    baseURL: 'http://54.174.103.157:3000/api'
+    baseURL: 'http://3.80.143.178:3000/api'
   },
 
   // Running port and host
