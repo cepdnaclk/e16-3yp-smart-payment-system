@@ -81,11 +81,10 @@ This is the 3rd year embedded system project
 [![img_web_app](https://user-images.githubusercontent.com/54934856/120007420-84286800-bff7-11eb-9ab5-6f6fdeaf4f03.jpg?raw=true)](https://youtu.be/JaxcWVb3in4)
 
 ## Testing
-      Under testing we checked for unit testing and intergration testing. In unit testing we checked all functions related to 
-      adding a card, refunding, return, scanning a card, issue a card, register and login.
+  Under testing we checked for unit testing and intergration testing. In unit testing we checked all functions related to adding a card, refunding, return, scanning a card, issue a card, register and login.
  ![Testing](https://github.com/cepdnaclk/e16-3yp-smart-payment-system/blob/main/images/Testing/unit%20testing.jpeg?raw=true)  
  
-    Under intergration testing we tested Basic route to see the server up and ruining and Route which send the 404 message
+  Under intergration testing we tested Basic route to see the server up and ruining and Route which send the 404 message
     
  ![Testing1](https://github.com/cepdnaclk/e16-3yp-smart-payment-system/blob/main/images/Testing/integrtion%20testing.jpeg?raw=true)  
  
